@@ -85,7 +85,8 @@ makeIsotype({
   shapeDomain: ["Emissionen"],
   shapeRange: [path7],
   colorRange: ["#666666"],
-  xDomain: [0, 60]
+  xDomain: [0, 60],
+  height: 120
 })
   .render({ renderer: "svg" })
 ```
