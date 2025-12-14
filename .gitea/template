@@ -1,0 +1,12 @@
+# Gitea Template Configuration
+# Files and directories listed here will NOT be copied when creating a new repository from this template
+
+# Exclude build outputs
+.quarto/
+website/
+
+# Exclude specific data that shouldn't be in templates
+# data/data.csv
+
+# Exclude sensitive files
+keys/
