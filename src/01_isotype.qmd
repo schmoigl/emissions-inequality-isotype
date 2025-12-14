@@ -4,24 +4,26 @@ makeIsotype = function({
   inputData,
   shapeDomain = ["Lebensmittel", "Wohnen", "Energie", "Mobilität", "Güter", "Dienstleistungen"],
   shapeRange = [path1, path2, path3, path4, path5, path6],
-  colorRange = colors_fiw,
-  xDomain = [0, 20],
-  height = 340
+  colorRange = colors_burger,
+  xDomain = [0, 25],
+  height = 300,
+  size = 5,
+  unit = "€",
+  divisor = 1000,
+  minExtent = 100,
+  spacing = 10,
+  plotWidth = null
 }) {
 
-  const chartIsotypeMain = vl.markPoint({
-      size: 5,
+  return vl.layer(
+    vl.markPoint({
+      size: size,
       stroke: "black",
       strokeOpacity: 1,
       strokeWidth: 0.75,
       opacity: 1,
       clip: false,
-      // dy: -100,
     })
-    .transform(
-      vl.calculate("sequence(0, round(datum.value / 1000))").as("positions"),
-      vl.flatten(["positions"]),
-    )
     .encode(
       vl.y()
         .fieldN("name")
@@ -31,8 +33,8 @@ makeIsotype = function({
           ticks: false,
           title: null,
           labelOffset: 14,
+          minExtent: minExtent,
         }),
-      // vl.yOffset().value(-8),
       vl.x()
         .fieldQ("positions")
         .scale({
@@ -60,12 +62,32 @@ makeIsotype = function({
           range: shapeRange
         })
         .legend(false)
+    ),
+    vl.markText({
+      align: "left",
+      dx: 30,
+      dy: 14,
+      fontSize: 12,
+      clip: false
+    })
+    .transform(
+      vl.filter(`datum.positions === round(datum.value / ${divisor}) - 1`),
+      vl.calculate(`format(datum.value, ',') + ' ${unit}'`).as("valueWithUnit")
     )
-
-  return vl.layer(
-    chartIsotypeMain,
+    .encode(
+      vl.y()
+        .fieldN("name"),
+      vl.x()
+        .fieldQ("positions"),
+      vl.text()
+        .fieldN("valueWithUnit"),
+    )
   )
-  .width(makeWidth(width))
+  .transform(
+    vl.calculate(`sequence(0, round(datum.value / ${divisor}))`).as("positions"),
+    vl.flatten(["positions"]),
+  )
+  .width(plotWidth !== null ? plotWidth : makeWidth(width))
   .height(height)
   .facet({
     column: {
@@ -76,9 +98,10 @@ makeIsotype = function({
       header: {
         labelFontSize: 15,
         labelOrient: "top",
-        labelPadding: 6,
+        labelPadding: -6,
       },
     },
+    spacing: spacing
   })
   .resolve({scale: {x: "shared"}})
   .data(inputData)
