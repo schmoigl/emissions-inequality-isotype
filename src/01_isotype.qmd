@@ -12,7 +12,8 @@ makeIsotype = function({
   divisor = 1000,
   minExtent = 100,
   spacing = 10,
-  plotWidth = null
+  plotWidth = null,
+  textShift = 40
 }) {
 
   return vl.layer(
@@ -65,7 +66,7 @@ makeIsotype = function({
     ),
     vl.markText({
       align: "left",
-      dx: 30,
+      dx: textShift,
       dy: 14,
       fontSize: 12,
       clip: false
@@ -76,7 +77,8 @@ makeIsotype = function({
     )
     .encode(
       vl.y()
-        .fieldN("name"),
+        .fieldN("name")
+        .sort(shapeDomain),
       vl.x()
         .fieldQ("positions"),
       vl.text()
