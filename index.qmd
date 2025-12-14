@@ -122,7 +122,7 @@ makeIsotype({
   inputData: filteredEmissionen,
   shapeDomain: ["Emissionen"],
   shapeRange: [path7],
-  colorRange: ["#666666"],
+  colorRange: ["#d3d3d3"],
   height: 50,
   size: 5,
   unit: "t CO₂",
