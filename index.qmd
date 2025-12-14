@@ -1,5 +1,5 @@
 ---
-title: "Ungleiche Emissionen"
+title: "Ungleicher Konsum -  Ungleiche Emissionen"
 execute:
   eval: true
   echo: false
@@ -10,6 +10,7 @@ execute:
   cache: false
 ---
 
+Die Klimakrise ist auch eine Frage der Verteilung: In Österreich verursacht das reichste Einkommenszehntel viermal so viele CO₂-Emissionen wie das ärmste. Während Ausgaben für Energie bei allen ähnlich sind, klaffen bei Mobilität und Güterkonsum die Emissionen massiv auseinander. Gleichzeitig würden ärmere Haushalte bei einer CO₂-Bepreisung überproportional belastet – sie geben einen größeren Teil ihres Einkommens für klimaschädlichen Konsum aus, ohne die finanziellen Mittel für Alternativen. Die Isotype-Darstellung macht diese Ungleichheit auf einen Blick erfassbar: Jedes Symbol steht für eine Tonne CO₂ – die unterschiedliche Anzahl zeigt unmittelbar, wie drastisch die Emissionen zwischen Arm und Reich auseinanderklaffen. So wird sichtbar, dass wirksamer Klimaschutz soziale Gerechtigkeit mitdenken muss.
 
 ```{r}
 #| echo: false
@@ -31,6 +32,17 @@ read_excel("data/emissions-data.xlsx") |>
       "Mobility",
       "Goods",
       "Services"
+    )
+  ) |>
+  mutate(
+    name = case_when(
+      name == "Food" ~ "Lebensmittel",
+      name == "Housing" ~ "Wohnen",
+      name == "Energy" ~ "Energie",
+      name == "Mobility" ~ "Mobilität",
+      name == "Goods" ~ "Güter",
+      name == "Services" ~ "Dienstleistungen",
+      TRUE ~ name
     )
   ) |>
   filter(
@@ -60,7 +72,19 @@ makeIsotype({ inputData: data })
   .render({ renderer: "svg" })
 ```
 
-<!-- 
+```{ojs}
+//| echo: false
+//| output: false
+emissionenData = FileAttachment("data/emissionen.csv").csv({ typed: true })
+```
+
+```{ojs}
+//| echo: false
+makeIsotypeEmissions({ inputData: emissionenData })
+  .render({ renderer: "svg" })
+```
+
+<!--
 ## Colors
 
 ```{ojs}

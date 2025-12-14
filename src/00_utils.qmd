@@ -4,41 +4,11 @@
 //| warning: false
 //| output: false
 makeWidth = function(inputWidth) {
-  if (inputWidth>1800) {
-    return 1200
-  }
-  if (inputWidth>1700) {
-    return 1100
-  }
-  if (inputWidth>1600) {
-    return 1000
-  }
-  if (inputWidth>1500) {
-    return 900
-  }
-  if (inputWidth>1400) {
-    return 800
-  }
-  if (inputWidth>1300) {
-    return 750
-  }
-  if (inputWidth>1200) {
-    return 700
-  }
-  if (inputWidth>1100) {
-    return 650
-  }
-  if (inputWidth>1000) {
-    return 600
-  }
-  if (inputWidth>900) {
-    return 550
-  }
-  if (inputWidth>800) {
-    return 500
+  if (inputWidth>826) {
+    return 340
   }
   else {
-    return 300
+    return (width-48) / 2
   }
 }
 ```
@@ -125,21 +95,24 @@ colors_fiw = [
   "#ffd54f"  // yellow
 ]
 
-// Food
-path1 = "M1 21.98c0 .56.45 1.01 1.01 1.01H15c.56 0 1.01-.45 1.01-1.01V21H1v.98zM8.5 8.99C4.75 8.99 1 11 1 15h15c0-4-3.75-6.01-7.5-6.01zM3.62 13c1.11-1.55 3.47-2.01 4.88-2.01s3.77.46 4.88 2.01H3.62zM1 17h15v2H1zM18 5V1h-2v4h-5l.23 2h9.56l-1.4 7H18v2h1.72c.84 0 1.53-.65 1.63-1.47L23 5h-5z"
+// Lebensmittel (Food)
+path1 = "M20 6c0-1.1-.9-2-2-2H6c-1.1 0-2 .9-2 2v1h16V6zM4 9h16v1.5H4V9zm0 3h16v1.5H4V12zm2 4c-1.1 0-2 .9-2 2v1c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-1c0-1.1-.9-2-2-2H6z"
 
-// Housing
+// Wohnen (Housing)
 path2 = "M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"
 
-// Energy
+// Energie (Energy)
 path3 = "M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7z"
 
-// Mobility
+// Mobilität (Mobility)
 path4 = "M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"
 
-// Goods
+// Güter (Goods)
 path5 = "M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"
 
-// Services
+// Dienstleistungen (Services)
 path6 = "M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+
+// Emissionen (Emissions - Factory with smoke)
+path7 = "M2 17h20v4H2v-4zm2-2h4v2H4v-2zm6 0h4v2h-4v-2zm6 0h4v2h-4v-2zm-8-2h4V8H8v5zm-2 0V9H4v4h2zm10 0h4V9h-4v4zm2-8h-2V3h-2v2h-2V3h-2v2H8V3H6v2H4V3H2v6h20V3h-2v2z"
 ```

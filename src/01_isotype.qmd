@@ -18,11 +18,12 @@ makeIsotype = function({ inputData }) {
     .encode(
       vl.y()
         .fieldN("name")
-        .sort(["Food", "Housing", "Energy", "Mobility", "Goods", "Services"])
+        .sort(["Lebensmittel", "Wohnen", "Energie", "Mobilität", "Güter", "Dienstleistungen"])
         .axis({
           domain: false,
           ticks: false,
           title: null,
+          labelOffset: 14,
         }),
       // vl.yOffset().value(-8),
       vl.x()
@@ -42,13 +43,13 @@ makeIsotype = function({ inputData }) {
       vl.fill()
         .fieldN("name")
         .scale({
-          range: colors_burger,
+          range: colors_fiw,
         })
         .legend(false),
       vl.shape()
         .fieldN("name")
         .scale({
-          domain: ["Food", "Housing", "Energy", "Mobility", "Goods", "Services"],
+          domain: ["Lebensmittel", "Wohnen", "Energie", "Mobilität", "Güter", "Dienstleistungen"],
           range: [
             path1,
             path2,
@@ -64,7 +65,84 @@ makeIsotype = function({ inputData }) {
   return vl.layer(
     chartIsotypeMain,
   )
-  .width(makeWidth(width) / 2)
+  .width(makeWidth(width))
+  .height(340)
+  .facet({
+    column: {
+      field: "Quantile",
+      type: "nominal",
+      title: null,
+      sort: ["Arm", "Reich"],
+      header: {
+        labelFontSize: 15,
+        labelOrient: "top",
+        labelPadding: 6,
+      },
+    },
+  })
+  .resolve({scale: {x: "shared"}})
+  .data(inputData)
+  .config(config);
+
+}
+
+makeIsotypeEmissions = function({ inputData }) {
+
+  const chartIsotypeMain = vl.markPoint({
+      size: 5,
+      stroke: "black",
+      strokeOpacity: 1,
+      strokeWidth: 0.75,
+      opacity: 1,
+      clip: false,
+    })
+    .transform(
+      vl.calculate("sequence(0, round(datum.value / 1000))").as("positions"),
+      vl.flatten(["positions"]),
+    )
+    .encode(
+      vl.y()
+        .fieldN("name")
+        .sort(["Emissionen"])
+        .axis({
+          domain: false,
+          ticks: false,
+          title: null,
+          labelOffset: 14,
+        }),
+      vl.x()
+        .fieldQ("positions")
+        .scale({
+          domain: [0, 60],
+          nice: false,
+          zero: false,
+        })
+        .axis({
+          title: null,
+          labels: false,
+          ticks: false,
+          domain: false,
+          grid: false,
+        }),
+      vl.fill()
+        .fieldN("name")
+        .scale({
+          range: ["#666666"],
+        })
+        .legend(false),
+      vl.shape()
+        .fieldN("name")
+        .scale({
+          domain: ["Emissionen"],
+          range: [path7]
+        })
+        .legend(false)
+    )
+
+  return vl.layer(
+    chartIsotypeMain,
+  )
+  .width(makeWidth(width))
   .height(340)
   .facet({
     column: {
