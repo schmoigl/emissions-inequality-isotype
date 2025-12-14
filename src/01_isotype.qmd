@@ -101,7 +101,7 @@ makeIsotype = function({
         labelPadding: -6,
       },
     },
-    spacing: spacing
+    spacing: -20
   })
   .resolve({scale: {x: "shared"}})
   .data(inputData)
