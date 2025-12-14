@@ -21,12 +21,12 @@ Die Visualisierung basiert auf der Studie "Income distribution, consumption expe
 
 - **Framework:** Quarto
 - **Visualisierung:** Observable Plot mit Vega-Lite
-- **Datenquelle:** Haberl et al. (2022), EXIOBASE3, Österreichische Haushaltsbudgeterhebung 2009/10
+- **Datenquelle:** xx
 - **Typografie:** Jost (Fließtext), Lexend (Überschriften)
 
 ## Datenquelle
 
-Haberl, H., Wiedenhofer, D., Schaffartzik, A., Plank, B., Schöggl, J.-P., & Steinberger, J. K. (2022). Income distribution, consumption expenditure and household CO2 emissions in Austria. *Ecological Economics*, 197, 107413. [https://doi.org/10.1016/j.ecolecon.2022.107413](https://doi.org/10.1016/j.ecolecon.2022.107413)
+xx
 
 ## Marie Neurath Preis
 
