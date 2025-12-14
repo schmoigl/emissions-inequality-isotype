@@ -1,5 +1,5 @@
 ---
-title: "Quarto"
+title: "Ungleiche Emissionen"
 execute: 
   eval: true
   echo: false
@@ -15,18 +15,16 @@ execute:
 ```{r}
 #| echo: false
 source("src/00_libs.R")
+
+read_excel("data/emissions-data.xlsx") |>
+  pivot_longer(2:11) |>
+  mutate(value = round(value)) |>
+  write_csv("data/data.csv") 
 ```
 
 ```{r}
 #| echo: false
-data <- read_csv("data/data.csv")
-```
 
-```{r}
-#| echo: false
-data |> 
-  filter(row_number()<20) |>
-  kable("html")
 ```
 
 
