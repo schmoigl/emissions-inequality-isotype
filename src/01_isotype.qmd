@@ -5,15 +5,16 @@ makeIsotype = function({
   shapeDomain = ["Lebensmittel", "Wohnen", "Energie", "Mobilität", "Güter", "Dienstleistungen"],
   shapeRange = [path1, path2, path3, path4, path5, path6],
   colorRange = colors_burger,
-  xDomain = [0, 25],
-  height = 300,
+  xDomain = [0, 30],
+  height = 260,
   size = 5,
   unit = "€",
   divisor = 1000,
   minExtent = 100,
   spacing = 10,
   plotWidth = null,
-  textShift = 40
+  textShift = 40,
+  showFacetHeader = true
 }) {
 
   return vl.layer(
@@ -89,7 +90,7 @@ makeIsotype = function({
     vl.calculate(`sequence(0, round(datum.value / ${divisor}))`).as("positions"),
     vl.flatten(["positions"]),
   )
-  .width(plotWidth !== null ? plotWidth : makeWidth(width))
+  .width(makeWidth(width))
   .height(height)
   .facet({
     column: {
@@ -98,12 +99,12 @@ makeIsotype = function({
       title: null,
       sort: ["Arm", "Reich"],
       header: {
-        labelFontSize: 15,
+        labelFontSize: showFacetHeader ? 15 : 0,
         labelOrient: "top",
         labelPadding: -6,
       },
     },
-    spacing: -20
+    spacing: -60
   })
   .resolve({scale: {x: "shared"}})
   .data(inputData)

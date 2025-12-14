@@ -91,15 +91,15 @@ makeIsotype({
   shapeDomain: ["Emissionen"],
   shapeRange: [path7],
   colorRange: ["#666666"],
-  xDomain: [0, 60],
-  height: 120,
+  height: 100,
   size: 3,
   unit: "t CO₂",
-  divisor: 10000,
+  divisor: 5000,
   minExtent: 130,
-  spacing: -50,
+  spacing: -100,
   plotWidth: 330,
-  textShift: 60
+  textShift: 60,
+  showFacetHeader: false
 })
   .config({...config, facet: {...config.facet, spacing: 30}})
   .render({ renderer: "svg" })

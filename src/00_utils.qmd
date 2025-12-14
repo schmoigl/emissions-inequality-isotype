@@ -5,7 +5,7 @@
 //| output: false
 makeWidth = function(inputWidth) {
   if (inputWidth>826) {
-    return 310
+    return 340
   }
   else {
     return (width-100) / 2
