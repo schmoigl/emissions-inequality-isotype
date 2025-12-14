@@ -3,18 +3,16 @@
 makeIsotype = function({ inputData }) {
 
   const chartIsotypeMain = vl.markPoint({
-      size: width > 768 ? 0.5 : 0.25,
+      size: 10,
       stroke: "black",
-      strokeWidth: 0,
       strokeOpacity: 1,
       opacity: 0.9,
-      dy: -100,
-      clip: true,
+      dy: 0,
+      clip: false,
     })
     .transform(
       vl.calculate("sequence(0, datum.value / 1000)").as("positions"),
       vl.flatten(["positions"]),
-      vl.calculate("datum.positions % 10").as("positionX"),
     )
     .encode(
       vl.y().fieldN("name").axis(null),
@@ -24,7 +22,12 @@ makeIsotype = function({ inputData }) {
       //     domain: [-0.5, 5.5],
       //   }),
       vl.x()
-        .fieldQ("positionX")
+        .fieldQ("positions")
+        .scale({
+          domain: [0, 20],
+          nice: false,
+          zero: false,
+        })
         .axis({
           title: null,
           labels: false,
@@ -33,6 +36,12 @@ makeIsotype = function({ inputData }) {
           grid: false,
         }),
       vl.fill()
+        .fieldN("name")
+        // .scale({
+        //   range: colors2,
+        // })
+        .legend(false),
+      vl.color()
         .fieldN("name")
         // .scale({
         //   range: colors2,
@@ -61,7 +70,6 @@ makeIsotype = function({ inputData }) {
       vl.calculate("['↜ ' + datum.text]").as("label"), // , datum.gesl
       vl.calculate("sequence(0, datum.value / 1000)").as("positions"),
       vl.flatten(["positions"]),
-      vl.calculate("datum.positions % 10").as("positionX"),
     )
     .encode(
       vl.y().fieldN("gesl").axis(null),
@@ -88,10 +96,10 @@ makeIsotype = function({ inputData }) {
     field: "Quantile",
     type: "nominal",
     title: null,
-    sort: ["lower", "higher"],
+    sort: ["Arm", "Reich"],
     scale: {
-      domain: ["lower", "higher"],
-      range: ["lower", "higher"],
+      domain: ["Arm", "Reich"],
+      range: ["Arm", "Reich"],
     },
     header: {
       labelFontSize: 15,
@@ -100,7 +108,7 @@ makeIsotype = function({ inputData }) {
       labelPadding: -20,
     },
   })
-  .resolve({scale: {x: "independent", yOffset: "independent"}})
+  .resolve({scale: {x: "shared", yOffset: "independent"}})
   .data(inputData)
   .config(config);
 

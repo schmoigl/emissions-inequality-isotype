@@ -33,6 +33,9 @@ read_excel("data/emissions-data.xlsx") |>
   filter(
     Quantile %in% c(1, 5)
   ) |>
+  mutate(
+    Quantile = ifelse(Quantile == 1, "Arm", "Reich")
+  ) |>
   write_csv("data/data.csv") 
 ```
 
@@ -49,7 +52,7 @@ data = FileAttachment("data/data.csv").csv({ typed: true })
 
 ```{ojs}
 //| echo: false
-makeIsotype({ data: data })
+makeIsotype({ inputData: data })
   .render({ renderer: "svg" })
 ```
 
