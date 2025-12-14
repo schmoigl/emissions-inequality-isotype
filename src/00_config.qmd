@@ -6,7 +6,7 @@
 config = ({
   view: { stroke: null }, 
   background: "transparent", // "#f1f1f1"
-  font: "Montserrat", // "Century Gothic" "FFDaxPro"
+  font: "Jost", // "Century Gothic" "FFDaxPro"
   fontSize: 14,
   concat: { spacing: 20 },
   padding: {

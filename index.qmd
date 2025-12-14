@@ -10,7 +10,7 @@ execute:
 ---
 
 
-## R
+## R data preparation
 
 ```{r}
 #| echo: false
@@ -22,17 +22,13 @@ read_excel("data/emissions-data.xlsx") |>
   write_csv("data/data.csv") 
 ```
 
-```{r}
-#| echo: false
 
-```
-
-
-## JavaScript
+## JavaScript viz
 
 {{< include src/00_config.qmd >}}
 {{< include src/00_libs.qmd >}}
 {{< include src/00_utils.qmd >}}
+{{< include 01_isotype.qmd  >}}
 
 ```{ojs}
 //| echo: false
