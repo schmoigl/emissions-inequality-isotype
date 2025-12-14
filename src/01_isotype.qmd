@@ -1,0 +1,111 @@
+
+```{ojs}
+makeIsotype = function({ inputData }) {
+
+  const chartIsotypeMain = vl.markPoint({
+      size: width > 768 ? 0.5 : 0.25,
+      stroke: "black",
+      strokeWidth: 0,
+      strokeOpacity: 1,
+      opacity: 0.9,
+      dy: -100,
+      clip: true,
+    })
+    .transform(
+      vl.calculate("sequence(0, datum.percRound)").as("positions"),
+      vl.flatten(["positions"]),
+      vl.calculate("datum.positions % 10").as("positionX"),
+      vl.calculate("floor(datum.positions / 10)").as("positionY"),
+    )
+    .encode(
+      vl.y().fieldN("gesl").axis(null),
+      vl.yOffset()
+        .fieldQ("positionY")
+        .scale({
+          domain: [-0.5, 5.5],
+        }),
+      vl.x()
+        .fieldQ("positionX")
+        .axis({
+          title: null,
+          labels: false,
+          ticks: false,
+          domain: false,
+          grid: false,
+        })
+        .scale({
+          domain: [-0.5, 10.5],
+        }),
+      vl.fill()
+        .fieldN("gesl")
+        .scale({
+          range: colors2,
+        })
+        .legend(false),
+      vl.shape()
+        .fieldN("gesl")
+        .scale({
+          range: [
+            path2,
+            path1,
+            ]
+        })
+        .legend(false)
+    )
+
+  const chartIsotypeText = vl.markText({
+      size: 15,
+      dx: 15,
+      dy: 14,
+      align: "center",
+      opacity: 0.651,
+      clip: true,
+    })
+    .transform(
+      vl.calculate("['↜ ' + datum.text]").as("label"), // , datum.gesl
+      vl.calculate("datum.percRound % 10").as("positionX"),
+      vl.calculate("floor(datum.percRound / 10)").as("positionY"),
+    )
+    .encode(
+      vl.y().fieldN("gesl").axis(null),
+      vl.yOffset()
+        .fieldQ("positionY")
+        .scale({
+          domain: [-0.5, 5.5],
+        }),
+      vl.x()
+        .fieldQ("positionX")
+        .scale({
+          domain: [-0.5, 10.5],
+        }),
+      vl.text().fieldN("label"),
+    )
+
+  return vl.layer(
+    chartIsotypeMain,
+    chartIsotypeText,
+  )
+  .width(makeWidth(width) / 2)
+  .height(340)
+  .facet({
+    field: "tail",
+    type: "nominal",
+    title: null,
+    sort: ["lower", "higher"],
+    scale: {
+      domain: ["lower", "higher"],
+      range: ["lower", "higher"],
+    },
+    header: {
+      labelFontSize: 15,
+      labelOrient: "top",
+      // labelExpr: `datum.value == 'lower' ? 'Pension < ${rangeValue}€' : 'Pension > ${rangeValue}€'`,
+      labelPadding: -20,
+    },
+  })
+  .resolve({scale: {x: "independent", yOffset: "independent"}})
+  .data(inputData)
+  .config(config);
+
+}
+```
