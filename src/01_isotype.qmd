@@ -12,18 +12,17 @@ makeIsotype = function({ inputData }) {
       clip: true,
     })
     .transform(
-      vl.calculate("sequence(0, datum.percRound)").as("positions"),
+      vl.calculate("sequence(0, datum.value / 1000)").as("positions"),
       vl.flatten(["positions"]),
       vl.calculate("datum.positions % 10").as("positionX"),
-      vl.calculate("floor(datum.positions / 10)").as("positionY"),
     )
     .encode(
-      vl.y().fieldN("gesl").axis(null),
-      vl.yOffset()
-        .fieldQ("positionY")
-        .scale({
-          domain: [-0.5, 5.5],
-        }),
+      vl.y().fieldN("name").axis(null),
+      // vl.yOffset()
+      //   .fieldQ("positionY")
+      //   .scale({
+      //     domain: [-0.5, 5.5],
+      //   }),
       vl.x()
         .fieldQ("positionX")
         .axis({
@@ -32,25 +31,22 @@ makeIsotype = function({ inputData }) {
           ticks: false,
           domain: false,
           grid: false,
-        })
-        .scale({
-          domain: [-0.5, 10.5],
         }),
       vl.fill()
-        .fieldN("gesl")
-        .scale({
-          range: colors2,
-        })
+        .fieldN("name")
+        // .scale({
+        //   range: colors2,
+        // })
         .legend(false),
       vl.shape()
-        .fieldN("gesl")
-        .scale({
-          range: [
-            path2,
-            path1,
-            ]
-        })
-        .legend(false)
+        .fieldN("name")
+        // .scale({
+        //   range: [
+        //     path2,
+        //     path1,
+        //     ]
+        // })
+        // .legend(false)
     )
 
   const chartIsotypeText = vl.markText({
@@ -63,16 +59,17 @@ makeIsotype = function({ inputData }) {
     })
     .transform(
       vl.calculate("['↜ ' + datum.text]").as("label"), // , datum.gesl
-      vl.calculate("datum.percRound % 10").as("positionX"),
-      vl.calculate("floor(datum.percRound / 10)").as("positionY"),
+      vl.calculate("sequence(0, datum.value / 1000)").as("positions"),
+      vl.flatten(["positions"]),
+      vl.calculate("datum.positions % 10").as("positionX"),
     )
     .encode(
       vl.y().fieldN("gesl").axis(null),
-      vl.yOffset()
-        .fieldQ("positionY")
-        .scale({
-          domain: [-0.5, 5.5],
-        }),
+      // vl.yOffset()
+      //   .fieldQ("positionY")
+      //   .scale({
+      //     domain: [-0.5, 5.5],
+      //   }),
       vl.x()
         .fieldQ("positionX")
         .scale({
@@ -88,7 +85,7 @@ makeIsotype = function({ inputData }) {
   .width(makeWidth(width) / 2)
   .height(340)
   .facet({
-    field: "tail",
+    field: "Quantile",
     type: "nominal",
     title: null,
     sort: ["lower", "higher"],

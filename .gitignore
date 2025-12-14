@@ -36,3 +36,4 @@ keys/
 
 # formats
 *.xlsx
+**/*.quarto_ipynb
