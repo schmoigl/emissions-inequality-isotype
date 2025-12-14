@@ -3,24 +3,28 @@
 makeIsotype = function({ inputData }) {
 
   const chartIsotypeMain = vl.markPoint({
-      size: 10,
+      size: 5,
       stroke: "black",
       strokeOpacity: 1,
-      opacity: 0.9,
-      dy: 0,
+      strokeWidth: 0.75,
+      opacity: 1,
       clip: false,
+      // dy: -100,
     })
     .transform(
-      vl.calculate("sequence(0, datum.value / 1000)").as("positions"),
+      vl.calculate("sequence(0, round(datum.value / 1000))").as("positions"),
       vl.flatten(["positions"]),
     )
     .encode(
-      vl.y().fieldN("name").axis(null),
-      // vl.yOffset()
-      //   .fieldQ("positionY")
-      //   .scale({
-      //     domain: [-0.5, 5.5],
-      //   }),
+      vl.y()
+        .fieldN("name")
+        .sort(["Food", "Housing", "Energy", "Mobility", "Goods", "Services"])
+        .axis({
+          domain: false,
+          ticks: false,
+          title: null,
+        }),
+      // vl.yOffset().value(-8),
       vl.x()
         .fieldQ("positions")
         .scale({
@@ -37,78 +41,45 @@ makeIsotype = function({ inputData }) {
         }),
       vl.fill()
         .fieldN("name")
-        // .scale({
-        //   range: colors2,
-        // })
-        .legend(false),
-      vl.color()
-        .fieldN("name")
-        // .scale({
-        //   range: colors2,
-        // })
+        .scale({
+          range: colors_burger,
+        })
         .legend(false),
       vl.shape()
         .fieldN("name")
-        // .scale({
-        //   range: [
-        //     path2,
-        //     path1,
-        //     ]
-        // })
-        // .legend(false)
-    )
-
-  const chartIsotypeText = vl.markText({
-      size: 15,
-      dx: 15,
-      dy: 14,
-      align: "center",
-      opacity: 0.651,
-      clip: true,
-    })
-    .transform(
-      vl.calculate("['↜ ' + datum.text]").as("label"), // , datum.gesl
-      vl.calculate("sequence(0, datum.value / 1000)").as("positions"),
-      vl.flatten(["positions"]),
-    )
-    .encode(
-      vl.y().fieldN("gesl").axis(null),
-      // vl.yOffset()
-      //   .fieldQ("positionY")
-      //   .scale({
-      //     domain: [-0.5, 5.5],
-      //   }),
-      vl.x()
-        .fieldQ("positionX")
         .scale({
-          domain: [-0.5, 10.5],
-        }),
-      vl.text().fieldN("label"),
+          domain: ["Food", "Housing", "Energy", "Mobility", "Goods", "Services"],
+          range: [
+            path1,
+            path2,
+            path3,
+            path4,
+            path5,
+            path6
+            ]
+        })
+        .legend(false)
     )
 
   return vl.layer(
     chartIsotypeMain,
-    // chartIsotypeText,
   )
   .width(makeWidth(width) / 2)
   .height(340)
   .facet({
-    field: "Quantile",
-    type: "nominal",
-    title: null,
-    sort: ["Arm", "Reich"],
-    scale: {
-      domain: ["Arm", "Reich"],
-      range: ["Arm", "Reich"],
-    },
-    header: {
-      labelFontSize: 15,
-      labelOrient: "top",
-      // labelExpr: `datum.value == 'lower' ? 'Pension < ${rangeValue}€' : 'Pension > ${rangeValue}€'`,
-      labelPadding: -20,
+    column: {
+      field: "Quantile",
+      type: "nominal",
+      title: null,
+      sort: ["Arm", "Reich"],
+      header: {
+        labelFontSize: 15,
+        labelOrient: "top",
+        labelPadding: 6,
+      },
     },
   })
-  .resolve({scale: {x: "shared", yOffset: "independent"}})
+  .resolve({scale: {x: "shared"}})
   .data(inputData)
   .config(config);
 

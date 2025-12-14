@@ -1,17 +1,19 @@
 ---
 title: "Ungleiche Emissionen"
-execute: 
+execute:
   eval: true
   echo: false
   output: true
   warning: false
   error: true
   include: true
+  cache: false
 ---
 
 
 ```{r}
 #| echo: false
+#| cache: false
 source("src/00_libs.R")
 
 read_excel("data/emissions-data.xlsx") |>
@@ -47,6 +49,7 @@ read_excel("data/emissions-data.xlsx") |>
 
 ```{ojs}
 //| echo: false
+//| output: false
 data = FileAttachment("data/data.csv").csv({ typed: true })
 ```
 
