@@ -10,7 +10,8 @@ execute:
   cache: false
 ---
 
-Die Klimakrise ist auch eine Frage der Verteilung: In Österreich verursacht das reichste Einkommenszehntel viermal so viele CO₂-Emissionen wie das ärmste. Während Ausgaben für Energie bei allen ähnlich sind, klaffen bei Mobilität und Güterkonsum die Emissionen massiv auseinander. Gleichzeitig würden ärmere Haushalte bei einer CO₂-Bepreisung überproportional belastet – sie geben einen größeren Teil ihres Einkommens für klimaschädlichen Konsum aus, ohne die finanziellen Mittel für Alternativen. Die Isotype-Darstellung macht diese Ungleichheit auf einen Blick erfassbar.
+Die Klimakrise ist auch eine Frage der Verteilung: In Österreich verursachen die Reichsten viel mehr CO₂-Emissionen als die Ärmsten. Während Ausgaben für Energie bei allen ähnlich sind, klaffen bei Mobilität und Güterkonsum die Emissionen massiv auseinander. Gleichzeitig werden ärmere Haushalte bei einer CO₂-Bepreisung überproportional belastet – sie geben einen größeren Teil ihres Einkommens für klimaschädlichen Konsum aus, ohne die finanziellen Mittel für Alternativen. Die Isotype-Darstellung macht diese Ungleichheit auf einen Blick erfassbar.
+
 ```{r}
 #| echo: false
 #| cache: false
@@ -77,7 +78,7 @@ data = FileAttachment("data/data.csv").csv({ typed: true })
 viewof selectedQuantile = Inputs.select(
   ["Arme", "Untere Mittelschicht", "Mittelschicht", "Obere Mittelschicht"],
   {
-    label: "Einkommensgruppe:",
+    label: "",
     value: "Arme"
   }
 )
