@@ -7,7 +7,8 @@
       "Bash(git add:*)",
       "Bash(test:*)",
       "WebFetch(domain:www.sciencedirect.com)",
-      "WebFetch(domain:wien.arbeiterkammer.at)"
+      "WebFetch(domain:wien.arbeiterkammer.at)",
+      "WebFetch(domain:vega.github.io)"
     ]
   }
 }
