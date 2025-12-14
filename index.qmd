@@ -18,7 +18,22 @@ source("src/00_libs.R")
 
 read_excel("data/emissions-data.xlsx") |>
   pivot_longer(2:11) |>
-  mutate(value = round(value)) |>
+  mutate(
+    value = round(value)
+    ) |>
+  filter(
+    name %in% c(
+      "Food",
+      "Housing",
+      "Energy",
+      "Mobility",
+      "Goods",
+      "Services"
+    )
+  ) |>
+  filter(
+    Quantile %in% c(1, 5)
+  ) |>
   write_csv("data/data.csv") 
 ```
 
@@ -37,10 +52,11 @@ data = FileAttachment("data/data.csv").csv({ typed: true })
 
 ```{ojs}
 //| echo: false
-data
+makeIsotype({ data: dataIsotype })
+  .render({ renderer: "svg" })
 ```
 
-
+<!-- 
 ## Colors
 
 ```{ojs}
@@ -63,4 +79,4 @@ html`
     </div>
   `)}
 </div>`
-```
+``` -->

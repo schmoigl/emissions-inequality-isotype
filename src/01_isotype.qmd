@@ -83,7 +83,7 @@ makeIsotype = function({ inputData }) {
 
   return vl.layer(
     chartIsotypeMain,
-    chartIsotypeText,
+    // chartIsotypeText,
   )
   .width(makeWidth(width) / 2)
   .height(340)
