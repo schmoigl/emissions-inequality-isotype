@@ -1,13 +1,31 @@
 Quantile,name,value
-Arm,Lebensmittel,3248
-Arm,Wohnen,3498
-Arm,Energie,1119
-Arm,Mobilität,1826
-Arm,Güter,5562
-Arm,Dienstleistungen,1901
-Reich,Lebensmittel,7054
-Reich,Wohnen,8383
-Reich,Energie,2122
-Reich,Mobilität,9340
-Reich,Güter,19879
-Reich,Dienstleistungen,7516
+Arme,Lebensmittel,3248
+Arme,Wohnen,3498
+Arme,Energie,1119
+Arme,Mobilität,1826
+Arme,Güter,5562
+Arme,Dienstleistungen,1901
+Untere Mittelschicht,Lebensmittel,4111
+Untere Mittelschicht,Wohnen,4825
+Untere Mittelschicht,Energie,1365
+Untere Mittelschicht,Mobilität,3653
+Untere Mittelschicht,Güter,8638
+Untere Mittelschicht,Dienstleistungen,3360
+Mittelschicht,Lebensmittel,5024
+Mittelschicht,Wohnen,6091
+Mittelschicht,Energie,1711
+Mittelschicht,Mobilität,4644
+Mittelschicht,Güter,11123
+Mittelschicht,Dienstleistungen,4067
+Obere Mittelschicht,Lebensmittel,5836
+Obere Mittelschicht,Wohnen,7237
+Obere Mittelschicht,Energie,1892
+Obere Mittelschicht,Mobilität,6522
+Obere Mittelschicht,Güter,13963
+Obere Mittelschicht,Dienstleistungen,5173
+Reiche,Lebensmittel,7054
+Reiche,Wohnen,8383
+Reiche,Energie,2122
+Reiche,Mobilität,9340
+Reiche,Güter,19879
+Reiche,Dienstleistungen,7516
