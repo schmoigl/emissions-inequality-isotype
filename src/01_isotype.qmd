@@ -1,6 +1,12 @@
 
 ```{ojs}
-makeIsotype = function({ inputData }) {
+makeIsotype = function({
+  inputData,
+  shapeDomain = ["Lebensmittel", "Wohnen", "Energie", "Mobilität", "Güter", "Dienstleistungen"],
+  shapeRange = [path1, path2, path3, path4, path5, path6],
+  colorRange = colors_fiw,
+  xDomain = [0, 20]
+}) {
 
   const chartIsotypeMain = vl.markPoint({
       size: 5,
@@ -18,7 +24,7 @@ makeIsotype = function({ inputData }) {
     .encode(
       vl.y()
         .fieldN("name")
-        .sort(["Lebensmittel", "Wohnen", "Energie", "Mobilität", "Güter", "Dienstleistungen"])
+        .sort(shapeDomain)
         .axis({
           domain: false,
           ticks: false,
@@ -29,7 +35,7 @@ makeIsotype = function({ inputData }) {
       vl.x()
         .fieldQ("positions")
         .scale({
-          domain: [0, 20],
+          domain: xDomain,
           nice: false,
           zero: false,
         })
@@ -43,21 +49,14 @@ makeIsotype = function({ inputData }) {
       vl.fill()
         .fieldN("name")
         .scale({
-          range: colors_fiw,
+          range: colorRange,
         })
         .legend(false),
       vl.shape()
         .fieldN("name")
         .scale({
-          domain: ["Lebensmittel", "Wohnen", "Energie", "Mobilität", "Güter", "Dienstleistungen"],
-          range: [
-            path1,
-            path2,
-            path3,
-            path4,
-            path5,
-            path6
-            ]
+          domain: shapeDomain,
+          range: shapeRange
         })
         .legend(false)
     )
