@@ -2,7 +2,7 @@ project:
   type: website
   output-dir: website
   preview:
-    port: 1111
+    port: 7777
     browser: true
     watch-inputs: true
   render: 
@@ -14,7 +14,12 @@ website:
   navbar: false
 format:
   html:
-    theme: [style/styles.scss]
+    theme: [cosmo, style/styles.scss]
+    grid:
+      # sidebar-width: 300px
+      body-width: 826px
+      margin-width: 380px
+      gutter-width: 8px 
     toc: false
     page-layout: article
-    fontsize: 16px
+    fontsize: 15px
