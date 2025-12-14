@@ -80,7 +80,13 @@ emissionenData = FileAttachment("data/emissionen.csv").csv({ typed: true })
 
 ```{ojs}
 //| echo: false
-makeIsotypeEmissions({ inputData: emissionenData })
+makeIsotype({
+  inputData: emissionenData,
+  shapeDomain: ["Emissionen"],
+  shapeRange: [path7],
+  colorRange: ["#666666"],
+  xDomain: [0, 60]
+})
   .render({ renderer: "svg" })
 ```
 
