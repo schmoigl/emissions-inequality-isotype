@@ -71,7 +71,8 @@ makeIsotype({
   inputData: data,
   minExtent: 130,
   spacing: -50,
-  plotWidth: 330
+  plotWidth: 330,
+  textShift: 36
 })
   .config({...config, facet: {...config.facet, spacing: -20}})
   .render({ renderer: "svg" })
@@ -97,7 +98,8 @@ makeIsotype({
   divisor: 10000,
   minExtent: 130,
   spacing: -50,
-  plotWidth: 330
+  plotWidth: 330,
+  textShift: 60
 })
   .config({...config, facet: {...config.facet, spacing: 30}})
   .render({ renderer: "svg" })
