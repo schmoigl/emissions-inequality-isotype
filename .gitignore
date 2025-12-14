@@ -37,3 +37,5 @@ keys/
 # formats
 *.xlsx
 **/*.quarto_ipynb
+
+/.luarc.json
