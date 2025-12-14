@@ -91,7 +91,7 @@ makeIsotype({
   shapeDomain: ["Emissionen"],
   shapeRange: [path7],
   colorRange: ["#666666"],
-  height: 100,
+  height: 70,
   size: 3,
   unit: "t CO₂",
   divisor: 5000,
