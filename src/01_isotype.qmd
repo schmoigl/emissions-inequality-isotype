@@ -4,8 +4,9 @@ makeIsotype = function({
   inputData,
   shapeDomain = ["Lebensmittel", "Wohnen", "Energie", "Mobilität", "Güter", "Dienstleistungen"],
   shapeRange = [path1, path2, path3, path4, path5, path6],
+  shapeRangeHalf = [path1_half, path2_half, path3_half, path4_half, path5_half, path6_half],
   colorRange = colors_burger,
-  xDomain = [0, 13],
+  xDomain = [0, 14],
   height = 250,
   size = 5,
   unit = "€",
@@ -18,11 +19,13 @@ makeIsotype = function({
 }) {
 
   return vl.layer(
+    // Combined shapes layer with conditional shape selection
     vl.markPoint({
       size: size,
       stroke: "black",
       strokeOpacity: 1,
       strokeWidth: 1,
+      opacity: 1,
       clip: false,
     })
     .encode(
@@ -57,14 +60,12 @@ makeIsotype = function({
         })
         .legend(false),
       vl.shape()
-        .fieldN("name")
+        .fieldN("shapeKey")
         .scale({
-          domain: shapeDomain,
-          range: shapeRange
+          domain: shapeDomain.concat(shapeDomain.map(d => d + "_half")),
+          range: shapeRange.concat(shapeRangeHalf)
         })
-        .legend(false),
-      vl.opacity()
-        .fieldQ("shapeOpacity")
+        .legend(false)
     ),
     vl.markText({
       align: "left",
@@ -94,7 +95,8 @@ makeIsotype = function({
     vl.calculate(`datum.decimal >= 0.3 && datum.decimal <= 0.7 ? datum.fullShapes + 1 : round(datum.exactValue)`).as("totalShapes"),
     vl.calculate(`sequence(0, datum.totalShapes)`).as("positions"),
     vl.flatten(["positions"]),
-    vl.calculate(`datum.positions === datum.totalShapes - 1 && datum.decimal >= 0.3 && datum.decimal <= 0.7 ? 0.5 : 1`).as("shapeOpacity")
+    vl.calculate(`datum.positions === datum.totalShapes - 1 && datum.decimal >= 0.3 && datum.decimal <= 0.7 ? 1 : 0`).as("isHalfShape"),
+    vl.calculate(`datum.isHalfShape === 1 ? datum.name + '_half' : datum.name`).as("shapeKey")
   )
   .width(makeWidth(width))
   .height(height)

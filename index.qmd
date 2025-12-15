@@ -97,7 +97,7 @@ makeIsotype({
   minExtent: 130,
   spacing: -50,
   plotWidth: 330,
-  size: 6,
+  size: 5,
   divisor: 2000,
 })
   .config({...config, facet: {...config.facet, spacing: -20}})
@@ -122,6 +122,7 @@ makeIsotype({
   inputData: filteredEmissionen,
   shapeDomain: ["Emissionen"],
   shapeRange: [path7],
+  shapeRangeHalf: [path7_half],
   colorRange: ["#d3d3d3"],
   height: 50,
   size: 5,
