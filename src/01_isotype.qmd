@@ -23,7 +23,6 @@ makeIsotype = function({
       stroke: "black",
       strokeOpacity: 1,
       strokeWidth: 1,
-      opacity: 1,
       clip: false,
     })
     .encode(
@@ -63,7 +62,9 @@ makeIsotype = function({
           domain: shapeDomain,
           range: shapeRange
         })
-        .legend(false)
+        .legend(false),
+      vl.opacity()
+        .fieldQ("shapeOpacity")
     ),
     vl.markText({
       align: "left",
@@ -73,7 +74,7 @@ makeIsotype = function({
       clip: false
     })
     .transform(
-      vl.filter(`datum.positions === round(datum.value / ${divisor}) - 1`),
+      vl.filter(`datum.positions === datum.totalShapes - 1`),
       vl.calculate(`format(datum.value, ',') + ' ${unit}'`).as("valueWithUnit")
     )
     .encode(
@@ -87,8 +88,13 @@ makeIsotype = function({
     )
   )
   .transform(
-    vl.calculate(`sequence(0, round(datum.value / ${divisor}))`).as("positions"),
+    vl.calculate(`datum.value / ${divisor}`).as("exactValue"),
+    vl.calculate(`floor(datum.exactValue)`).as("fullShapes"),
+    vl.calculate(`datum.exactValue - datum.fullShapes`).as("decimal"),
+    vl.calculate(`datum.decimal >= 0.3 && datum.decimal <= 0.7 ? datum.fullShapes + 1 : round(datum.exactValue)`).as("totalShapes"),
+    vl.calculate(`sequence(0, datum.totalShapes)`).as("positions"),
     vl.flatten(["positions"]),
+    vl.calculate(`datum.positions === datum.totalShapes - 1 && datum.decimal >= 0.3 && datum.decimal <= 0.7 ? 0.5 : 1`).as("shapeOpacity")
   )
   .width(makeWidth(width))
   .height(height)
