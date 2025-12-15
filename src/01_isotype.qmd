@@ -92,10 +92,10 @@ makeIsotype = function({
     vl.calculate(`datum.value / ${divisor}`).as("exactValue"),
     vl.calculate(`floor(datum.exactValue)`).as("fullShapes"),
     vl.calculate(`datum.exactValue - datum.fullShapes`).as("decimal"),
-    vl.calculate(`datum.decimal >= 0.3 && datum.decimal <= 0.7 ? datum.fullShapes + 1 : round(datum.exactValue)`).as("totalShapes"),
+    vl.calculate(`datum.decimal >= 0.25 && datum.decimal <= 0.75 ? datum.fullShapes + 1 : round(datum.exactValue)`).as("totalShapes"),
     vl.calculate(`sequence(0, datum.totalShapes)`).as("positions"),
     vl.flatten(["positions"]),
-    vl.calculate(`datum.positions === datum.totalShapes - 1 && datum.decimal >= 0.3 && datum.decimal <= 0.7 ? 1 : 0`).as("isHalfShape"),
+    vl.calculate(`datum.positions === datum.totalShapes - 1 && datum.decimal >= 0.25 && datum.decimal <= 0.75 ? 1 : 0`).as("isHalfShape"),
     vl.calculate(`datum.isHalfShape === 1 ? datum.name + '_half' : datum.name`).as("shapeKey")
   )
   .width(makeWidth(width))
