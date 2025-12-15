@@ -21,6 +21,14 @@ h1, h2, h3, h4, h5, h6 {
 //     display: none;
 // }
 
+:root {
+    --r-selection-background-color: #FFAA00; // #94672d #E20613
+}
+
+::selection {
+    background-color: var(--r-selection-background-color);
+}
+
 .navbar {
     height: 3.75rem;
     flex-flow: row nowrap;
