@@ -12,56 +12,6 @@ execute:
 
 Die Klimakrise ist auch eine Frage der Verteilung: In Österreich verursachen die Reichsten viel mehr CO₂-Emissionen als die Ärmsten. Während Ausgaben für Energie bei allen ähnlich sind, klaffen bei Mobilität und Güterkonsum die Emissionen massiv auseinander. Gleichzeitig werden ärmere Haushalte bei einer CO₂-Bepreisung überproportional belastet – sie geben einen größeren Teil ihres Einkommens für klimaschädlichen Konsum aus, ohne die finanziellen Mittel für Alternativen. Die Isotype-Darstellung macht diese Ungleichheit auf einen Blick erfassbar.
 
-```{r}
-#| echo: false
-#| cache: false
-#| eval: false
-source("src/00_libs.R")
-
-read_excel("data/emissions-data.xlsx") |>
-  pivot_longer(2:11) |>
-  mutate(
-    value = round(value),
-    # nIso = round(value/1000)
-    ) |>
-  filter(
-    name %in% c(
-      "Food",
-      "Housing",
-      "Energy",
-      "Mobility",
-      "Goods",
-      "Services"
-    )
-  ) |>
-  mutate(
-    name = case_when(
-      name == "Food" ~ "Lebensmittel",
-      name == "Housing" ~ "Wohnen",
-      name == "Energy" ~ "Energie",
-      name == "Mobility" ~ "Mobilität",
-      name == "Goods" ~ "Güter",
-      name == "Services" ~ "Dienstleistungen",
-      TRUE ~ name
-    )
-  ) |>
-  filter(
-    Quantile %in% c(1, 2, 3, 4, 5)
-  ) |>
-  mutate(
-    Quantile = case_when(
-      Quantile == 1 ~ "Arme",
-      Quantile == 2 ~ "Untere Mittelschicht",
-      Quantile == 3 ~ "Mittelschicht",
-      Quantile == 4 ~ "Obere Mittelschicht",
-      Quantile == 5 ~ "Reiche",
-      TRUE ~ as.character(Quantile)
-    )
-  ) |>
-  write_csv("data/data.csv") 
-```
-
-
 {{< include src/00_config.qmd >}}
 {{< include src/00_libs.qmd >}}
 {{< include src/00_utils.qmd >}}
@@ -136,28 +86,3 @@ makeIsotype({
   .config({...config, facet: {...config.facet, spacing: -20}})
   .render({ renderer: "svg" })
 ```
-
-<!--
-## Colors
-
-```{ojs}
-html`
-<div class="logo-container-styleguide">
-  ${colors_burger.map(color => html`
-    <div class="swatches">
-      <div 
-        title="${color}" 
-        style="
-          margin-bottom: 1em;
-          width: 24px; 
-          height: 24px; 
-          background-color: ${color}; 
-          border: 0.75px solid black;"
-      >
-      </div>
-      <div>${color}</div>
-      <div>${hexToRgb(color)}</div>
-    </div>
-  `)}
-</div>`
-``` -->
