@@ -38,8 +38,15 @@ form {
     margin-top: 24px;
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 0;
 }
+
+/* Center SVG marks */
+// .observablehq svg.marks {
+//     display: block;
+//     margin: 0 auto;
+// }
 
 label {
     margin-right: 0;
