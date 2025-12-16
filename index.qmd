@@ -1,5 +1,9 @@
 ---
 title: "Die Emissionen der Wenigen, die Lasten der Vielen"
+author:
+  - name: Fabian Kalleitner
+  - name: Lukas Schmoigl
+author-title: "Autoren"
 bibliography: references.bib
 reference-section-title: "Literatur"
 execute:
