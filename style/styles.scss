@@ -23,6 +23,10 @@ h1, h2, h3, h4, h5, h6 {
 
 :root {
     --r-selection-background-color: #FFAA00; // #94672d #E20613
+    --bs-link-color: #FFAA00;
+    --bs-link-color-rgb: 255, 170, 0;
+    --bs-link-hover-color: #cc8800;
+    --bs-link-hover-color-rgb: 204, 136, 0;
 }
 
 ::selection {

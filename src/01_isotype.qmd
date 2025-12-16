@@ -38,6 +38,7 @@ makeIsotype = function({
           title: null,
           labelOffset: 14,
           minExtent: minExtent,
+          labelExpr: "split(datum.label, '\\n')",
         }),
       vl.x()
         .fieldQ("positions")
@@ -81,7 +82,10 @@ makeIsotype = function({
     .encode(
       vl.y()
         .fieldN("name")
-        .sort(shapeDomain),
+        .sort(shapeDomain)
+        .axis({
+          labelExpr: "split(datum.label, '\\n')",
+        }),
       vl.x()
         .fieldQ("positions"),
       vl.text()
