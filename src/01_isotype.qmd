@@ -9,12 +9,19 @@ makeIsotype = function({
   xDomain = [0, 15.5],
   height = 250,
   size = 5,
+  scaleFactor = 1,
+  sizeField = null,
+  sizeRange = null,
+  sizeByCategory = null,
   unit = "€",
   divisor = 1000,
   spacing = -10,
   textShift = 40,
   showFacetHeader = true
 }) {
+
+  const useCategorySize = sizeByCategory !== null;
+  const useSizeField = sizeField !== null;
 
   return vl.layer(
     // Combined shapes layer with conditional shape selection
@@ -64,7 +71,18 @@ makeIsotype = function({
           domain: shapeDomain.concat(shapeDomain.map(d => d + "_half")),
           range: shapeRange.concat(shapeRangeHalf)
         })
-        .legend(false)
+        .legend(false),
+      // ...(useCategorySize ? [vl.size()
+      //   .fieldN("name")
+      //   .scale({
+      //     domain: shapeDomain,
+      //     range: sizeByCategory
+      //   })
+      //   .legend(false)] : []),
+      // ...(useSizeField && !useCategorySize ? [vl.size()
+      //   .fieldQ(sizeField)
+      //   .scale(sizeRange ? { range: sizeRange } : { range: [size * scaleFactor * 0.5, size * scaleFactor * 1.5] })
+      //   .legend(false)] : [])
     ),
     vl.markText({
       align: "right",
@@ -75,7 +93,7 @@ makeIsotype = function({
     .transform(
       vl.filter(`datum.positions === datum.totalShapes - 1`),
       vl.calculate(`format(datum.value, ',') + ' ${unit}'`).as("valueWithUnit"),
-      vl.calculate("13.75").as("fixedX")
+      vl.calculate("13.6").as("fixedX")
     )
     .encode(
       vl.y()
