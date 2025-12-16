@@ -13,7 +13,6 @@ makeIsotype = function({
   divisor = 1000,
   minExtent = 100,
   spacing = -10,
-  plotWidth = null,
   textShift = 36,
   showFacetHeader = true
 }) {
@@ -113,10 +112,10 @@ makeIsotype = function({
       header: {
         labelFontSize: showFacetHeader ? 15 : 0,
         labelOrient: "top",
-        labelPadding: -6,
+        labelPadding: -12,
       },
     },
-    spacing: -60
+    // spacing: -100
   })
   .resolve({scale: {x: "shared"}})
   .data(inputData)
