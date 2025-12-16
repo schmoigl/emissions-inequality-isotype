@@ -68,9 +68,10 @@ colors_npr = [
 ]
 colors_burger = [
   "#D62300",
-  "#FF8732",
-  "#703a28", // lighter
   "#F5EBDC",
+  "#703a28", // lighter
+  "#FF8732",
+  // "#F5EBDC",
   "#198737",
   "#FFAA00",
 ]
