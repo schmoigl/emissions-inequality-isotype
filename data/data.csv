@@ -24,8 +24,13 @@ Wohnen,Mittelschicht,1939
 Wohnen,Obere Mittelschicht,2265
 Wohnen,Reiche,3141
 Wohnen,Untere Mittelschicht,1553
-Emissionen,Arme,3831
-Emissionen,Mittelschicht,7258
-Emissionen,Obere Mittelschicht,8332
-Emissionen,Reiche,12998
-Emissionen,Untere Mittelschicht,5738
+"Emissionen
+Gesamt",Arme,3831
+"Emissionen
+Gesamt",Mittelschicht,7258
+"Emissionen
+Gesamt",Obere Mittelschicht,8332
+"Emissionen
+Gesamt",Reiche,12998
+"Emissionen
+Gesamt",Untere Mittelschicht,5738
