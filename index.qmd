@@ -39,7 +39,7 @@ viewof selectedQuantile = Inputs.select(
 //| echo: false
 //| output: false
 filteredData = data
-  .filter(d => d.name != "Emissionen")
+  .filter(d => d.name != "Emissionen\nGesamt")
   .filter(d => d.Quantile === selectedQuantile || d.Quantile === "Reiche")
 ```
 
@@ -68,7 +68,7 @@ emissionenData = FileAttachment("data/emissionen.csv").csv({ typed: true })
 //| echo: false
 //| output: false
 filteredEmissionen = data
-  .filter(d => d.name == "Emissionen")
+  .filter(d => d.name == "Emissionen\nGesamt")
   .filter(d => d.Quantile === selectedQuantile || d.Quantile === "Reiche")
 ```
 
@@ -76,7 +76,7 @@ filteredEmissionen = data
 //| echo: false
 makeIsotype({
   inputData: filteredEmissionen,
-  shapeDomain: ["Emissionen"],
+  shapeDomain: ["Emissionen\nGesamt"],
   shapeRange: [path7],
   shapeRangeHalf: [path7_half],
   colorRange: ["#d3d3d3"],
@@ -91,4 +91,24 @@ makeIsotype({
 })
   .config({...config, facet: {...config.facet, spacing: -20}})
   .render({ renderer: "svg" })
+```
+
+```{ojs}
+//| echo: false
+//| output: asis
+{
+  const descriptions = {
+    "Arme": "die ärmsten 10% der Haushalte",
+    "Untere Mittelschicht": "Haushalte im unteren Mittelfeld (etwa 20-30% vom Einkommen)",
+    "Mittelschicht": "Haushalte in der Mitte (etwa 40-50% vom Einkommen)",
+    "Obere Mittelschicht": "Haushalte im oberen Mittelfeld (etwa 60-70% vom Einkommen)"
+  };
+
+  const selectedDesc = descriptions[selectedQuantile];
+
+  return html`<p style="margin-top: 20px; font-size: 14px; line-height: 1.6;">
+    <strong>${selectedQuantile}</strong> sind ${selectedDesc}.
+    <strong>Reiche</strong> sind die reichsten 10% der Haushalte.
+  </p>`;
+}
 ```
