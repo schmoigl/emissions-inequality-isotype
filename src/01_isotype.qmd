@@ -112,10 +112,10 @@ makeIsotype = function({
       header: {
         labelFontSize: showFacetHeader ? 15 : 0,
         labelOrient: "top",
-        labelPadding: -12,
+        labelPadding: -8,
       },
     },
-    // spacing: -100
+    spacing: -20
   })
   .resolve({scale: {x: "shared"}})
   .data(inputData)

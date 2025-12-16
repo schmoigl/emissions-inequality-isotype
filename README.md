@@ -32,6 +32,8 @@ Dorninger, C., Gingrich, S., Haas, W., Brad, A., Schneider, E., & Wiedenhofer, D
 
 Der Marie Neurath Preis für Datenvisualisierung wird 2025 von der Arbeiterkammer Wien vergeben und zeichnet Visualisierungen aus, die Verteilungsfragen im erweiterten Sinn niederschwellig zugänglich machen und komplexe wirtschaftliche und soziale Zusammenhänge sichtbar werden lassen.
 
+**Mehr Informationen:** [https://wien.arbeiterkammer.at/neurath](https://wien.arbeiterkammer.at/neurath)
+
 ---
 
 **Erstellt von:** Lukas Schmoigl
