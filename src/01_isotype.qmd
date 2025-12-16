@@ -11,9 +11,8 @@ makeIsotype = function({
   size = 5,
   unit = "€",
   divisor = 1000,
-  minExtent = 100,
   spacing = -10,
-  textShift = 36,
+  textShift = 40,
   showFacetHeader = true
 }) {
 
@@ -36,7 +35,7 @@ makeIsotype = function({
           ticks: false,
           title: null,
           labelOffset: 14,
-          minExtent: minExtent,
+          minExtent: 128,
           labelExpr: "split(datum.label, '\\n')",
         }),
       vl.x()
@@ -70,8 +69,8 @@ makeIsotype = function({
     vl.markText({
       align: "left",
       dx: textShift,
-      dy: 14,
-      fontSize: 12,
+      dy: 15,
+      fontSize: 15,
       clip: false
     })
     .transform(

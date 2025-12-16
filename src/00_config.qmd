@@ -4,31 +4,31 @@
 //| warning: false
 //| output: false
 config = ({
-  view: { stroke: null }, 
+  view: { stroke: null },
   background: "transparent", // "#f1f1f1"
   font: "Jost", // "Century Gothic" "FFDaxPro"
-  fontSize: 14,
-  concat: { spacing: 20 },
+  fontSize: 15,
+  concat: { spacing: 10 },
   padding: {
-    top: 20, 
-    right: 5, 
-    bottom: 20,
+    top: 5,
+    right: 5,
+    bottom: 5,
     left: 5,
     },
   title: {
-    offset: 0, 
-    fontSize: 16, 
-    subtitleFontSize: 14,
+    offset: 0,
+    fontSize: 16,
+    subtitleFontSize: 15,
   },
   facet: {
-    fontSize: 14,
-    labelFontSize: 14, 
-    titleFontSize: 14,
+    fontSize: 15,
+    labelFontSize: 15,
+    titleFontSize: 15,
     titleFontWeight: "normal",
   },
   axis: {
-    labelFontSize: 14, 
-    titleFontSize: 14,
+    labelFontSize: 15,
+    titleFontSize: 15,
     titleFontWeight: "normal",
   },
   axisX: {
@@ -41,14 +41,14 @@ config = ({
     labelPadding: 10,
   },
   legend: {
-    labelFontSize: 14, 
-    titleFontSize: 14,
+    labelFontSize: 15,
+    titleFontSize: 15,
     titleFontWeight: "normal",
     orient: "top",
     title: false,
   },
   mark: {
-    fontSize: 14
+    fontSize: 15
   },
   locale: {
     number: {
