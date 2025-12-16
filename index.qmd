@@ -1,5 +1,6 @@
 ---
 title: "Ungleicher Konsum -  Ungleiche Emissionen"
+bibliography: references.bib
 execute:
   eval: true
   echo: false
@@ -10,7 +11,7 @@ execute:
   cache: false
 ---
 
-Die Klimakrise ist auch eine Frage der Verteilung: In Österreich verursachen die Reichsten viel mehr CO₂-Emissionen als die Ärmsten. Während Ausgaben für Energie bei allen ähnlich sind, klaffen bei Mobilität und Güterkonsum die Emissionen massiv auseinander. Gleichzeitig werden ärmere Haushalte bei einer CO₂-Bepreisung überproportional belastet – sie geben einen größeren Teil ihres Einkommens für klimaschädlichen Konsum aus, ohne die finanziellen Mittel für Alternativen. Die Isotype-Darstellung macht diese Ungleichheit auf einen Blick erfassbar.
+Die Klimakrise ist auch eine Frage der Verteilung: In Österreich verursachen die Reichsten viel mehr CO₂-Emissionen als die Ärmsten. Während Ausgaben für Energie bei allen ähnlich sind, klaffen bei Mobilität und Güterkonsum die Emissionen massiv auseinander. Gleichzeitig werden ärmere Haushalte bei einer CO₂-Bepreisung überproportional belastet – sie geben einen größeren Teil ihres Einkommens für klimaschädlichen Konsum aus, ohne die finanziellen Mittel für Alternativen. Die Isotype-Darstellung macht diese Ungleichheit auf einen Blick erfassbar [@dorninger2025slow].
 
 {{< include src/00_config.qmd >}}
 {{< include src/00_libs.qmd >}}
@@ -37,7 +38,9 @@ viewof selectedQuantile = Inputs.select(
 ```{ojs}
 //| echo: false
 //| output: false
-filteredData = data.filter(d => d.Quantile === selectedQuantile || d.Quantile === "Reiche")
+filteredData = data
+  .filter(d => d.name != "Emissionen")
+  .filter(d => d.Quantile === selectedQuantile || d.Quantile === "Reiche")
 ```
 
 ```{ojs}
@@ -48,7 +51,8 @@ makeIsotype({
   spacing: -50,
   plotWidth: 330,
   size: 5,
-  divisor: 2000,
+  divisor: 500,
+  unit: "kg CO₂",
 })
   .config({...config, facet: {...config.facet, spacing: -20}})
   .render({ renderer: "svg" })
@@ -63,7 +67,9 @@ emissionenData = FileAttachment("data/emissionen.csv").csv({ typed: true })
 ```{ojs}
 //| echo: false
 //| output: false
-filteredEmissionen = emissionenData.filter(d => d.Quantile === selectedQuantile || d.Quantile === "Reiche")
+filteredEmissionen = data
+  .filter(d => d.name == "Emissionen")
+  .filter(d => d.Quantile === selectedQuantile || d.Quantile === "Reiche")
 ```
 
 ```{ojs}
@@ -76,8 +82,8 @@ makeIsotype({
   colorRange: ["#d3d3d3"],
   height: 50,
   size: 5,
-  unit: "t CO₂",
-  divisor: 3,
+  unit: "kg CO₂",
+  divisor: 2000,
   minExtent: 130,
   spacing: -100,
   plotWidth: 330,

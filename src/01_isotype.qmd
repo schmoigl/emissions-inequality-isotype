@@ -105,7 +105,7 @@ makeIsotype = function({
       field: "Quantile",
       type: "nominal",
       title: null,
-      sort: ["Arm", "Reich"],
+      sort: ["Arme", "Untere Mittelschicht", "Mittelschicht", "Obere Mittelschicht", "Reiche"],
       header: {
         labelFontSize: showFacetHeader ? 15 : 0,
         labelOrient: "top",
