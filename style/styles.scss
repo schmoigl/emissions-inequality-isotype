@@ -11,6 +11,10 @@ $animation-duration: 0.7s;
 @import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap');
 
+body {
+    font-size: 15px;
+}
+
 /* Headlines */
 h1, h2, h3, h4, h5, h6 {
     font-family: "Lexend", sans-serif;
@@ -21,8 +25,51 @@ h1, h2, h3, h4, h5, h6 {
     font-family: "Lexend", sans-serif;
 }
 
+.quarto-title-meta-heading {
+    text-transform: none;
+}
+
 .citation {
     font-weight: "bold";
+}
+
+/* Observable input select styling */
+form {
+    margin-top: 24px;
+    display: flex;
+    align-items: center;
+    gap: 0;
+}
+
+label {
+    margin-right: 0;
+    margin-left: 0;
+    min-width: 0;
+    width: auto;
+    display: inline;
+    flex-shrink: 0;
+    --label-width: auto;
+}
+
+select {
+    border: none;
+    border-bottom: 1px solid #000;
+    border-radius: 0;
+    box-shadow: none;
+    background-color: transparent;
+    outline: none;
+    padding: 4px 0;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    flex-shrink: 1;
+
+    &:focus {
+        border: none;
+        border-bottom: 1px solid #000;
+        box-shadow: none;
+        outline: none;
+    }
 }
 
 /* quarto */

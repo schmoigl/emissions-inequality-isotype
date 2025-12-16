@@ -1,11 +1,5 @@
 ---
 title: "Die Emissionen der Wenigen, die Lasten der Vielen"
-author:
-  - name: Fabian Kalleitner
-  - name: Lukas Schmoigl
-author-title: "Autoren"
-bibliography: references.bib
-reference-section-title: "Literatur"
 execute:
   eval: true
   echo: false
@@ -16,7 +10,7 @@ execute:
   cache: false
 ---
 
-Wirksamer Klimaschutz muss soziale Gerechtigkeit mitdenken. Eine aktuelle Studie [@dorninger2025slow] zeigt: Die **reichsten 10%** der österreichischen Haushalte verursachen **3,4-mal** so viele CO₂-Emissionen wie die **ärmsten 10%**. Diese Ungleichheit ist besonders bei <span style="color: #FF8732; padding: 2px 4px; border-radius: 3px;">**Mobilität**</span>, <span style="color: #198737;">**Wohnen**</span> und <span style="color: #D62300;">**Dienstleistungen**</span> ausgeprägt. Während ärmere Haushalte ihre Emissionen reduzierten, blieben die der Reichsten konstant hoch. Bei einer CO₂-Bepreisung würden einkommensschwache Haushalte überproportional belastet – ohne die finanziellen Mittel für klimafreundliche Alternativen.
+Wirksamer Klimaschutz muss soziale Gerechtigkeit mitdenken. Eine [**aktuelle Studie**](https://doi.org/10.1111/jiec.70074){target="_blank"} zeigt: Die **reichsten 10%** der österreichischen Haushalte verursachen **3,4-mal** so viele CO₂-Emissionen wie die **ärmsten 10%**. Diese Ungleichheit ist besonders bei <span style="color: #FF8732; padding: 2px 4px; border-radius: 3px;">**Mobilität**</span>, <span style="color: #198737;">**Wohnen**</span> und <span style="color: #D62300;">**Dienstleistungen**</span> ausgeprägt. Während ärmere Haushalte ihre Emissionen reduzierten, blieben die der Reichsten konstant hoch. Bei einer CO₂-Bepreisung würden einkommensschwache Haushalte überproportional belastet – ohne die finanziellen Mittel für klimafreundliche Alternativen.
 
 Die **Isotype-Methode** macht diese abstrakte Verteilungsfrage unmittelbar erfassbar: Jedes Symbol steht für eine konkrete Menge CO₂. Was **Marie Neurath** in den 1920er-Jahren für wirtschaftliche und soziale Zusammenhänge entwickelte, zeigt auf einen Blick, wie drastisch die Emissionen zwischen Arm und Reich auseinanderklaffen. Diese Visualisierung folgt damit dem Kern der **Wiener Methode der Bildstatistik**: komplexe Verteilungsfragen niederschwellig zugänglich zu machen und zur öffentlichen Diskussion beizutragen.
 
@@ -33,17 +27,6 @@ data = FileAttachment("data/data.csv").csv({ typed: true })
 
 ```{ojs}
 //| echo: false
-viewof selectedQuantile = Inputs.select(
-  ["Arme", "Untere Mittelschicht", "Mittelschicht", "Obere Mittelschicht"],
-  {
-    label: "",
-    value: "Arme"
-  }
-)
-```
-
-```{ojs}
-//| echo: false
 //| output: false
 filteredData = data
   .filter(d => d.name != "Emissionen\nGesamt")
@@ -54,10 +37,9 @@ filteredData = data
 //| echo: false
 makeIsotype({
   inputData: filteredData,
-  minExtent: 130,
   spacing: -50,
-  height: 200,
-  size: 6,
+  height: 210,
+  size: 7,
   divisor: 500,
   unit: "kg CO₂",
 })
@@ -88,14 +70,21 @@ makeIsotype({
   shapeRangeHalf: [path7_half],
   colorRange: ["#d3d3d3"],
   height: 30,
-  size: 6,
+  size: 7,
   unit: "kg CO₂",
   divisor: 2000,
-  minExtent: 130,
   showFacetHeader: false
 })
   .config(config)
   .render({ renderer: "svg" })
+```
+
+```{ojs}
+//| echo: false
+viewof selectedQuantile = Inputs.select(
+  ["Arme", "Untere Mittelschicht", "Mittelschicht", "Obere Mittelschicht"],
+  { label: "Vergleich mit ", value: "Arme" }
+)
 ```
 
 ```{ojs}
@@ -112,8 +101,16 @@ makeIsotype({
   const selectedDesc = descriptions[selectedQuantile];
 
   return html`<p style="margin-top: 20px;">
-    <strong>${selectedQuantile}</strong> sind ${selectedDesc}.
+    <strong>${selectedQuantile}</strong> sind ${selectedDesc}.<br>
     <strong>Reiche</strong> sind die reichsten 10% der Haushalte.
   </p>`;
 }
 ```
+
+### Autoren
+
+[Fabian Kalleitner](https://www.ls4.soziologie.uni-muenchen.de/personen/wissenschaftlich_mitarbeiter/fabian_kalleitner/index.html), [Lukas Schmoigl](https://www.wifo.ac.at/person/lukas-schmoigl/)
+
+### Literatur {#literatur}
+
+Dorninger, Christian, Simone Gingrich, Willi Haas, Alina Brad, Etienne Schneider, and Dominik Wiedenhofer. 2025. "Slow and Unequal Reduction in Austrian Household GHG Footprints Between 2000 and 2020." *Journal of Industrial Ecology* 29 (5): 1651–65. <https://doi.org/10.1111/jiec.70074>.
