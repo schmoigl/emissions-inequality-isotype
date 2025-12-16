@@ -34,8 +34,6 @@ Der Marie Neurath Preis für Datenvisualisierung wird 2025 von der Arbeiterkamme
 
 **Mehr Informationen:** [https://wien.arbeiterkammer.at/neurath](https://wien.arbeiterkammer.at/neurath)
 
----
-
 **Erstellt von:** Lukas Schmoigl
 **Organisation:** [WIFO – Österreichisches Institut für Wirtschaftsforschung](https://www.wifo.ac.at/)
 **Kontakt:** [lukas.schmoigl@wifo.ac.at](mailto:lukas.schmoigl@wifo.ac.at)
