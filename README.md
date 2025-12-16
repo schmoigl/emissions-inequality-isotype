@@ -21,12 +21,12 @@ Die Visualisierung basiert auf der Studie "Income distribution, consumption expe
 
 - **Framework:** Quarto
 - **Visualisierung:** Observable Plot mit Vega-Lite
-- **Datenquelle:** xx
+- **Datenquelle:** Dorninger et al. (2025)
 - **Typografie:** Jost (Fließtext), Lexend (Überschriften)
 
 ## Datenquelle
 
-xx
+Dorninger, C., Gingrich, S., Haas, W., Brad, A., Schneider, E., & Wiedenhofer, D. (2025). Slow and unequal reduction in Austrian household GHG footprints between 2000 and 2020. *Journal of Industrial Ecology*, 29(5), 1651–1665. https://doi.org/10.1111/jiec.70074
 
 ## Marie Neurath Preis
 

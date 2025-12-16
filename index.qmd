@@ -1,6 +1,7 @@
 ---
 title: "Ungleicher Konsum -  Ungleiche Emissionen"
 bibliography: references.bib
+reference-section-title: "Literatur"
 execute:
   eval: true
   echo: false
