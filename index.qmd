@@ -1,5 +1,5 @@
 ---
-title: "Ungleicher Konsum -  Ungleiche Emissionen"
+title: "Die Emissionen der Wenigen, die Lasten der Vielen"
 bibliography: references.bib
 reference-section-title: "Literatur"
 execute:
@@ -12,7 +12,7 @@ execute:
   cache: false
 ---
 
-Die Klimakrise ist auch eine Frage der Verteilung: In Österreich verursachen die Reichsten viel mehr CO₂-Emissionen als die Ärmsten. Während Ausgaben für Energie bei allen ähnlich sind, klaffen bei Mobilität und Güterkonsum die Emissionen massiv auseinander. Gleichzeitig werden ärmere Haushalte bei einer CO₂-Bepreisung überproportional belastet – sie geben einen größeren Teil ihres Einkommens für klimaschädlichen Konsum aus, ohne die finanziellen Mittel für Alternativen. Die Isotype-Darstellung macht diese Ungleichheit auf einen Blick erfassbar [@dorninger2025slow].
+Die Klimakrise ist auch eine Frage der Verteilung: In Österreich verursachen die Reichsten mehr als vier mal so viele CO₂-Emissionen als die Ärmsten. Während die Emissionen durch Essen und Konsumgüter noch halbwegs proportional verlaufen, klaffen sie bei Mobilität, Wohnen und Diensleistungen massiv auseinander. Gleichzeitig werden ärmere Haushalte bei einer CO₂-Bepreisung überproportional belastet – sie geben einen größeren Teil ihres Einkommens für klimaschädlichen Konsum aus, ohne die finanziellen Mittel für Alternativen. Die Isotype-Darstellung macht diese Ungleichheit auf einen Blick erfassbar [@dorninger2025slow].
 
 {{< include src/00_config.qmd >}}
 {{< include src/00_libs.qmd >}}
@@ -50,12 +50,12 @@ makeIsotype({
   inputData: filteredData,
   minExtent: 130,
   spacing: -50,
-  plotWidth: 330,
-  size: 5,
+  height: 200,
+  size: 6,
   divisor: 500,
   unit: "kg CO₂",
 })
-  .config({...config, facet: {...config.facet, spacing: -20}})
+  .config(config)
   .render({ renderer: "svg" })
 ```
 
@@ -81,16 +81,14 @@ makeIsotype({
   shapeRange: [path7],
   shapeRangeHalf: [path7_half],
   colorRange: ["#d3d3d3"],
-  height: 50,
-  size: 5,
+  height: 40,
+  size: 6,
   unit: "kg CO₂",
   divisor: 2000,
   minExtent: 130,
-  spacing: -100,
-  plotWidth: 330,
   showFacetHeader: false
 })
-  .config({...config, facet: {...config.facet, spacing: -20}})
+  .config(config)
   .render({ renderer: "svg" })
 ```
 
