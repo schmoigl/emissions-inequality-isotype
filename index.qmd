@@ -12,7 +12,9 @@ execute:
   cache: false
 ---
 
-Die Klimakrise ist auch eine Frage der Verteilung: In Österreich verursachen die Reichsten mehr als vier mal so viele CO₂-Emissionen als die Ärmsten. Während die Emissionen durch Essen und Konsumgüter noch halbwegs proportional verlaufen, klaffen sie bei Mobilität, Wohnen und Diensleistungen massiv auseinander. Gleichzeitig werden ärmere Haushalte bei einer CO₂-Bepreisung überproportional belastet – sie geben einen größeren Teil ihres Einkommens für klimaschädlichen Konsum aus, ohne die finanziellen Mittel für Alternativen. Die Isotype-Darstellung macht diese Ungleichheit auf einen Blick erfassbar [@dorninger2025slow].
+Wirksamer Klimaschutz muss soziale Gerechtigkeit mitdenken. Eine aktuelle Studie [@dorninger2025slow] zeigt: Die reichsten 10% der österreichischen Haushalte verursachen 3,4-mal so viele CO₂-Emissionen wie die ärmsten 10%. Diese Ungleichheit ist besonders bei Mobilität und Güterkonsum ausgeprägt. Während ärmere Haushalte ihre Emissionen reduzierten, blieben die der Reichsten konstant hoch. Bei einer CO₂-Bepreisung würden einkommensschwache Haushalte überproportional belastet – ohne die finanziellen Mittel für klimafreundliche Alternativen.
+
+Die Isotype-Methode macht diese abstrakte Verteilungsfrage unmittelbar erfassbar: Jedes Symbol steht für eine konkrete Menge CO₂. Was Marie Neurath in den 1920er-Jahren für wirtschaftliche und soziale Zusammenhänge entwickelte, zeigt auf einen Blick, wie drastisch die Emissionen zwischen Arm und Reich auseinanderklaffen. Diese Visualisierung folgt damit dem Kern der Wiener Methode der Bildstatistik: komplexe Verteilungsfragen niederschwellig zugänglich zu machen und zur öffentlichen Diskussion beizutragen.
 
 {{< include src/00_config.qmd >}}
 {{< include src/00_libs.qmd >}}
@@ -81,7 +83,7 @@ makeIsotype({
   shapeRange: [path7],
   shapeRangeHalf: [path7_half],
   colorRange: ["#d3d3d3"],
-  height: 40,
+  height: 30,
   size: 6,
   unit: "kg CO₂",
   divisor: 2000,
