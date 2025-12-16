@@ -81,14 +81,6 @@ makeIsotype({
 
 ```{ojs}
 //| echo: false
-viewof selectedQuantile = Inputs.select(
-  ["Arme", "Untere Mittelschicht", "Mittelschicht", "Obere Mittelschicht"],
-  { label: "Vergleich mit ", value: "Arme" }
-)
-```
-
-```{ojs}
-//| echo: false
 //| output: false
 decileData = {
   const deciles = [
@@ -181,6 +173,14 @@ vl.layer(
 
 ```{ojs}
 //| echo: false
+viewof selectedQuantile = Inputs.select(
+  ["Arme", "Untere Mittelschicht", "Mittelschicht", "Obere Mittelschicht"],
+  { label: "Vergleich mit ", value: "Arme" }
+)
+```
+
+<!-- ```{ojs}
+//| echo: false
 //| output: asis
 {
   const descriptions = {
@@ -197,7 +197,7 @@ vl.layer(
     <strong>Reiche</strong> sind die reichsten 10% der Haushalte.
   </p>`;
 }
-```
+``` -->
 
 ### Autoren
 
