@@ -89,6 +89,98 @@ viewof selectedQuantile = Inputs.select(
 
 ```{ojs}
 //| echo: false
+//| output: false
+decileData = {
+  const deciles = [
+    { decile: 1, group: "Arme", position: 0 },
+    { decile: 2, group: "na", position: 1 },
+    { decile: 3, group: "Untere Mittelschicht", position: 2 },
+    { decile: 4, group: "na", position: 3 },
+    { decile: 5, group: "Mittelschicht", position: 4 },
+    { decile: 6, group: "na", position: 5 },
+    { decile: 7, group: "Obere Mittelschicht", position: 6 },
+    { decile: 8, group: "Andere", position: 7 },
+    { decile: 9, group: "Andere", position: 8 },
+    { decile: 10, group: "Reiche", position: 9 }
+  ];
+
+  return deciles.map(d => ({
+    ...d,
+    isHighlighted: d.group === selectedQuantile || d.group === "Reiche"
+  }));
+}
+```
+
+```{ojs}
+//| echo: false
+//| output: false
+labelData = [
+  { position: 0, label: "Arme", group: "Arme" },
+  { position: 2, label: "Untere Mittelschicht", group: "Untere Mittelschicht" },
+  { position: 4, label: "Mittelschicht", group: "Mittelschicht" },
+  { position: 6, label: "Obere Mittelschicht", group: "Obere Mittelschicht" },
+  { position: 9, label: "Reiche", group: "Reiche" }
+].map(d => ({
+  ...d,
+  isHighlighted: d.group === selectedQuantile || d.group === "Reiche"
+}))
+```
+
+```{ojs}
+//| echo: false
+vl.layer(
+  vl.markPoint({
+    shape: path_neurath,
+    size: 0.11,
+    stroke: "black",
+    strokeWidth: 0.8,
+    filled: true
+  })
+  .data(decileData)
+  .encode(
+    vl.x()
+      .fieldQ("position")
+      .scale({ domain: [-0.5, 9.5] })
+      .axis(null),
+    vl.opacity()
+      .fieldN("isHighlighted")
+      .scale({ domain: [false, true], range: [0.2, 1] })
+      .legend(null),
+    vl.color()
+      .fieldN("isHighlighted")
+      .scale({ domain: [false, true], range: ["#d3d3d3", "#d3d3d3"] })
+      .legend(null)
+  ),
+  vl.markText({
+    dy: 96,
+    dx: 16,
+    align: "center",
+    anchor: "middle",
+    baseline: "top",
+    size: 15,
+  })
+  .data(labelData)
+  .encode(
+    vl.x()
+      .fieldQ("position")
+      .scale({ domain: [-0.5, 9.5] })
+      .axis(null),
+    vl.text()
+      .fieldN("label"),
+    vl.opacity()
+      .fieldN("isHighlighted")
+      .scale({ domain: [false, true], range: [0.2, 1] })
+      .legend(null)
+  )
+)
+.width(600)
+.height(60)
+.config(config)
+.render({ renderer: "svg" })
+```
+
+```{ojs}
+//| echo: false
 //| output: asis
 {
   const descriptions = {

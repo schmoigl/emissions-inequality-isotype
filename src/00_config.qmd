@@ -8,12 +8,12 @@ config = ({
   background: "transparent", // "#f1f1f1"
   font: "Jost", // "Century Gothic" "FFDaxPro"
   fontSize: 15,
-  concat: { spacing: 10 },
+  // concat: { spacing: 10 },
   padding: {
     top: 5,
-    right: 5,
+    right: 0,
     bottom: 5,
-    left: 5,
+    left: 0,
     },
   title: {
     offset: 0,
