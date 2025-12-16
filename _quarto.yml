@@ -17,7 +17,7 @@ format:
     theme: [cosmo, style/styles.scss]
     grid:
       # sidebar-width: 300px
-      body-width: 860px
+      body-width: 900px
       margin-width: 380px
       gutter-width: 8px 
     toc: false
