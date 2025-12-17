@@ -8,7 +8,7 @@ makeWidth = function(inputWidth) {
     return 368
   }
   else {
-    return (width-24)
+    return (width - 16)
   }
 }
 ```
