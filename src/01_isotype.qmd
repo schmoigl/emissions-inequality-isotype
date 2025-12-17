@@ -42,7 +42,8 @@ makeIsotype = function({
           title: null,
           labelOffset: 16,
           minExtent: 128,
-          labelExpr: "split(datum.label, '\\n')",
+          labels: width >= 860,
+          labelExpr: width >= 860 ? "split(datum.label, '\\n')" : null,
         }),
       vl.x()
         .fieldQ("positions")
