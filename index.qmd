@@ -25,7 +25,7 @@ data = FileAttachment("data/data.csv").csv({ typed: true })
 //| echo: false
 //| output: false
 filteredData = data
-  .filter(d => d.name != "Emissionen\nGesamt")
+  .filter(d => d.name != "Emissionen Gesamt")
   .filter(d => d.Quantile === selectedQuantile || d.Quantile === "Reiche")
 ```
 
@@ -72,7 +72,7 @@ decileData = {
 //| echo: false
 //| output: false
 filteredEmissionen = data
-  .filter(d => d.name == "Emissionen\nGesamt")
+  .filter(d => d.name == "Emissionen Gesamt")
   .filter(d => d.Quantile === selectedQuantile || d.Quantile === "Reiche")
 ```
 
@@ -80,7 +80,7 @@ filteredEmissionen = data
 //| echo: false
 makeIsotype({
   inputData: filteredEmissionen,
-  shapeDomain: ["Emissionen\nGesamt"],
+  shapeDomain: ["Emissionen Gesamt"],
   shapeRange: [path7],
   shapeRangeHalf: [path7_half],
   colorRange: ["#d3d3d3"],
