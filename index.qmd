@@ -154,7 +154,7 @@ vl.layer(
   ),
   vl.markText({
     dy: 86,
-    dx: 16,
+    dx: 14,
     align: "center",
     anchor: "middle",
     baseline: "top",
