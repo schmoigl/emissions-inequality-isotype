@@ -4,13 +4,8 @@
 //| warning: false
 //| output: false
 makeWidth = function(inputWidth) {
-<<<<<<< HEAD
-  if (inputWidth>826) {
-    return 392
-=======
   if (inputWidth >= 860) {
     return 368
->>>>>>> 6c9291e42f4d0b51ec88f7593653087cb4604081
   }
   else {
     return (width-24)
