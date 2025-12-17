@@ -11,7 +11,6 @@ data <- read_excel(
     Quantile = deciles
   ) |>
   mutate(
-    value = round(value * 1000),
     Quantile = case_when(
       Quantile == 1 ~ "Arme",
       Quantile == 3 ~ "Untere Mittelschicht",
@@ -45,4 +44,7 @@ data_agg <- data |>
   ungroup()
 
 add_row(data, data_agg) |>
+mutate(
+  value = round(value, 1),
+  ) |>
   write_csv("data/data.csv")

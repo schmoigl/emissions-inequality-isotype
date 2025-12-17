@@ -6,7 +6,7 @@ makeIsotype = function({
   shapeRange = [path1, path2, path3, path4, path5, path6],
   shapeRangeHalf = [path1_half, path2_half, path3_half, path4_half, path5_half, path6_half],
   colorRange = colors_burger,
-  xDomain = [0, 15.5],
+  xDomain = [0, 14],
   height = 250,
   size = 5,
   scaleFactor = 1,
@@ -43,7 +43,7 @@ makeIsotype = function({
           labelOffset: 16,
           minExtent: width >= 860 ? 128 : 0,
           labels: width >= 860,
-          labelExpr: width >= 860 ? "split(datum.label, '\\n')" : null,
+          labelExpr: width >= 860 ? "split(datum.label, ' ')" : null,
         }),
       vl.x()
         .fieldQ("positions")
@@ -93,7 +93,7 @@ makeIsotype = function({
     .transform(
       vl.filter(`datum.positions === datum.totalShapes - 1`),
       vl.calculate(`format(datum.value, ',') + ' ${unit}'`).as("valueWithUnit"),
-      vl.calculate("13.6").as("fixedX")
+      vl.calculate("12.5").as("fixedX")
     )
     .encode(
       vl.y()
@@ -101,7 +101,7 @@ makeIsotype = function({
         .sort(shapeDomain)
         .axis({
           labels: width >= 860,
-          labelExpr: width >= 860 ? "split(datum.label, '\\n')" : null,
+          labelExpr: width >= 860 ? "split(datum.label, ' ')" : null,
         }),
       vl.x()
         .fieldQ("fixedX"),
