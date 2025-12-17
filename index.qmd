@@ -35,10 +35,7 @@ data = FileAttachment("data/data.csv").csv({ typed: true })
 //| echo: false
 //| output: false
 filteredData = data
-  .filter(d => d.name != "Emissionen\nGesamt")
   .filter(d => d.Quantile === selectedQuantile || d.Quantile === "Reiche")
-
-filteredData
 ```
 
 ```{ojs}
@@ -50,31 +47,6 @@ makeIsotype({
   size: 7,
   divisor: 500,
   unit: "kg CO₂",
-})
-  .config(config)
-  .render({ renderer: "svg" })
-```
-
-```{ojs}
-//| echo: false
-//| output: false
-filteredEmissionen = data
-  .filter(d => d.name == "Emissionen\nGesamt")
-  .filter(d => d.Quantile === selectedQuantile || d.Quantile === "Reiche")
-```
-
-```{ojs}
-//| echo: false
-makeIsotype({
-  inputData: filteredEmissionen,
-  shapeDomain: ["Emissionen\nGesamt"],
-  shapeRange: [path7_direct],
-  shapeRangeHalf: [path7_half_direct],
-  colorRange: ["#d3d3d3"],
-  height: 30,
-  size: 7,
-  unit: "kg CO₂",
-  divisor: 2000,
 })
   .config(config)
   .render({ renderer: "svg" })
