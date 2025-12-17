@@ -41,7 +41,6 @@ makeIsotype = function({
           ticks: false,
           title: null,
           labelOffset: 16,
-          minExtent: width >= 860 ? 128 : 0,
           labels: width >= 860,
           labelExpr: width >= 860 ? "split(datum.label, '\\n')" : null,
         }),
