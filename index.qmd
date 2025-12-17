@@ -69,7 +69,6 @@ makeIsotype({
   size: 7,
   unit: "kg CO₂",
   divisor: 2000,
-  showFacetHeader: false
 })
   .config(config)
   .render({ renderer: "svg" })

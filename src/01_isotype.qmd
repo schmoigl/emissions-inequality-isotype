@@ -16,8 +16,7 @@ makeIsotype = function({
   unit = "€",
   divisor = 1000,
   spacing = -10,
-  textShift = 40,
-  showFacetHeader = true
+  textShift = 40
 }) {
 
   const useCategorySize = sizeByCategory !== null;
@@ -128,7 +127,7 @@ makeIsotype = function({
         title: null,
         sort: ["Arme", "Untere Mittelschicht", "Mittelschicht", "Obere Mittelschicht", "Reiche"],
         header: {
-          labelFontSize: showFacetHeader ? 15 : 0,
+          labelFontSize: 15,
           labelOrient: "top",
           labelPadding: -8,
         },
@@ -140,7 +139,7 @@ makeIsotype = function({
         title: null,
         sort: ["Arme", "Untere Mittelschicht", "Mittelschicht", "Obere Mittelschicht", "Reiche"],
         header: {
-          labelFontSize: showFacetHeader ? 15 : 0,
+          labelFontSize: 15,
           labelOrient: "top",
           labelPadding: -8,
         },
