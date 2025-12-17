@@ -27,8 +27,6 @@ data = FileAttachment("data/data.csv").csv({ typed: true })
 filteredData = data
   .filter(d => d.name != "Emissionen\nGesamt")
   .filter(d => d.Quantile === selectedQuantile || d.Quantile === "Reiche")
-
-console.log(filteredData)
 ```
 
 ```{ojs}
