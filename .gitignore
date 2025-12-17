@@ -7,7 +7,7 @@ keys/
 /out/
 /node_modules/
 *_files
-data/
+data/*
 
 # R
 .Rhistory
