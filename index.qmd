@@ -36,8 +36,8 @@ makeIsotype({
   spacing: -50,
   height: 210,
   size: 7,
-  divisor: 500,
-  unit: "kg CO₂",
+  divisor: 0.5,
+  unit: "t CO₂",
 })
   .config(config)
   .render({ renderer: "svg" })
@@ -86,8 +86,8 @@ makeIsotype({
   colorRange: ["#d3d3d3"],
   height: 30,
   size: 7,
-  unit: "kg CO₂",
-  divisor: 2000,
+  unit: "t CO₂",
+  divisor: 2,
 })
   .config(config)
   .render({ renderer: "svg" })
