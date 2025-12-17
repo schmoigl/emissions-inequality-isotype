@@ -120,19 +120,33 @@ makeIsotype = function({
   )
   .width(makeWidth(width))
   .height(height)
-  .facet({
-    column: {
-      field: "Quantile",
-      type: "nominal",
-      title: null,
-      sort: ["Arme", "Untere Mittelschicht", "Mittelschicht", "Obere Mittelschicht", "Reiche"],
-      header: {
-        labelFontSize: showFacetHeader ? 15 : 0,
-        labelOrient: "top",
-        labelPadding: -8,
+  .facet(
+    width < 860 ? {
+      row: {
+        field: "Quantile",
+        type: "nominal",
+        title: null,
+        sort: ["Arme", "Untere Mittelschicht", "Mittelschicht", "Obere Mittelschicht", "Reiche"],
+        header: {
+          labelFontSize: showFacetHeader ? 15 : 0,
+          labelOrient: "top",
+          labelPadding: -8,
+        },
       },
-    },
-  })
+    } : {
+      column: {
+        field: "Quantile",
+        type: "nominal",
+        title: null,
+        sort: ["Arme", "Untere Mittelschicht", "Mittelschicht", "Obere Mittelschicht", "Reiche"],
+        header: {
+          labelFontSize: showFacetHeader ? 15 : 0,
+          labelOrient: "top",
+          labelPadding: -8,
+        },
+      },
+    }
+  )
   .resolve({scale: {x: "shared"}})
   .data(inputData)
   .config(config);
