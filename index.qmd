@@ -67,7 +67,7 @@ makeIsotype({
   colorRange: ["#d3d3d3"],
   height: 30,
   size: 7,
-  unit: ["kg CO₂", "pro Monat"],
+  unit: "kg CO₂",
   divisor: 2000,
 })
   .config(config)
