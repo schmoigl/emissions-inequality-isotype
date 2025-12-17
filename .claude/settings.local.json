@@ -10,7 +10,8 @@
       "WebFetch(domain:wien.arbeiterkammer.at)",
       "WebFetch(domain:vega.github.io)",
       "Bash(Rscript:*)",
-      "WebFetch(domain:observablehq.com)"
+      "WebFetch(domain:observablehq.com)",
+      "Bash(quarto render:*)"
     ]
   }
 }
