@@ -100,7 +100,8 @@ makeIsotype = function({
         .fieldN("name")
         .sort(shapeDomain)
         .axis({
-          labelExpr: "split(datum.label, '\\n')",
+          labels: width >= 860,
+          labelExpr: width >= 860 ? "split(datum.label, '\\n')" : null,
         }),
       vl.x()
         .fieldQ("fixedX"),
