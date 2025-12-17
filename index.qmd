@@ -192,7 +192,7 @@ vl.layer(
       .value("Höheres Einkommen ⟶")
   )
 )
-.width(460)
+.width(width >= 860 ? 460 : (width - 24))
 .height(40)
 .config(config)
 .render({ renderer: "svg" })
