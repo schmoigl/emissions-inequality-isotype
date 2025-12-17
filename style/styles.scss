@@ -13,15 +13,17 @@ $animation-duration: 0.7s;
 
 body {
     font-size: 15px;
+    text-align: center;
 }
 
 /* Headlines */
 h1, h2, h3, h4, h5, h6 {
     font-family: "Lexend", sans-serif;
+    text-align: center;
 }
 
 h1.title {
-    font-size: 28px;
+    font-size: 26px;
 }
 
 /* Author block */
