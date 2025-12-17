@@ -1,5 +1,5 @@
 ---
-title: "Die Emissionen der Wenigen, die Lasten der Vielen"
+title: "DIE EMISSIONEN DER WENIGEN, DIE LASTEN DER VIELEN"
 execute:
   eval: true
   echo: false
@@ -9,10 +9,6 @@ execute:
   include: true
   cache: false
 ---
-
-Wirksamer Klimaschutz muss soziale Gerechtigkeit mitdenken. Eine [**aktuelle Studie**](https://doi.org/10.1111/jiec.70074){target="_blank"} zeigt: Die **reichsten 10%** der österreichischen Haushalte verursachen **3,4-mal** so viele CO₂-Emissionen wie die **ärmsten 10%**. Diese Ungleichheit ist besonders bei <span style="color: #FF8732; padding: 2px 4px; border-radius: 3px;">**Mobilität**</span>, <span style="color: #198737;">**Wohnen**</span> und <span style="color: #D62300;">**Dienstleistungen**</span> ausgeprägt. Während ärmere Haushalte ihre Emissionen reduzierten, blieben die der Reichsten konstant hoch. Bei einer CO₂-Bepreisung würden einkommensschwache Haushalte überproportional belastet – ohne die finanziellen Mittel für klimafreundliche Alternativen.
-
-Die **Isotype-Methode** macht diese abstrakte Verteilungsfrage unmittelbar erfassbar: Jedes Symbol steht für eine konkrete Menge CO₂. Was **Marie Neurath** in den 1920er-Jahren für wirtschaftliche und soziale Zusammenhänge entwickelte, zeigt auf einen Blick, wie drastisch die Emissionen zwischen Arm und Reich auseinanderklaffen. Diese Visualisierung folgt damit dem Kern der **Wiener Methode der Bildstatistik**: komplexe Verteilungsfragen niederschwellig zugänglich zu machen und zur öffentlichen Diskussion beizutragen.
 
 {{< include src/00_config.qmd >}}
 {{< include src/00_libs.qmd >}}
@@ -229,6 +225,10 @@ viewof selectedQuantile = Inputs.select(
   </p>`;
 }
 ``` -->
+
+Wirksamer Klimaschutz muss soziale Gerechtigkeit mitdenken. Eine [**aktuelle Studie**](https://doi.org/10.1111/jiec.70074){target="_blank"} zeigt: Die **reichsten 10%** der österreichischen Haushalte verursachen **3,4-mal** so viele CO₂-Emissionen wie die **ärmsten 10%**. Diese Ungleichheit ist besonders bei <span style="color: #FF8732; padding: 2px 4px; border-radius: 3px;">**Mobilität**</span>, <span style="color: #198737;">**Wohnen**</span> und <span style="color: #D62300;">**Dienstleistungen**</span> ausgeprägt. Während ärmere Haushalte ihre Emissionen reduzierten, blieben die der Reichsten konstant hoch. Bei einer CO₂-Bepreisung würden einkommensschwache Haushalte überproportional belastet – ohne die finanziellen Mittel für klimafreundliche Alternativen.
+
+Die **Isotype-Methode** macht diese abstrakte Verteilungsfrage unmittelbar erfassbar: Jedes Symbol steht für eine konkrete Menge CO₂. Was **Marie Neurath** in den 1920er-Jahren für wirtschaftliche und soziale Zusammenhänge entwickelte, zeigt auf einen Blick, wie drastisch die Emissionen zwischen Arm und Reich auseinanderklaffen. Diese Visualisierung folgt damit dem Kern der **Wiener Methode der Bildstatistik**: komplexe Verteilungsfragen niederschwellig zugänglich zu machen und zur öffentlichen Diskussion beizutragen.
 
 ### Autoren
 
