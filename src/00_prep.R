@@ -41,7 +41,7 @@ data <- read_excel(
 data_agg <- data |>
   group_by(Quantile) |>
   summarize(value = sum(value)) |>
-  mutate(name = "Emissionen\nGesamt") |>
+  mutate(name = "Emissionen Gesamt") |>
   ungroup()
 
 add_row(data, data_agg) |>
