@@ -74,7 +74,7 @@ makeIsotype = function({
     .transform(
       vl.filter(`datum.positions === datum.totalShapes - 1`),
       vl.calculate(`format(datum.value, ',') + ' ${unit}'`).as("valueWithUnit"),
-      vl.calculate("12.5").as("fixedX")
+      vl.calculate("12.25").as("fixedX")
     )
     .encode(
       vl.y()
