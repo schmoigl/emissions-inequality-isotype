@@ -88,6 +88,7 @@ makeIsotype({
   size: 7,
   unit: "t CO₂",
   divisor: 2,
+  showHeader: false
 })
   .config(config)
   .render({ renderer: "svg" })
@@ -97,12 +98,41 @@ makeIsotype({
 ```{ojs}
 //| echo: false
 //| output: false
+// Function to rotate a point around center (200, 200)
+rotatePath = function(pathStr, angleDeg) {
+  const angle = angleDeg * Math.PI / 180;
+  const cos = Math.cos(angle);
+  const sin = Math.sin(angle);
+  const cx = 200, cy = 200;
+
+  return pathStr.replace(/([0-9.]+)\s+([0-9.]+)/g, (match, x, y) => {
+    const xNum = parseFloat(x);
+    const yNum = parseFloat(y);
+    const xNew = cos * (xNum - cx) - sin * (yNum - cy) + cx;
+    const yNew = sin * (xNum - cx) + cos * (yNum - cy) + cy;
+    return `${xNew.toFixed(3)} ${yNew.toFixed(3)}`;
+  });
+}
+
+// Base arrow paths - mirrored on x-axis (flipped vertically)
+arrowRightBase = "M35 138C160.529 259.062 328.006 192.715 361 184.482 M343.69 257C355.23 209.711 361 185.319 361 183.823C361 181.579 327.488 165.87 312 142"
+arrowLeftBase = "M365 138C239.471 259.062 71.994 192.715 39 184.482 M56.31 257C44.77 209.711 39 185.319 39 183.823C39 181.579 72.512 165.87 88 142"
+
+// Rotated versions
+arrowRight = rotatePath(arrowRightBase, -55)  // 55° counterclockwise
+arrowLeft = rotatePath(arrowLeftBase, 45)     // 45° clockwise
+arrowLeftMedium = rotatePath(arrowLeftBase, 25)  // 25° clockwise for Obere Mittelschicht
+```
+
+```{ojs}
+//| echo: false
+//| output: false
 labelData = [
-  { position: 0, label: "Arme", group: "Arme" },
-  { position: 2, label: ["Untere", "Mittelschicht"], group: "Untere Mittelschicht" },
-  { position: 4, label: "Mittelschicht", group: "Mittelschicht" },
-  { position: 6, label: ["Obere", "Mittelschicht"], group: "Obere Mittelschicht" },
-  { position: 9, label: "Reiche", group: "Reiche" }
+  { position: 0, label: "Arme", group: "Arme", arrow: "left", xArrow: -1, yArrow: 6 },
+  { position: 2, label: ["Untere", "Mittelschicht"], group: "Untere Mittelschicht", arrow: "left", xArrow: 1, yArrow: 6  },
+  { position: 4, label: "Mittelschicht", group: "Mittelschicht", arrow: "left", xArrow: 3, yArrow: 6  },
+  { position: 6, label: ["Obere", "Mittelschicht"], group: "Obere Mittelschicht", arrow: "leftMedium", xArrow: 4.8, yArrow: 5  },
+  { position: 9, label: "Reiche", group: "Reiche", arrow: "right", xArrow: 9.7, yArrow: 4 }
 ].map(d => ({
   ...d,
   isHighlighted: d.group === selectedQuantile || d.group === "Reiche"
@@ -137,7 +167,7 @@ vl.layer(
   .encode(
     vl.x()
       .fieldQ("position")
-      .scale({ domain: [-0.5, 9.5] })
+      .scale({ domain: [-0.8, 10.8] })
       .axis(null),
     vl.opacity()
       .fieldN("isHighlighted")
@@ -160,7 +190,6 @@ vl.layer(
   .encode(
     vl.x()
       .fieldQ("position")
-      .scale({ domain: [-0.5, 9.5] })
       .axis(null),
     vl.text()
       .fieldN("label"),
@@ -181,13 +210,41 @@ vl.layer(
   .encode(
     vl.x()
       .fieldQ("x")
-      .scale({ domain: [-0.5, 9.5] })
       .axis(null),
     vl.text()
       .value("Höheres Einkommen ⟶")
-  )
+  ),
+  ...(width >= 860 ? [
+    vl.markPoint({
+      size: 0.04,
+      stroke: "#333333",
+      strokeWidth: 1,
+      filled: false
+    })
+    .data(labelData)
+    .encode(
+      vl.x()
+        .fieldQ("xArrow")
+        .axis(null),
+      vl.y()
+        .fieldQ("yArrow")
+        .axis(null),
+      vl.shape()
+        .fieldN("arrow")
+        .scale({ domain: ["left", "leftMedium", "right"], range: [arrowLeft, arrowLeftMedium, arrowRight] })
+        .legend(null),
+      vl.size()
+        .fieldN("isHighlighted")
+        .scale({ domain: [false, true], range: [0, 0.04] })
+        .legend(null),
+      vl.opacity()
+        .fieldN("isHighlighted")
+        .scale({ domain: [false, true], range: [0.33, 1] })
+        .legend(null)
+    )
+  ] : [])
 )
-.width(width >= 860 ? 400 : (width - 16))
+.width(width >= 860 ? 400 : (width - 18))
 .height(40)
 .config(config)
 .render({ renderer: "svg" })
@@ -221,7 +278,7 @@ viewof selectedQuantile = Inputs.select(
 }
 ``` -->
 
-Wirksamer Klimaschutz muss soziale Gerechtigkeit mitdenken. Eine [**Studie**](https://doi.org/10.1111/jiec.70074){target="_blank"} zeigt: Die **reichsten 10%** der österreichischen Haushalte verursachen mehr als **3 mal** so viele CO₂-Emissionen pro Monat als die **ärmsten 10%**. Diese Ungleichheit ist besonders bei <span style="color: #FF8732; padding: 2px 4px; border-radius: 3px;">**Mobilität**</span>, <span style="color: #198737;">**Wohnen**</span> und <span style="color: #D62300;">**Dienstleistungen**</span> ausgeprägt. Während ärmere Haushalte ihre Emissionen reduzierten, blieben die der Reichsten konstant hoch. Bei einer CO₂-Bepreisung würden einkommensschwache Haushalte überproportional belastet – ohne die finanziellen Mittel für klimafreundliche Alternativen.
+Wirksamer Klimaschutz muss soziale Gerechtigkeit mitdenken. Eine [**Studie**](https://doi.org/10.1111/jiec.70074){target="_blank"} zeigt: Die **reichsten 10%** der österreichischen Haushalte verursachen mehr als **3 mal** so viele CO₂-Emissionen pro Monat als die **ärmsten 10%**. Diese Ungleichheit ist besonders bei <span style="color: #FF8732; padding: 2px 4px; border-radius: 3px;">**Mobilität**</span>, <span style="color: #198737;">**Wohnen**</span> und <span style="color: #D62300;">**Dienstleistungen**</span> ausgeprägt. Während ärmere Haushalte ihre Emissionen reduzierten, blieben die der Reichsten konstant hoch. Durch eine CO₂-Bepreisung werden allerdings einkommensschwache Haushalte überproportional belastet – ohne die finanziellen Mittel für klimafreundliche Alternativen.
 
 Die **Isotype-Methode** macht diese abstrakte Verteilungsfrage unmittelbar erfassbar: Jedes Symbol steht für eine konkrete Menge CO₂. Was **Marie Neurath** in den 1920er-Jahren für wirtschaftliche und soziale Zusammenhänge entwickelte, zeigt auf einen Blick, wie drastisch die Emissionen zwischen Arm und Reich auseinanderklaffen. Diese Visualisierung folgt damit dem Kern der **Wiener Methode der Bildstatistik**: komplexe Verteilungsfragen niederschwellig zugänglich zu machen und zur öffentlichen Diskussion beizutragen.
 

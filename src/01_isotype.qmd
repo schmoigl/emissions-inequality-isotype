@@ -9,18 +9,10 @@ makeIsotype = function({
   xDomain = [0, 14],
   height = 250,
   size = 5,
-  scaleFactor = 1,
-  sizeField = null,
-  sizeRange = null,
-  sizeByCategory = null,
   unit = "€",
   divisor = 1000,
-  spacing = -10,
-  textShift = 40
+  showHeader = true
 }) {
-
-  const useCategorySize = sizeByCategory !== null;
-  const useSizeField = sizeField !== null;
 
   return vl.layer(
     // Combined shapes layer with conditional shape selection
@@ -41,7 +33,7 @@ makeIsotype = function({
           ticks: false,
           title: null,
           labelOffset: 16,
-          minExtent: width >= 860 ? 128 : 0,
+          minExtent: width >= 860 ? 128 : 16,
           labels: width >= 860,
           labelExpr: width >= 860 ? "split(datum.label, ' ')" : null,
         }),
@@ -71,18 +63,7 @@ makeIsotype = function({
           domain: shapeDomain.concat(shapeDomain.map(d => d + "_half")),
           range: shapeRange.concat(shapeRangeHalf)
         })
-        .legend(false),
-      // ...(useCategorySize ? [vl.size()
-      //   .fieldN("name")
-      //   .scale({
-      //     domain: shapeDomain,
-      //     range: sizeByCategory
-      //   })
-      //   .legend(false)] : []),
-      // ...(useSizeField && !useCategorySize ? [vl.size()
-      //   .fieldQ(sizeField)
-      //   .scale(sizeRange ? { range: sizeRange } : { range: [size * scaleFactor * 0.5, size * scaleFactor * 1.5] })
-      //   .legend(false)] : [])
+        .legend(false)
     ),
     vl.markText({
       align: "right",
@@ -128,10 +109,12 @@ makeIsotype = function({
         type: "nominal",
         title: null,
         sort: ["Arme", "Untere Mittelschicht", "Mittelschicht", "Obere Mittelschicht", "Reiche"],
-        header: {
+        header: showHeader ? {
           labelFontSize: 15,
           labelOrient: "top",
           labelPadding: -8,
+        } : {
+          labels: false
         },
       },
     } : {
@@ -140,10 +123,12 @@ makeIsotype = function({
         type: "nominal",
         title: null,
         sort: ["Arme", "Untere Mittelschicht", "Mittelschicht", "Obere Mittelschicht", "Reiche"],
-        header: {
+        header: showHeader ? {
           labelFontSize: 15,
           labelOrient: "top",
           labelPadding: -8,
+        } : {
+          labels: false
         },
       },
     }
