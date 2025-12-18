@@ -35,7 +35,7 @@ makeIsotype({
   inputData: filteredData,
   spacing: -50,
   height: 210,
-  size: 7,
+  size: 8,
   divisor: 0.5,
   unit: "t CO₂",
 })
@@ -85,7 +85,7 @@ makeIsotype({
   shapeRangeHalf: [path7_half],
   colorRange: ["#d3d3d3"],
   height: 30,
-  size: 7,
+  size: 8,
   unit: "t CO₂",
   divisor: 2,
   showHeader: false
@@ -244,7 +244,7 @@ vl.layer(
     )
   ] : [])
 )
-.width(width >= 860 ? 400 : (width - 24))
+.width(width >= 860 ? 460 : (width - 24))
 .height(40)
 .config(config)
 .render({ renderer: "svg" })
