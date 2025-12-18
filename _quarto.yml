@@ -8,7 +8,7 @@ project:
   render: 
     - index.qmd
 website:
-  title: "Marie Neurath"
+  title: ""
   favicon: img/favicon.ico
   search: false
   navbar: false
