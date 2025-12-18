@@ -123,7 +123,7 @@ arrowLeftBase = "M365 138C239.471 259.062 71.994 192.715 39 184.482 M56.31 257C4
 
 // Rotated versions
 arrowRight = rotatePath(arrowRightBase, -55)  // 55° counterclockwise
-arrowLeftHigh = rotatePath(arrowLeftBase, 70)  
+arrowLeftHigh = rotatePath(arrowLeftBase, 75)  
 arrowLeft = rotatePath(arrowLeftBase, 35)     // 45° clockwise
 arrowLeftMedium = rotatePath(arrowLeftBase, 20)  // 25° clockwise for Obere Mittelschicht
 ```
@@ -132,7 +132,7 @@ arrowLeftMedium = rotatePath(arrowLeftBase, 20)  // 25° clockwise for Obere Mit
 //| echo: false
 //| output: false
 labelData = [
-  { position: 0, label: "Arme", group: "Arme", arrow: "leftHigh", xArrow: -1, yArrow: 6 },
+  { position: 0, label: "Arme", group: "Arme", arrow: "leftHigh", xArrow: -0.8, yArrow: 6 },
   { position: 2, label: ["Untere", "Mittelschicht"], group: "Untere Mittelschicht", arrow: "left", xArrow: 1, yArrow: 6  },
   { position: 4, label: "Mittelschicht", group: "Mittelschicht", arrow: "left", xArrow: 3, yArrow: 6  },
   { position: 6, label: ["Obere", "Mittelschicht"], group: "Obere Mittelschicht", arrow: "leftMedium", xArrow: 4.8, yArrow: 5  },
