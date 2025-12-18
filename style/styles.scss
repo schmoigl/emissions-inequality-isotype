@@ -28,6 +28,7 @@ h1.title {
 
 h1.title, h3 {
     font-size: 24px;
+    opacity: 1;
 }
 
 /* Author block */
@@ -96,10 +97,10 @@ select {
 
 :root {
     --r-selection-background-color: #FFAA00; // #94672d #E20613
-    --bs-link-color: #198737;
-    --bs-link-color-rgb: 25, 135, 55;
-    --bs-link-hover-color: #198737;
-    --bs-link-hover-color-rgb: 25, 135, 55;
+    --bs-link-color: #703a28;
+    --bs-link-color-rgb: 112, 58, 40;
+    --bs-link-hover-color: #703a28;
+    --bs-link-hover-color-rgb: 112, 58, 40;
 }
 
 ::selection {
