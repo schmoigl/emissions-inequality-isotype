@@ -78,20 +78,23 @@ filteredEmissionen = data
 
 ```{ojs}
 //| echo: false
-makeIsotype({
-  inputData: filteredEmissionen,
-  shapeDomain: ["Emissionen Gesamt"],
-  shapeRange: [path7],
-  shapeRangeHalf: [path7_half],
-  colorRange: ["#d3d3d3"],
-  height: 30,
-  size: 8,
-  unit: "t CO₂",
-  divisor: 2,
-  showHeader: false
-})
-  .config(config)
-  .render({ renderer: "svg" })
+width >= 860 ? 
+  makeIsotype({
+    inputData: filteredEmissionen,
+    shapeDomain: ["Emissionen Gesamt"],
+    shapeRange: [path7],
+    shapeRangeHalf: [path7_half],
+    colorRange: ["#d3d3d3"],
+    height: 30,
+    size: 8,
+    unit: "t CO₂",
+    divisor: 2,
+    showHeader: false
+  })
+    .config(config)
+    .render({ renderer: "svg" })
+  :
+  htl.html`<div></div>`
 ``` 
 
 
@@ -120,15 +123,16 @@ arrowLeftBase = "M365 138C239.471 259.062 71.994 192.715 39 184.482 M56.31 257C4
 
 // Rotated versions
 arrowRight = rotatePath(arrowRightBase, -55)  // 55° counterclockwise
-arrowLeft = rotatePath(arrowLeftBase, 45)     // 45° clockwise
-arrowLeftMedium = rotatePath(arrowLeftBase, 25)  // 25° clockwise for Obere Mittelschicht
+arrowLeftHigh = rotatePath(arrowLeftBase, 70)  
+arrowLeft = rotatePath(arrowLeftBase, 35)     // 45° clockwise
+arrowLeftMedium = rotatePath(arrowLeftBase, 20)  // 25° clockwise for Obere Mittelschicht
 ```
 
 ```{ojs}
 //| echo: false
 //| output: false
 labelData = [
-  { position: 0, label: "Arme", group: "Arme", arrow: "left", xArrow: -1, yArrow: 6 },
+  { position: 0, label: "Arme", group: "Arme", arrow: "leftHigh", xArrow: -1, yArrow: 6 },
   { position: 2, label: ["Untere", "Mittelschicht"], group: "Untere Mittelschicht", arrow: "left", xArrow: 1, yArrow: 6  },
   { position: 4, label: "Mittelschicht", group: "Mittelschicht", arrow: "left", xArrow: 3, yArrow: 6  },
   { position: 6, label: ["Obere", "Mittelschicht"], group: "Obere Mittelschicht", arrow: "leftMedium", xArrow: 4.8, yArrow: 5  },
@@ -167,7 +171,7 @@ vl.layer(
   .encode(
     vl.x()
       .fieldQ("position")
-      .scale({ domain: width >= 860 ? [-0.8, 10.8] : [-0, 10] })
+      .scale({ domain: width >= 860 ? [-0.8, 16] : [-0, 10] })
       .axis(null),
     vl.opacity()
       .fieldN("isHighlighted")
@@ -231,7 +235,7 @@ vl.layer(
         .axis(null),
       vl.shape()
         .fieldN("arrow")
-        .scale({ domain: ["left", "leftMedium", "right"], range: [arrowLeft, arrowLeftMedium, arrowRight] })
+        .scale({ domain: ["leftHigh", "left", "leftMedium", "right"], range: [arrowLeftHigh, arrowLeft, arrowLeftMedium, arrowRight] })
         .legend(null),
       vl.size()
         .fieldN("isHighlighted")
@@ -244,7 +248,7 @@ vl.layer(
     )
   ] : [])
 )
-.width(width >= 860 ? 480 : (width - 24))
+.width(width >= 860 ? 700 : (width - 24))
 .height(40)
 .config(config)
 .render({ renderer: "svg" })
