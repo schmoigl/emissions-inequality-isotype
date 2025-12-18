@@ -1,5 +1,5 @@
 ---
-title: "DIE EMISSIONEN DER WENIGEN — DIE LASTEN DER VIELEN"
+title: "DIE LASTEN DER VIELEN — DIE EMISSIONEN DER WENIGEN"
 execute:
   eval: true
   echo: false
@@ -14,6 +14,7 @@ execute:
 {{< include src/00_libs.qmd >}}
 {{< include src/00_utils.qmd >}}
 {{< include src/01_isotype.qmd  >}}
+
 
 ```{ojs}
 //| echo: false
@@ -303,6 +304,8 @@ viewof selectedQuantile = Inputs.select(
 )
 ```
 
+### HINTERGRUND
+
 Wirksamer Klimaschutz muss soziale Gerechtigkeit mitdenken. Eine [**Studie**](https://doi.org/10.1111/jiec.70074){target="_blank"} zeigt: Die **reichsten 10%** der österreichischen Haushalte verursachen mehr als **3 mal** so viele CO₂-Emissionen pro Monat als die **ärmsten 10%**. Diese Ungleichheit ist besonders bei <span style="color: #3E6F8E;">**Mobilität**</span>, <span style="color: #D62300;">**Wohnen**</span> und <span style="color: #198737;">**Dienstleistungen**</span> ausgeprägt. Während ärmere Haushalte ihre Emissionen reduzierten, blieben die der Reichsten konstant hoch. Durch eine CO₂-Bepreisung werden allerdings einkommensschwache Haushalte überproportional belastet – ohne die finanziellen Mittel für klimafreundliche Alternativen.
 
 Die **Isotype-Methode** macht diese abstrakte Verteilungsfrage unmittelbar erfassbar: Jedes Symbol steht für eine konkrete Menge CO₂. Was **Marie Neurath** in den 1920er-Jahren für wirtschaftliche und soziale Zusammenhänge entwickelte, zeigt auf einen Blick, wie drastisch die Emissionen zwischen Arm und Reich auseinanderklaffen. Diese Visualisierung folgt damit dem Kern der **Wiener Methode der Bildstatistik**: komplexe Verteilungsfragen niederschwellig zugänglich zu machen und zur öffentlichen Diskussion beizutragen.
@@ -311,6 +314,6 @@ Die **Isotype-Methode** macht diese abstrakte Verteilungsfrage unmittelbar erfas
 
 [**Fabian Kalleitner**](https://www.ls4.soziologie.uni-muenchen.de/personen/wissenschaftlich_mitarbeiter/fabian_kalleitner/index.html){target="_blank"} — [**Lukas Schmoigl**](https://www.wifo.ac.at/person/lukas-schmoigl/){target="_blank"}
 
-### LITERATUR
+### DATEN
 
 Dorninger, Christian, Simone Gingrich, Willi Haas, Alina Brad, Etienne Schneider, and Dominik Wiedenhofer. 2025. "Slow and Unequal Reduction in Austrian Household GHG Footprints Between 2000 and 2020." *Journal of Industrial Ecology* 29 (5): 1651–65. [**Link**](https://doi.org/10.1111/jiec.70074){target="_blank"}.
