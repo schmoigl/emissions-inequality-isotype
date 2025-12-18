@@ -288,8 +288,8 @@ Die **Isotype-Methode** macht diese abstrakte Verteilungsfrage unmittelbar erfas
 
 ### AUTOREN
 
-[Fabian Kalleitner](https://www.ls4.soziologie.uni-muenchen.de/personen/wissenschaftlich_mitarbeiter/fabian_kalleitner/index.html), [Lukas Schmoigl](https://www.wifo.ac.at/person/lukas-schmoigl/)
+**[Fabian Kalleitner](https://www.ls4.soziologie.uni-muenchen.de/personen/wissenschaftlich_mitarbeiter/fabian_kalleitner/index.html), [Lukas Schmoigl](https://www.wifo.ac.at/person/lukas-schmoigl/)**
 
 ### LITERATUR
 
-Dorninger, Christian, Simone Gingrich, Willi Haas, Alina Brad, Etienne Schneider, and Dominik Wiedenhofer. 2025. "Slow and Unequal Reduction in Austrian Household GHG Footprints Between 2000 and 2020." *Journal of Industrial Ecology* 29 (5): 1651–65. <https://doi.org/10.1111/jiec.70074>.
+Dorninger, Christian, Simone Gingrich, Willi Haas, Alina Brad, Etienne Schneider, and Dominik Wiedenhofer. 2025. "Slow and Unequal Reduction in Austrian Household GHG Footprints Between 2000 and 2020." *Journal of Industrial Ecology* 29 (5): 1651–65. **<https://doi.org/10.1111/jiec.70074>**.
