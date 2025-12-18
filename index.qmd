@@ -125,7 +125,7 @@ width >= 860 ?
     shapeDomain: ["Emissionen Gesamt"],
     shapeRange: [path7],
     shapeRangeHalf: [path7_half],
-    colorRange: ["#703a28"],
+    colorRange: ["#474A51"],
     height: 30,
     size: 8,
     unit: "t CO₂",
