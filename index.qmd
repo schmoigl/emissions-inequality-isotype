@@ -167,7 +167,7 @@ vl.layer(
   .encode(
     vl.x()
       .fieldQ("position")
-      .scale({ domain: [-0.8, 10.8] })
+      .scale({ domain: width >= 860 ? [-0.8, 10.8] : [-0, 10] })
       .axis(null),
     vl.opacity()
       .fieldN("isHighlighted")
@@ -244,7 +244,7 @@ vl.layer(
     )
   ] : [])
 )
-.width(width >= 860 ? 400 : (width - 18))
+.width(width >= 860 ? 400 : (width - 24))
 .height(40)
 .config(config)
 .render({ renderer: "svg" })
