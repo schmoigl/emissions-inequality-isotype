@@ -27,6 +27,46 @@ data = FileAttachment("data/data.csv").csv({ typed: true })
 filteredData = data
   .filter(d => d.name != "Emissionen Gesamt")
   .filter(d => d.Quantile === selectedQuantile || d.Quantile === "Reiche")
+
+colors_bruegel = [
+  "#F0533B",
+  "#EAD7B0",
+  "#FCB944",
+  "#306c2e",
+  "#0E747C",
+]
+
+colors_neurath = [
+  "#316c2f",
+  "#fdedcc",
+  "#FCB944",
+  "#0E747C",
+  "#de491d",
+]
+
+colors_thomas = [
+  "#FCB944",
+  "#F0533B",
+  "#7A8A6F",
+  "#0E747C",
+  "#EAD7B0"
+]
+
+colors_thomas_2 = [
+  "#DABF63", 
+  "#E5DCBD",
+  "#C66F6C",
+  "#959976",
+  "#8BA59A"
+]
+
+colors_new = [
+  "#198737",
+  "#F5EBDC",
+  "#FFAA00",
+  "#3E6F8E",
+  "#D62300",
+]
 ```
 
 ```{ojs}
@@ -38,6 +78,7 @@ makeIsotype({
   size: 8,
   divisor: 0.5,
   unit: "t CO₂",
+  colorRange: colors_new,
 })
   .config(config)
   .render({ renderer: "svg" })
@@ -84,7 +125,7 @@ width >= 860 ?
     shapeDomain: ["Emissionen Gesamt"],
     shapeRange: [path7],
     shapeRangeHalf: [path7_half],
-    colorRange: ["#d3d3d3"],
+    colorRange: ["#703a28"],
     height: 30,
     size: 8,
     unit: "t CO₂",
@@ -262,27 +303,7 @@ viewof selectedQuantile = Inputs.select(
 )
 ```
 
-<!-- ```{ojs}
-//| echo: false
-//| output: asis
-{
-  const descriptions = {
-    "Arme": "die ärmsten 10% der Haushalte",
-    "Untere Mittelschicht": "Haushalte im unteren Mittelfeld (etwa 20-30% vom Einkommen)",
-    "Mittelschicht": "Haushalte in der Mitte (etwa 40-50% vom Einkommen)",
-    "Obere Mittelschicht": "Haushalte im oberen Mittelfeld (etwa 60-70% vom Einkommen)"
-  };
-
-  const selectedDesc = descriptions[selectedQuantile];
-
-  return html`<p style="margin-top: 20px;">
-    <strong>${selectedQuantile}</strong> sind ${selectedDesc}.<br>
-    <strong>Reiche</strong> sind die reichsten 10% der Haushalte.
-  </p>`;
-}
-``` -->
-
-Wirksamer Klimaschutz muss soziale Gerechtigkeit mitdenken. Eine [**Studie**](https://doi.org/10.1111/jiec.70074){target="_blank"} zeigt: Die **reichsten 10%** der österreichischen Haushalte verursachen mehr als **3 mal** so viele CO₂-Emissionen pro Monat als die **ärmsten 10%**. Diese Ungleichheit ist besonders bei <span style="color: #FF8732; padding: 2px 4px; border-radius: 3px;">**Mobilität**</span>, <span style="color: #198737;">**Wohnen**</span> und <span style="color: #D62300;">**Dienstleistungen**</span> ausgeprägt. Während ärmere Haushalte ihre Emissionen reduzierten, blieben die der Reichsten konstant hoch. Durch eine CO₂-Bepreisung werden allerdings einkommensschwache Haushalte überproportional belastet – ohne die finanziellen Mittel für klimafreundliche Alternativen.
+Wirksamer Klimaschutz muss soziale Gerechtigkeit mitdenken. Eine [**Studie**](https://doi.org/10.1111/jiec.70074){target="_blank"} zeigt: Die **reichsten 10%** der österreichischen Haushalte verursachen mehr als **3 mal** so viele CO₂-Emissionen pro Monat als die **ärmsten 10%**. Diese Ungleichheit ist besonders bei <span style="color: #3E6F8E; padding: 2px 4px; border-radius: 3px;">**Mobilität**</span>, <span style="color: #D62300;">**Wohnen**</span> und <span style="color: #198737;">**Dienstleistungen**</span> ausgeprägt. Während ärmere Haushalte ihre Emissionen reduzierten, blieben die der Reichsten konstant hoch. Durch eine CO₂-Bepreisung werden allerdings einkommensschwache Haushalte überproportional belastet – ohne die finanziellen Mittel für klimafreundliche Alternativen.
 
 Die **Isotype-Methode** macht diese abstrakte Verteilungsfrage unmittelbar erfassbar: Jedes Symbol steht für eine konkrete Menge CO₂. Was **Marie Neurath** in den 1920er-Jahren für wirtschaftliche und soziale Zusammenhänge entwickelte, zeigt auf einen Blick, wie drastisch die Emissionen zwischen Arm und Reich auseinanderklaffen. Diese Visualisierung folgt damit dem Kern der **Wiener Methode der Bildstatistik**: komplexe Verteilungsfragen niederschwellig zugänglich zu machen und zur öffentlichen Diskussion beizutragen.
 

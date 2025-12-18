@@ -67,14 +67,12 @@ colors_npr = [
   "#237BBD",
 ]
 colors_burger = [
-  "#D62300",
+  "#198737",
   "#F5EBDC",
   "#FFAA00",
   // "#703a28", // lighter
   "#FF8732",
-  // "#F5EBDC",
-  "#198737",
-  "#FFAA00",
+  "#D62300",
 ]
 colors_oekostrom = [
   "#05a56f",
