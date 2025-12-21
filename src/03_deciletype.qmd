@@ -54,22 +54,22 @@ makeDeciletype = function({
         .scale({ domain: [false, true], range: [0.33, 1] })
         .legend(null)
     ),
-    vl.markText({
-      dx: -12,
-      dy: 132,
-      align: "right",
-      baseline: "top",
-      fontSize: 15,
-      fontStyle: "italic"
-    })
-    .data([{ x: 9 }])
-    .encode(
-      vl.x()
-        .fieldQ("x")
-        .axis(null),
-      vl.text()
-        .value("Höheres Einkommen ⟶")
-    ),
+    // vl.markText({
+    //   dx: -12,
+    //   dy: 132,
+    //   align: "right",
+    //   baseline: "top",
+    //   fontSize: 15,
+    //   fontStyle: "italic"
+    // })
+    // .data([{ x: 9 }])
+    // .encode(
+    //   vl.x()
+    //     .fieldQ("x")
+    //     .axis(null),
+    //   vl.text()
+    //     .value("Höheres Einkommen ⟶")
+    // ),
     ...(width >= 860 ? [
       vl.markPoint({
         size: 0.04,
