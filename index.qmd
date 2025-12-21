@@ -212,7 +212,7 @@ filteredEmissionen = data
 //| echo: false
 width >= 860 ?
   html`<div style="display: flex; justify-content: center; align-items: center; gap: 30px; font-family: Jost; font-size: 15px; padding-top: 20px; padding-bottom: 20px;">
-    <div style="display: flex; align-items: flex-end; gap: 4px;">
+    <div style="display: flex; align-items: flex-end; gap: 0px;">
       <svg width="32" height="64" viewBox="0 0 24 48" style="vertical-align: middle; margin: 0;">
         <path d="${path7}" fill="#474A51" stroke="black" stroke-width="0.8" opacity="0.811"/>
       </svg>
