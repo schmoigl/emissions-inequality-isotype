@@ -99,43 +99,44 @@ makeDeciletype({
 }
 ```
 
+<!-- 
 ```{ojs}
 //| echo: false
 width >= 860 ?
   html`<div style="display: flex; justify-content: center; align-items: center; gap: 30px; font-family: Jost; font-size: 15px; padding-top: 20px; padding-bottom: 20px;">
     <div style="display: flex; align-items: flex-end; gap: 4px;">
-      <svg width="32" height="32" viewBox="0 0 24 24" style="vertical-align: middle; margin: 0;">
-        <path d="${path1}" fill="${colors_new[2]}" stroke="black" stroke-width="0.8" opacity="0.811"/>
+      <svg width="34" height="34" viewBox="0 0 24 24" style="vertical-align: middle; margin: 0;">
+        <path d="${path1}" fill="${colors_new[2]}" stroke="black" stroke-width="0.649" opacity="0.811"/>
+      </svg>
+      <svg width="34" height="34" viewBox="0 0 24 24" style="vertical-align: middle; margin: 0;">
+        <path d="${path2}" fill="${colors_new[4]}" stroke="black" stroke-width="0.649" opacity="0.811"/>
+      </svg>
+      <svg width="34" height="34" viewBox="0 0 24 24" style="vertical-align: middle; margin: 0;">
+        <path d="${path4}" fill="${colors_new[3]}" stroke="black" stroke-width="0.649" opacity="0.811"/>
+      </svg>
+      <svg width="34" height="34" viewBox="0 0 24 24" style="vertical-align: middle; margin: 0;">
+        <path d="${path5}" fill="${colors_new[1]}" stroke="black" stroke-width="0.649" opacity="0.811"/>
       </svg>
       <svg width="32" height="32" viewBox="0 0 24 24" style="vertical-align: middle; margin: 0;">
-        <path d="${path2}" fill="${colors_new[4]}" stroke="black" stroke-width="0.8" opacity="0.811"/>
-      </svg>
-      <svg width="32" height="32" viewBox="0 0 24 24" style="vertical-align: middle; margin: 0;">
-        <path d="${path4}" fill="${colors_new[3]}" stroke="black" stroke-width="0.8" opacity="0.811"/>
-      </svg>
-      <svg width="32" height="32" viewBox="0 0 24 24" style="vertical-align: middle; margin: 0;">
-        <path d="${path5}" fill="${colors_new[1]}" stroke="black" stroke-width="0.8" opacity="0.811"/>
-      </svg>
-      <svg width="32" height="32" viewBox="0 0 24 24" style="vertical-align: middle; margin: 0;">
-        <path d="${path6}" fill="${colors_new[0]}" stroke="black" stroke-width="0.8" opacity="0.811"/>
+        <path d="${path6}" fill="${colors_new[0]}" stroke="black" stroke-width="0.722" opacity="0.811"/>
       </svg>
       <span style="font-weight: 400;">≈ 0,5 t CO₂ pro Jahr</span>
     </div>
     <div style="display: flex; align-items: flex-end; gap: 0px;">
-      <svg width="32" height="32" viewBox="0 0 24 24" style="vertical-align: middle; margin: 0;">
-        <path d="${path1_half}" fill="${colors_new[2]}" stroke="black" stroke-width="0.8" opacity="0.811"/>
+      <svg width="34" height="34" viewBox="0 0 24 24" style="vertical-align: middle; margin: 0;">
+        <path d="${path1_half}" fill="${colors_new[2]}" stroke="black" stroke-width="0.649" opacity="0.811"/>
+      </svg>
+      <svg width="34" height="34" viewBox="0 0 24 24" style="vertical-align: middle; margin: 0;">
+        <path d="${path2_half}" fill="${colors_new[4]}" stroke="black" stroke-width="0.649" opacity="0.811"/>
+      </svg>
+      <svg width="34" height="34" viewBox="0 0 24 24" style="vertical-align: middle; margin: 0;">
+        <path d="${path4_half}" fill="${colors_new[3]}" stroke="black" stroke-width="0.649" opacity="0.811"/>
+      </svg>
+      <svg width="34" height="34" viewBox="0 0 24 24" style="vertical-align: middle; margin: 0;">
+        <path d="${path5_half}" fill="${colors_new[1]}" stroke="black" stroke-width="0.649" opacity="0.811"/>
       </svg>
       <svg width="32" height="32" viewBox="0 0 24 24" style="vertical-align: middle; margin: 0;">
-        <path d="${path2_half}" fill="${colors_new[4]}" stroke="black" stroke-width="0.8" opacity="0.811"/>
-      </svg>
-      <svg width="32" height="32" viewBox="0 0 24 24" style="vertical-align: middle; margin: 0;">
-        <path d="${path4_half}" fill="${colors_new[3]}" stroke="black" stroke-width="0.8" opacity="0.811"/>
-      </svg>
-      <svg width="32" height="32" viewBox="0 0 24 24" style="vertical-align: middle; margin: 0;">
-        <path d="${path5_half}" fill="${colors_new[1]}" stroke="black" stroke-width="0.8" opacity="0.811"/>
-      </svg>
-      <svg width="32" height="32" viewBox="0 0 24 24" style="vertical-align: middle; margin: 0;">
-        <path d="${path6_half}" fill="${colors_new[0]}" stroke="black" stroke-width="0.8" opacity="0.811"/>
+        <path d="${path6_half}" fill="${colors_new[0]}" stroke="black" stroke-width="0.722" opacity="0.811"/>
       </svg>
       <span style="font-weight: 400;">≈ 0,25 t CO₂ pro Jahr</span>
     </div>
@@ -143,6 +144,7 @@ width >= 860 ?
   :
   htl.html`<div></div>`
 ```
+ -->
 
 ```{ojs}
 //| echo: false
@@ -272,7 +274,7 @@ labelData = [
   { position: 0, label: "Arme", group: "Arme", arrow: "right", xArrow: -1, yArrow: -28 },
   { position: 2, label: ["Untere", "Mittelschicht"], group: "Untere Mittelschicht", arrow: "right", xArrow: 1, yArrow: -28  },
   { position: 4, label: "Mittelschicht", group: "Mittelschicht", arrow: "right", xArrow: 3, yArrow: -28 },
-  { position: 6, label: ["Obere", "Mittelschicht"], group: "Obere Mittelschicht", arrow: "leftMedium", xArrow: 5, yArrow: -28 },
+  { position: 6, label: ["Obere", "Mittelschicht"], group: "Obere Mittelschicht", arrow: "right", xArrow: 5, yArrow: -28 },
   { position: 9, label: "Reiche", group: "Reiche", arrow: "leftHigh", xArrow: 9.7, yArrow: -28 }
 ].map(d => ({
   ...d,
