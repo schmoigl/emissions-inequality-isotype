@@ -74,15 +74,45 @@ colors_new = [
 
 ```{ojs}
 //| echo: false
+html`<svg width="0" height="0" style="position: absolute;">
+  <defs>
+    <pattern id="hatch_right" patternUnits="userSpaceOnUse" width="3" height="3">
+      <path d="M0,3 L3,0" stroke="#333333" stroke-width="0.6" fill="none" />
+    </pattern>
+    <pattern id="hatch_left" patternUnits="userSpaceOnUse" width="3" height="3">
+      <path d="M0,0 L3,3" stroke="#333333" stroke-width="0.6" fill="none" />
+    </pattern>
+  </defs>
+</svg>`
+```
+
+```{ojs}
+//| echo: false
+makeDeciletype({
+  decileData: decileData,
+  labelData: labelData,
+  arrowLeftHigh: arrowLeftHigh,
+  arrowLeft: arrowLeft,
+  arrowLeftMedium: arrowLeftMedium,
+  arrowRight: arrowRight,
+  vizWidth: 500,
+  vizHeight: 30
+})
+.render({ renderer: "svg" })
+```
+
+```{ojs}
+//| echo: false
 {
   const viz = await makeIsotype({
     inputData: filteredData,
     spacing: -50,
-    height: 210,
+    height: 200,
     size: 8,
     divisor: 0.5,
     unit: "t CO₂",
     colorRange: colors_new,
+    showHeader: width >= 860 ? false : true
   })
     .config(config)
     .render({ renderer: "svg" });
@@ -98,44 +128,38 @@ colors_new = [
 width >= 860 ?
   html`<div style="display: flex; justify-content: center; align-items: center; gap: 30px; font-family: Jost; font-size: 15px; padding-top: 20px; padding-bottom: 20px;">
     <div style="display: flex; align-items: flex-end; gap: 4px;">
-      <svg width="32" height="64" viewBox="0 -24 24 48" style="vertical-align: middle; margin: 0;">
+      <svg width="32" height="32" viewBox="0 0 24 24" style="vertical-align: middle; margin: 0;">
         <path d="${path1}" fill="${colors_new[2]}" stroke="black" stroke-width="0.8" opacity="0.811"/>
       </svg>
-      <svg width="32" height="64" viewBox="0 -24 24 48" style="vertical-align: middle; margin: 0;">
+      <svg width="32" height="32" viewBox="0 0 24 24" style="vertical-align: middle; margin: 0;">
         <path d="${path2}" fill="${colors_new[4]}" stroke="black" stroke-width="0.8" opacity="0.811"/>
       </svg>
-      <svg width="32" height="64" viewBox="0 -24 24 48" style="vertical-align: middle; margin: 0;">
-        <path d="${path3}" fill="${colors_new[1]}" stroke="black" stroke-width="0.8" opacity="0.811"/>
-      </svg>
-      <svg width="32" height="64" viewBox="0 -24 24 48" style="vertical-align: middle; margin: 0;">
+      <svg width="32" height="32" viewBox="0 0 24 24" style="vertical-align: middle; margin: 0;">
         <path d="${path4}" fill="${colors_new[3]}" stroke="black" stroke-width="0.8" opacity="0.811"/>
       </svg>
-      <svg width="32" height="64" viewBox="0 -24 24 48" style="vertical-align: middle; margin: 0;">
-        <path d="${path5}" fill="${colors_new[0]}" stroke="black" stroke-width="0.8" opacity="0.811"/>
+      <svg width="32" height="32" viewBox="0 0 24 24" style="vertical-align: middle; margin: 0;">
+        <path d="${path5}" fill="${colors_new[1]}" stroke="black" stroke-width="0.8" opacity="0.811"/>
       </svg>
-      <svg width="32" height="64" viewBox="0 0 24 48" style="vertical-align: middle; margin: 0;">
-        <path d="${path7}" fill="#474A51" stroke="black" stroke-width="0.8" opacity="0.811"/>
+      <svg width="32" height="32" viewBox="0 0 24 24" style="vertical-align: middle; margin: 0;">
+        <path d="${path6}" fill="${colors_new[0]}" stroke="black" stroke-width="0.8" opacity="0.811"/>
       </svg>
       <span style="font-weight: 400;">≈ 0,5 t CO₂ pro Jahr</span>
     </div>
     <div style="display: flex; align-items: flex-end; gap: 0px;">
-      <svg width="32" height="64" viewBox="0 -24 24 48" style="vertical-align: middle; margin: 0;">
+      <svg width="32" height="32" viewBox="0 0 24 24" style="vertical-align: middle; margin: 0;">
         <path d="${path1_half}" fill="${colors_new[2]}" stroke="black" stroke-width="0.8" opacity="0.811"/>
       </svg>
-      <svg width="32" height="64" viewBox="0 -24 24 48" style="vertical-align: middle; margin: 0;">
+      <svg width="32" height="32" viewBox="0 0 24 24" style="vertical-align: middle; margin: 0;">
         <path d="${path2_half}" fill="${colors_new[4]}" stroke="black" stroke-width="0.8" opacity="0.811"/>
       </svg>
-      <svg width="32" height="64" viewBox="0 -24 24 48" style="vertical-align: middle; margin: 0;">
-        <path d="${path3_half}" fill="${colors_new[1]}" stroke="black" stroke-width="0.8" opacity="0.811"/>
-      </svg>
-      <svg width="32" height="64" viewBox="0 -24 24 48" style="vertical-align: middle; margin: 0;">
+      <svg width="32" height="32" viewBox="0 0 24 24" style="vertical-align: middle; margin: 0;">
         <path d="${path4_half}" fill="${colors_new[3]}" stroke="black" stroke-width="0.8" opacity="0.811"/>
       </svg>
-      <svg width="32" height="64" viewBox="0 -24 24 48" style="vertical-align: middle; margin: 0;">
-        <path d="${path5_half}" fill="${colors_new[0]}" stroke="black" stroke-width="0.8" opacity="0.811"/>
+      <svg width="32" height="32" viewBox="0 0 24 24" style="vertical-align: middle; margin: 0;">
+        <path d="${path5_half}" fill="${colors_new[1]}" stroke="black" stroke-width="0.8" opacity="0.811"/>
       </svg>
-      <svg width="32" height="64" viewBox="0 0 24 48" style="vertical-align: middle; margin: 0;">
-        <path d="${path7_half}" fill="#474A51" stroke="black" stroke-width="0.8" opacity="0.811"/>
+      <svg width="32" height="32" viewBox="0 0 24 24" style="vertical-align: middle; margin: 0;">
+        <path d="${path6_half}" fill="${colors_new[0]}" stroke="black" stroke-width="0.8" opacity="0.811"/>
       </svg>
       <span style="font-weight: 400;">≈ 0,25 t CO₂ pro Jahr</span>
     </div>
@@ -187,7 +211,7 @@ filteredEmissionen = data
       shapeRange: [path7],
       shapeRangeHalf: [path7_half],
       colorRange: ["#474A51"],
-      height: 140,
+      height: 130,
       size: 8,
       unit: "t CO₂",
       divisor: 0.5,
@@ -204,8 +228,36 @@ filteredEmissionen = data
     return htl.html`<div></div>`;
   }
 }
-``` 
+```
 
+```{ojs}
+//| echo: false
+width >= 860 ?
+  html`<div style="display: flex; justify-content: center; align-items: center; gap: 30px; font-family: Jost; font-size: 15px; padding-top: 20px; padding-bottom: 20px;">
+    <div style="display: flex; align-items: flex-end; gap: 4px;">
+      <svg width="32" height="64" viewBox="0 0 24 48" style="vertical-align: middle; margin: 0;">
+        <path d="${path7}" fill="#474A51" stroke="black" stroke-width="0.8" opacity="0.811"/>
+      </svg>
+      <span style="font-weight: 400;">≈ 0,5 t CO₂ pro Jahr</span>
+    </div>
+    <div style="display: flex; align-items: flex-end; gap: 0px;">
+      <svg width="32" height="64" viewBox="0 0 24 48" style="vertical-align: middle; margin: 0;">
+        <path d="${path7_half}" fill="#474A51" stroke="black" stroke-width="0.8" opacity="0.811"/>
+      </svg>
+      <span style="font-weight: 400;">≈ 0,25 t CO₂ pro Jahr</span>
+    </div>
+  </div>`
+  :
+  htl.html`<div></div>`
+```
+
+```{ojs}
+//| echo: false
+viewof selectedQuantile = Inputs.select(
+  ["Arme", "Untere Mittelschicht", "Mittelschicht", "Obere Mittelschicht"],
+  { label: "Vergleich mit ", value: "Arme" }
+)
+```
 
 ```{ojs}
 //| echo: false
@@ -250,43 +302,6 @@ labelData = [
   ...d,
   isHighlighted: d.group === selectedQuantile || d.group === "Reiche"
 }))
-```
-
-```{ojs}
-//| echo: false
-html`<svg width="0" height="0" style="position: absolute;">
-  <defs>
-    <pattern id="hatch_right" patternUnits="userSpaceOnUse" width="3" height="3">
-      <path d="M0,3 L3,0" stroke="#333333" stroke-width="0.6" fill="none" />
-    </pattern>
-    <pattern id="hatch_left" patternUnits="userSpaceOnUse" width="3" height="3">
-      <path d="M0,0 L3,3" stroke="#333333" stroke-width="0.6" fill="none" />
-    </pattern>
-  </defs>
-</svg>`
-```
-
-```{ojs}
-//| echo: false
-makeDeciletype({
-  decileData: decileData,
-  labelData: labelData,
-  arrowLeftHigh: arrowLeftHigh,
-  arrowLeft: arrowLeft,
-  arrowLeftMedium: arrowLeftMedium,
-  arrowRight: arrowRight,
-  vizWidth: 500,
-  vizHeight: 30
-})
-.render({ renderer: "svg" })
-```
-
-```{ojs}
-//| echo: false
-viewof selectedQuantile = Inputs.select(
-  ["Arme", "Untere Mittelschicht", "Mittelschicht", "Obere Mittelschicht"],
-  { label: "Vergleich mit ", value: "Arme" }
-)
 ```
 
 ### HINTERGRUND
