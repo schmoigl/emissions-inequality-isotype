@@ -31,36 +31,12 @@ filteredData = data
   .filter(d => d.name != "Emissionen Gesamt")
   .filter(d => d.Quantile === selectedQuantile || d.Quantile === "Reiche")
 
-colors_bruegel = [
-  "#F0533B",
-  "#EAD7B0",
-  "#FCB944",
-  "#306c2e",
-  "#0E747C",
-]
-
 colors_neurath = [
   "#316c2f",
   "#fdedcc",
   "#FCB944",
   "#0E747C",
   "#de491d",
-]
-
-colors_thomas = [
-  "#FCB944",
-  "#F0533B",
-  "#7A8A6F",
-  "#0E747C",
-  "#EAD7B0"
-]
-
-colors_thomas_2 = [
-  "#DABF63", 
-  "#E5DCBD",
-  "#C66F6C",
-  "#959976",
-  "#8BA59A"
 ]
 
 colors_new = [
@@ -282,22 +258,22 @@ rotatePath = function(pathStr, angleDeg) {
 arrowRightBase = "M35 138C160.529 259.062 328.006 192.715 361 184.482 M343.69 257C355.23 209.711 361 185.319 361 183.823C361 181.579 327.488 165.87 312 142"
 arrowLeftBase = "M365 138C239.471 259.062 71.994 192.715 39 184.482 M56.31 257C44.77 209.711 39 185.319 39 183.823C39 181.579 72.512 165.87 88 142"
 
-// Rotated versions
-arrowRight = rotatePath(arrowRightBase, -55)  // 55° counterclockwise
-arrowLeftHigh = rotatePath(arrowLeftBase, 75)  
-arrowLeft = rotatePath(arrowLeftBase, 35)     // 45° clockwise
-arrowLeftMedium = rotatePath(arrowLeftBase, 20)  // 25° clockwise for Obere Mittelschicht
+// Rotated versions - adjusted to point upward with consistent angles
+arrowRight = rotatePath(arrowRightBase, 125)  // pointing up-right
+arrowLeftHigh = rotatePath(arrowLeftBase, -125)  // pointing up-left (symmetric to right)
+arrowLeft = rotatePath(arrowLeftBase, -125)  // pointing up-left (symmetric to right)
+arrowLeftMedium = rotatePath(arrowLeftBase, -125)  // pointing up-left (symmetric to right)
 ```
 
 ```{ojs}
 //| echo: false
 //| output: false
 labelData = [
-  { position: 0, label: "Arme", group: "Arme", arrow: "leftHigh", xArrow: -0.8, yArrow: 6 },
-  { position: 2, label: ["Untere", "Mittelschicht"], group: "Untere Mittelschicht", arrow: "left", xArrow: 1, yArrow: 6  },
-  { position: 4, label: "Mittelschicht", group: "Mittelschicht", arrow: "left", xArrow: 3, yArrow: 6  },
-  { position: 6, label: ["Obere", "Mittelschicht"], group: "Obere Mittelschicht", arrow: "leftMedium", xArrow: 4.8, yArrow: 5  },
-  { position: 9, label: "Reiche", group: "Reiche", arrow: "right", xArrow: 9.7, yArrow: 4 }
+  { position: 0, label: "Arme", group: "Arme", arrow: "right", xArrow: -1, yArrow: -28 },
+  { position: 2, label: ["Untere", "Mittelschicht"], group: "Untere Mittelschicht", arrow: "right", xArrow: 1, yArrow: -28  },
+  { position: 4, label: "Mittelschicht", group: "Mittelschicht", arrow: "right", xArrow: 3, yArrow: -28 },
+  { position: 6, label: ["Obere", "Mittelschicht"], group: "Obere Mittelschicht", arrow: "leftMedium", xArrow: 5, yArrow: -28 },
+  { position: 9, label: "Reiche", group: "Reiche", arrow: "leftHigh", xArrow: 9.7, yArrow: -28 }
 ].map(d => ({
   ...d,
   isHighlighted: d.group === selectedQuantile || d.group === "Reiche"
