@@ -84,6 +84,7 @@ makeDeciletype = function({
           .axis(null),
         vl.y()
           .fieldQ("yArrow")
+          .scale({ domain: [-15, 5] })
           .axis(null),
         vl.shape()
           .fieldN("arrow")
