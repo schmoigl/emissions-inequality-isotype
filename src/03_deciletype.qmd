@@ -1,0 +1,108 @@
+
+```{ojs}
+makeDeciletype = function({
+  decileData,
+  labelData,
+  arrowLeftHigh,
+  arrowLeft,
+  arrowLeftMedium,
+  arrowRight,
+  vizWidth = 500,
+  vizHeight = 40
+}) {
+
+  return vl.layer(
+    vl.markPoint({
+      shape: path_neurath,
+      size: 0.08,
+      stroke: "black",
+      strokeWidth: 0.8,
+      filled: true
+    })
+    .data(decileData)
+    .encode(
+      vl.x()
+        .fieldQ("position")
+        .scale({ domain: width >= 860 ? [-0.8, 9.8] : [-0, 10] })
+        .axis(null),
+      vl.opacity()
+        .fieldN("isHighlighted")
+        .scale({ domain: [false, true], range: [0.33, 1] })
+        .legend(null),
+      vl.fill()
+        .fieldN("isHighlighted")
+        .scale({ domain: [false, true], range: ["url(#hatch_left)", "url(#hatch_right)"] })
+        .legend(null)
+    ),
+    vl.markText({
+      dy: 86,
+      dx: 14,
+      align: "center",
+      anchor: "middle",
+      baseline: "top",
+      fontSize: 15,
+    })
+    .data(labelData)
+    .encode(
+      vl.x()
+        .fieldQ("position")
+        .axis(null),
+      vl.text()
+        .fieldN("label"),
+      vl.opacity()
+        .fieldN("isHighlighted")
+        .scale({ domain: [false, true], range: [0.33, 1] })
+        .legend(null)
+    ),
+    vl.markText({
+      dx: -12,
+      dy: 132,
+      align: "right",
+      baseline: "top",
+      fontSize: 15,
+      fontStyle: "italic"
+    })
+    .data([{ x: 9 }])
+    .encode(
+      vl.x()
+        .fieldQ("x")
+        .axis(null),
+      vl.text()
+        .value("Höheres Einkommen ⟶")
+    ),
+    ...(width >= 860 ? [
+      vl.markPoint({
+        size: 0.04,
+        stroke: "#333333",
+        strokeWidth: 1,
+        filled: false
+      })
+      .data(labelData)
+      .encode(
+        vl.x()
+          .fieldQ("xArrow")
+          .axis(null),
+        vl.y()
+          .fieldQ("yArrow")
+          .axis(null),
+        vl.shape()
+          .fieldN("arrow")
+          .scale({ domain: ["leftHigh", "left", "leftMedium", "right"], range: [arrowLeftHigh, arrowLeft, arrowLeftMedium, arrowRight] })
+          .legend(null),
+        vl.size()
+          .fieldN("isHighlighted")
+          .scale({ domain: [false, true], range: [0, 0.04] })
+          .legend(null),
+        vl.opacity()
+          .fieldN("isHighlighted")
+          .scale({ domain: [false, true], range: [0.33, 1] })
+          .legend(null)
+      )
+    ] : [])
+  )
+  .width(width >= 860 ? vizWidth : (width - 24))
+  .height(vizHeight)
+  .config(config);
+
+}
+```

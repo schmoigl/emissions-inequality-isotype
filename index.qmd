@@ -1,5 +1,5 @@
 ---
-title: "DIE LASTEN DER VIELEN — DIE EMISSIONEN DER WENIGEN"
+title: "DIE EMISSIONEN DER WENIGEN"
 execute:
   eval: true
   echo: false
@@ -13,7 +13,9 @@ execute:
 {{< include src/00_config.qmd >}}
 {{< include src/00_libs.qmd >}}
 {{< include src/00_utils.qmd >}}
-{{< include src/01_isotype.qmd  >}}
+{{< include src/01_isotype.qmd >}}
+{{< include src/02_chimneytype.qmd >}}
+{{< include src/03_deciletype.qmd >}}
 
 
 ```{ojs}
@@ -72,17 +74,74 @@ colors_new = [
 
 ```{ojs}
 //| echo: false
-makeIsotype({
-  inputData: filteredData,
-  spacing: -50,
-  height: 210,
-  size: 8,
-  divisor: 0.5,
-  unit: "t CO₂",
-  colorRange: colors_new,
-})
-  .config(config)
-  .render({ renderer: "svg" })
+{
+  const viz = await makeIsotype({
+    inputData: filteredData,
+    spacing: -50,
+    height: 210,
+    size: 8,
+    divisor: 0.5,
+    unit: "t CO₂",
+    colorRange: colors_new,
+  })
+    .config(config)
+    .render({ renderer: "svg" });
+
+  return html`<div style="display: flex; justify-content: center; background-color: #f5f5f5; padding: 15px;">
+    ${viz}
+  </div>`;
+}
+```
+
+```{ojs}
+//| echo: false
+width >= 860 ?
+  html`<div style="display: flex; justify-content: center; align-items: center; gap: 30px; font-family: Jost; font-size: 15px; padding-top: 20px; padding-bottom: 20px;">
+    <div style="display: flex; align-items: flex-end; gap: 4px;">
+      <svg width="32" height="64" viewBox="0 -24 24 48" style="vertical-align: middle; margin: 0;">
+        <path d="${path1}" fill="${colors_new[2]}" stroke="black" stroke-width="0.8" opacity="0.811"/>
+      </svg>
+      <svg width="32" height="64" viewBox="0 -24 24 48" style="vertical-align: middle; margin: 0;">
+        <path d="${path2}" fill="${colors_new[4]}" stroke="black" stroke-width="0.8" opacity="0.811"/>
+      </svg>
+      <svg width="32" height="64" viewBox="0 -24 24 48" style="vertical-align: middle; margin: 0;">
+        <path d="${path3}" fill="${colors_new[1]}" stroke="black" stroke-width="0.8" opacity="0.811"/>
+      </svg>
+      <svg width="32" height="64" viewBox="0 -24 24 48" style="vertical-align: middle; margin: 0;">
+        <path d="${path4}" fill="${colors_new[3]}" stroke="black" stroke-width="0.8" opacity="0.811"/>
+      </svg>
+      <svg width="32" height="64" viewBox="0 -24 24 48" style="vertical-align: middle; margin: 0;">
+        <path d="${path5}" fill="${colors_new[0]}" stroke="black" stroke-width="0.8" opacity="0.811"/>
+      </svg>
+      <svg width="32" height="64" viewBox="0 0 24 48" style="vertical-align: middle; margin: 0;">
+        <path d="${path7}" fill="#474A51" stroke="black" stroke-width="0.8" opacity="0.811"/>
+      </svg>
+      <span style="font-weight: 400;">≈ 0,5 t CO₂ pro Jahr</span>
+    </div>
+    <div style="display: flex; align-items: flex-end; gap: 0px;">
+      <svg width="32" height="64" viewBox="0 -24 24 48" style="vertical-align: middle; margin: 0;">
+        <path d="${path1_half}" fill="${colors_new[2]}" stroke="black" stroke-width="0.8" opacity="0.811"/>
+      </svg>
+      <svg width="32" height="64" viewBox="0 -24 24 48" style="vertical-align: middle; margin: 0;">
+        <path d="${path2_half}" fill="${colors_new[4]}" stroke="black" stroke-width="0.8" opacity="0.811"/>
+      </svg>
+      <svg width="32" height="64" viewBox="0 -24 24 48" style="vertical-align: middle; margin: 0;">
+        <path d="${path3_half}" fill="${colors_new[1]}" stroke="black" stroke-width="0.8" opacity="0.811"/>
+      </svg>
+      <svg width="32" height="64" viewBox="0 -24 24 48" style="vertical-align: middle; margin: 0;">
+        <path d="${path4_half}" fill="${colors_new[3]}" stroke="black" stroke-width="0.8" opacity="0.811"/>
+      </svg>
+      <svg width="32" height="64" viewBox="0 -24 24 48" style="vertical-align: middle; margin: 0;">
+        <path d="${path5_half}" fill="${colors_new[0]}" stroke="black" stroke-width="0.8" opacity="0.811"/>
+      </svg>
+      <svg width="32" height="64" viewBox="0 0 24 48" style="vertical-align: middle; margin: 0;">
+        <path d="${path7_half}" fill="#474A51" stroke="black" stroke-width="0.8" opacity="0.811"/>
+      </svg>
+      <span style="font-weight: 400;">≈ 0,25 t CO₂ pro Jahr</span>
+    </div>
+  </div>`
+  :
+  htl.html`<div></div>`
 ```
 
 ```{ojs}
@@ -120,23 +179,31 @@ filteredEmissionen = data
 
 ```{ojs}
 //| echo: false
-width >= 860 ? 
-  makeIsotype({
-    inputData: filteredEmissionen,
-    shapeDomain: ["Emissionen Gesamt"],
-    shapeRange: [path7],
-    shapeRangeHalf: [path7_half],
-    colorRange: ["#474A51"],
-    height: 30,
-    size: 8,
-    unit: "t CO₂",
-    divisor: 2,
-    showHeader: false
-  })
-    .config(config)
-    .render({ renderer: "svg" })
-  :
-  htl.html`<div></div>`
+{
+  if (width >= 860) {
+    const viz = await makeChimneytype({
+      inputData: filteredEmissionen,
+      shapeDomain: ["Emissionen Gesamt"],
+      shapeRange: [path7],
+      shapeRangeHalf: [path7_half],
+      colorRange: ["#474A51"],
+      height: 140,
+      size: 8,
+      unit: "t CO₂",
+      divisor: 0.5,
+      showHeader: false,
+      iconsPerRow: 10
+    })
+      .config(config)
+      .render({ renderer: "svg" });
+
+    return html`<div style="display: flex; justify-content: center; background-color: #f5f5f5; padding: 15px;">
+      ${viz}
+    </div>`;
+  } else {
+    return htl.html`<div></div>`;
+  }
+}
 ``` 
 
 
@@ -201,98 +268,16 @@ html`<svg width="0" height="0" style="position: absolute;">
 
 ```{ojs}
 //| echo: false
-vl.layer(
-  vl.markPoint({
-    shape: path_neurath,
-    size: 0.08,
-    stroke: "black",
-    strokeWidth: 0.8,
-    filled: true
-  })
-  .data(decileData)
-  .encode(
-    vl.x()
-      .fieldQ("position")
-      .scale({ domain: width >= 860 ? [-0.8, 16] : [-0, 10] })
-      .axis(null),
-    vl.opacity()
-      .fieldN("isHighlighted")
-      .scale({ domain: [false, true], range: [0.33, 1] })
-      .legend(null),
-    vl.fill()
-      .fieldN("isHighlighted")
-      .scale({ domain: [false, true], range: ["url(#hatch_left)", "url(#hatch_right)"] })
-      .legend(null)
-  ),
-  vl.markText({
-    dy: 86,
-    dx: 14,
-    align: "center",
-    anchor: "middle",
-    baseline: "top",
-    fontSize: 15,
-  })
-  .data(labelData)
-  .encode(
-    vl.x()
-      .fieldQ("position")
-      .axis(null),
-    vl.text()
-      .fieldN("label"),
-    vl.opacity()
-      .fieldN("isHighlighted")
-      .scale({ domain: [false, true], range: [0.33, 1] })
-      .legend(null)
-  ),
-  vl.markText({
-    dx: -12,
-    dy: 132,
-    align: "right",
-    baseline: "top",
-    fontSize: 15,
-    fontStyle: "italic"
-  })
-  .data([{ x: 9 }])
-  .encode(
-    vl.x()
-      .fieldQ("x")
-      .axis(null),
-    vl.text()
-      .value("Höheres Einkommen ⟶")
-  ),
-  ...(width >= 860 ? [
-    vl.markPoint({
-      size: 0.04,
-      stroke: "#333333",
-      strokeWidth: 1,
-      filled: false
-    })
-    .data(labelData)
-    .encode(
-      vl.x()
-        .fieldQ("xArrow")
-        .axis(null),
-      vl.y()
-        .fieldQ("yArrow")
-        .axis(null),
-      vl.shape()
-        .fieldN("arrow")
-        .scale({ domain: ["leftHigh", "left", "leftMedium", "right"], range: [arrowLeftHigh, arrowLeft, arrowLeftMedium, arrowRight] })
-        .legend(null),
-      vl.size()
-        .fieldN("isHighlighted")
-        .scale({ domain: [false, true], range: [0, 0.04] })
-        .legend(null),
-      vl.opacity()
-        .fieldN("isHighlighted")
-        .scale({ domain: [false, true], range: [0.33, 1] })
-        .legend(null)
-    )
-  ] : [])
-)
-.width(width >= 860 ? 700 : (width - 24))
-.height(40)
-.config(config)
+makeDeciletype({
+  decileData: decileData,
+  labelData: labelData,
+  arrowLeftHigh: arrowLeftHigh,
+  arrowLeft: arrowLeft,
+  arrowLeftMedium: arrowLeftMedium,
+  arrowRight: arrowRight,
+  vizWidth: 500,
+  vizHeight: 30
+})
 .render({ renderer: "svg" })
 ```
 

@@ -1,17 +1,18 @@
 
 ```{ojs}
-makeIsotype = function({
+makeChimneytype = function({
   inputData,
-  shapeDomain = ["Lebensmittel", "Wohnen", "Energie", "Mobilität", "Güter", "Dienstleistungen"],
-  shapeRange = [path1, path2, path3, path4, path5, path6],
-  shapeRangeHalf = [path1_half, path2_half, path3_half, path4_half, path5_half, path6_half],
-  colorRange = colors_burger,
+  shapeDomain = ["Emissionen Gesamt"],
+  shapeRange = [path7],
+  shapeRangeHalf = [path7_half],
+  colorRange = ["#474A51"],
   xDomain = [0, 12.5],
-  height = 250,
+  height = 60,
   size = 5,
   unit = "€",
   divisor = 1000,
-  showHeader = true
+  showHeader = false,
+  iconsPerRow = 10
 }) {
 
   return vl.layer(
@@ -28,6 +29,9 @@ makeIsotype = function({
       vl.y()
         .fieldN("name")
         .sort(shapeDomain)
+        .scale({
+          domain: shapeDomain,
+        })
         .axis({
           domain: false,
           ticks: false,
@@ -36,9 +40,12 @@ makeIsotype = function({
           minExtent: width >= 860 ? 128 : 16,
           labels: width >= 860,
           labelExpr: width >= 860 ? "split(datum.label, ' ')" : null,
+          grid: false,
         }),
+      vl.yOffset()
+        .fieldQ("rowOffset"),
       vl.x()
-        .fieldQ("positions")
+        .fieldQ("xPosition")
         .scale({
           domain: xDomain,
           nice: false,
@@ -68,7 +75,7 @@ makeIsotype = function({
     ),
     vl.markText({
       align: "right",
-      dy: 16,
+      dy: 36,
       dx: 100,
       fontSize: 14,
       clip: false
@@ -80,13 +87,11 @@ makeIsotype = function({
     .encode(
       vl.y()
         .fieldN("name")
-        .sort(shapeDomain)
-        .axis({
-          labels: width >= 860,
-          labelExpr: width >= 860 ? "split(datum.label, ' ')" : null,
-        }),
+        .sort(shapeDomain),
+      vl.yOffset()
+        .fieldQ("rowOffset"),
       vl.x()
-        .fieldQ("adjustedPositions"),
+        .fieldQ("xPosition"),
       vl.text()
         .fieldN("valueWithUnit"),
     )
@@ -100,7 +105,10 @@ makeIsotype = function({
     vl.flatten(["positions"]),
     vl.calculate(`datum.positions === datum.totalShapes - 1 && datum.decimal >= 0.25 && datum.decimal < 0.75 ? 1 : 0`).as("isHalfShape"),
     vl.calculate(`datum.isHalfShape === 1 ? datum.name + '_half' : datum.name`).as("shapeKey"),
-    vl.calculate(`datum.isHalfShape === 1 ? datum.positions - 0.5 : datum.positions`).as("adjustedPositions")
+    vl.calculate(`floor(datum.positions / ${iconsPerRow})`).as("row"),
+    vl.calculate(`datum.positions % ${iconsPerRow}`).as("xPosition"),
+    vl.calculate(`datum.isHalfShape === 1 ? datum.xPosition - 0.5 : datum.xPosition`).as("adjustedXPosition"),
+    vl.calculate(`datum.row * 20`).as("rowOffset")
   )
   .width(makeWidth(width))
   .height(height)
