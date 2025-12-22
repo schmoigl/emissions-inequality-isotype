@@ -17,35 +17,38 @@ execute:
 {{< include src/02_chimneytype.qmd >}}
 {{< include src/03_deciletype.qmd >}}
 
-
 ```{ojs}
 //| echo: false
 //| output: false
-data = FileAttachment("data/data.csv").csv({ typed: true })
+arrowRightBase = "M35 138C160.529 259.062 328.006 192.715 361 184.482 M343.69 257C355.23 209.711 361 185.319 361 183.823C361 181.579 327.488 165.87 312 142"
+arrowLeftBase = "M365 138C239.471 259.062 71.994 192.715 39 184.482 M56.31 257C44.77 209.711 39 185.319 39 183.823C39 181.579 72.512 165.87 88 142"
+
+arrowRight = rotatePath(arrowRightBase, 125)  // pointing up-right
+arrowLeftHigh = rotatePath(arrowLeftBase, -125)  // pointing up-left (symmetric to right)
+arrowLeft = rotatePath(arrowLeftBase, -125)  // pointing up-left (symmetric to right)
+arrowLeftMedium = rotatePath(arrowLeftBase, -125)  // pointing up-left (symmetric to right)
 ```
 
 ```{ojs}
 //| echo: false
 //| output: false
-filteredData = data
-  .filter(d => d.name != "Emissionen Gesamt")
-  .filter(d => d.Quantile === selectedQuantile || d.Quantile === "Reiche")
-
-colors_neurath = [
-  "#316c2f",
-  "#fdedcc",
-  "#FCB944",
-  "#0E747C",
-  "#de491d",
+baseData = [
+  { decile: 1, group: "Arme", position: 0, label: "Arme", arrow: "right", xArrow: -1, yArrow: -28 },
+  { decile: 2, group: "na", position: 1 },
+  { decile: 3, group: "Untere Mittelschicht", position: 2, label: ["Untere", "Mittelschicht"], arrow: "right", xArrow: 1, yArrow: -28 },
+  { decile: 4, group: "na", position: 3 },
+  { decile: 5, group: "Mittelschicht", position: 4, label: "Mittelschicht", arrow: "right", xArrow: 3, yArrow: -28 },
+  { decile: 6, group: "na", position: 5 },
+  { decile: 7, group: "Obere Mittelschicht", position: 6, label: ["Obere", "Mittelschicht"], arrow: "right", xArrow: 5, yArrow: -28 },
+  { decile: 8, group: "Andere", position: 7 },
+  { decile: 9, group: "Andere", position: 8 },
+  { decile: 10, group: "Reiche", position: 9, label: "Reiche", arrow: "leftHigh", xArrow: 9.7, yArrow: -28 }
 ]
 
-colors_new = [
-  "#198737",
-  "#F5EBDC",
-  "#FFAA00",
-  "#3E6F8E",
-  "#D62300",
-]
+addHighlight = d => ({ ...d, isHighlighted: d.group === selectedQuantile || d.group === "Reiche" })
+
+labelData = baseData.filter(d => d.label).map(addHighlight)
+decileData = baseData.map(addHighlight)
 ```
 
 ```{ojs}
@@ -71,10 +74,20 @@ makeDeciletype({
   arrowLeft: arrowLeft,
   arrowLeftMedium: arrowLeftMedium,
   arrowRight: arrowRight,
-  vizWidth: 500,
+  vizWidth: 600,
   vizHeight: 30
 })
 .render({ renderer: "svg" })
+```
+
+```{ojs}
+//| echo: false
+//| output: false
+data = FileAttachment("data/data.csv").csv({ typed: true })
+
+filteredData = data
+  .filter(d => d.name != "Emissionen Gesamt")
+  .filter(d => d.Quantile === selectedQuantile || d.Quantile === "Reiche")
 ```
 
 ```{ojs}
@@ -149,31 +162,6 @@ width >= 860 ?
 ```{ojs}
 //| echo: false
 //| output: false
-decileData = {
-  const deciles = [
-    { decile: 1, group: "Arme", position: 0 },
-    { decile: 2, group: "na", position: 1 },
-    { decile: 3, group: "Untere Mittelschicht", position: 2 },
-    { decile: 4, group: "na", position: 3 },
-    { decile: 5, group: "Mittelschicht", position: 4 },
-    { decile: 6, group: "na", position: 5 },
-    { decile: 7, group: "Obere Mittelschicht", position: 6 },
-    { decile: 8, group: "Andere", position: 7 },
-    { decile: 9, group: "Andere", position: 8 },
-    { decile: 10, group: "Reiche", position: 9 }
-  ];
-
-  return deciles.map(d => ({
-    ...d,
-    isHighlighted: d.group === selectedQuantile || d.group === "Reiche"
-  }));
-}
-```
-
-
-```{ojs}
-//| echo: false
-//| output: false
 filteredEmissionen = data
   .filter(d => d.name == "Emissionen Gesamt")
   .filter(d => d.Quantile === selectedQuantile || d.Quantile === "Reiche")
@@ -235,51 +223,6 @@ viewof selectedQuantile = Inputs.select(
   ["Arme", "Untere Mittelschicht", "Mittelschicht", "Obere Mittelschicht"],
   { label: "Vergleich mit ", value: "Arme" }
 )
-```
-
-```{ojs}
-//| echo: false
-//| output: false
-// Function to rotate a point around center (200, 200)
-rotatePath = function(pathStr, angleDeg) {
-  const angle = angleDeg * Math.PI / 180;
-  const cos = Math.cos(angle);
-  const sin = Math.sin(angle);
-  const cx = 200, cy = 200;
-
-  return pathStr.replace(/([0-9.]+)\s+([0-9.]+)/g, (match, x, y) => {
-    const xNum = parseFloat(x);
-    const yNum = parseFloat(y);
-    const xNew = cos * (xNum - cx) - sin * (yNum - cy) + cx;
-    const yNew = sin * (xNum - cx) + cos * (yNum - cy) + cy;
-    return `${xNew.toFixed(3)} ${yNew.toFixed(3)}`;
-  });
-}
-
-// Base arrow paths - mirrored on x-axis (flipped vertically)
-arrowRightBase = "M35 138C160.529 259.062 328.006 192.715 361 184.482 M343.69 257C355.23 209.711 361 185.319 361 183.823C361 181.579 327.488 165.87 312 142"
-arrowLeftBase = "M365 138C239.471 259.062 71.994 192.715 39 184.482 M56.31 257C44.77 209.711 39 185.319 39 183.823C39 181.579 72.512 165.87 88 142"
-
-// Rotated versions - adjusted to point upward with consistent angles
-arrowRight = rotatePath(arrowRightBase, 125)  // pointing up-right
-arrowLeftHigh = rotatePath(arrowLeftBase, -125)  // pointing up-left (symmetric to right)
-arrowLeft = rotatePath(arrowLeftBase, -125)  // pointing up-left (symmetric to right)
-arrowLeftMedium = rotatePath(arrowLeftBase, -125)  // pointing up-left (symmetric to right)
-```
-
-```{ojs}
-//| echo: false
-//| output: false
-labelData = [
-  { position: 0, label: "Arme", group: "Arme", arrow: "right", xArrow: -1, yArrow: -28 },
-  { position: 2, label: ["Untere", "Mittelschicht"], group: "Untere Mittelschicht", arrow: "right", xArrow: 1, yArrow: -28  },
-  { position: 4, label: "Mittelschicht", group: "Mittelschicht", arrow: "right", xArrow: 3, yArrow: -28 },
-  { position: 6, label: ["Obere", "Mittelschicht"], group: "Obere Mittelschicht", arrow: "right", xArrow: 5, yArrow: -28 },
-  { position: 9, label: "Reiche", group: "Reiche", arrow: "leftHigh", xArrow: 9.7, yArrow: -28 }
-].map(d => ({
-  ...d,
-  isHighlighted: d.group === selectedQuantile || d.group === "Reiche"
-}))
 ```
 
 ### HINTERGRUND

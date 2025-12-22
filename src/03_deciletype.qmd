@@ -23,7 +23,7 @@ makeDeciletype = function({
     .encode(
       vl.x()
         .fieldQ("position")
-        .scale({ domain: width >= 860 ? [-1, 10] : [-0, 10] })
+        .scale({ domain: width >= 860 ? [-1.2, 10.7] : [-0, 10], nice: false })
         .axis(null),
       vl.opacity()
         .fieldN("isHighlighted")
