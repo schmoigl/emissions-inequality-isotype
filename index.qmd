@@ -1,5 +1,5 @@
 ---
-title: "DIE EMISSIONEN DER WENIGEN"
+title: "DIE EMISSIONEN DER WENIGEN <br> DIE LASTEN DER VIELEN"
 execute:
   eval: true
   echo: false
@@ -227,9 +227,7 @@ viewof selectedQuantile = Inputs.select(
 
 ### HINTERGRUND
 
-Wirksamer Klimaschutz muss soziale Gerechtigkeit mitdenken. Eine [**Studie**](https://doi.org/10.1111/jiec.70074){target="_blank"} zeigt: Die nach Pro-Kopf-Haushaltseinkommen **reichsten 10%** der Bevölkerung in Österreich verursachen pro Kopf **mehr als dreimal** so hohe CO₂-Emissionen wie die **ärmsten 10%**. Diese Ungleichheit ist besonders bei <span style="color: #3E6F8E;">**Mobilität**</span>, <span style="color: #D62300;">**Wohnen**</span> und <span style="color: #198737;">**Dienstleistungen**</span> ausgeprägt. Die Folgen des Klimawandels verursachen erhebliche gesellschaftliche Kosten durch extreme Wetterereignisse, verringerte Produktivität und gesundheitliche Beeinträchtigungen infolge höherer Temperaturen. 
-
-Diese Kosten werden von allen getragen, unabhängig davon, ob eine einzelne Person mehr oder weniger Emissionen verursacht. Treibhausgase wie Kohlendioxid sind ein zentraler Treiber des Klimawandels. Die sozialen Kosten, die durch eine zusätzliche Tonne Treibhausgasemissionen entstehen, lassen sich in Geldbeträgen ausdrücken: Nach aktuellen Schätzungen  verursacht jede Tonne Emissionen soziale Kosten von mindestens 120 US-Dollar. Umgerechnet auf den Konsum in den folgenden Kategorien verursachen demnach Reiche detulich mehr Kosten für die Gesellschaft als Arme.
+Wirksamer Klimaschutz muss soziale Gerechtigkeit mitdenken. Eine [**Studie**](https://doi.org/10.1111/jiec.70074){target="_blank"} zeigt: Die nach Pro-Kopf-Haushaltseinkommen **reichsten 10%** der Bevölkerung in Österreich verursachen pro Kopf **mehr als dreimal** so hohe CO₂-Emissionen wie die **ärmsten 10%**. Diese Ungleichheit ist besonders bei <span style="color: #3E6F8E;">**Mobilität**</span>, <span style="color: #D62300;">**Wohnen**</span> und <span style="color: #198737;">**Dienstleistungen**</span> ausgeprägt. Die Folgen des Klimawandels verursachen erhebliche gesellschaftliche Kosten durch extreme Wetterereignisse, verringerte Produktivität und gesundheitliche Beeinträchtigungen infolge höherer Temperaturen. Diese Kosten werden von allen getragen, unabhängig davon, ob eine einzelne Person mehr oder weniger Emissionen verursacht. Um die Auswirkungen zumindest zu begrenzen, dürfte eine Person nur etwa 1-2 Tonnen an CO₂-Äquivalenten pro Jahr emittieren. Ein Wert den alle Einkommensdezile in Österreich überschreiten — allen voran Personen mit höherem Einkommen.
 
 Die **Isotype-Methode** macht diese abstrakte Verteilungsfrage unmittelbar erfassbar: Jedes Symbol steht für eine konkrete Menge CO₂. Was **Marie Neurath** in den 1920er-Jahren für wirtschaftliche und soziale Zusammenhänge entwickelte, zeigt auf einen Blick, wie drastisch die Emissionen zwischen Arm und Reich auseinanderklaffen. Diese Visualisierung folgt damit dem Kern der **Wiener Methode der Bildstatistik**: komplexe Verteilungsfragen niederschwellig zugänglich zu machen und zur öffentlichen Diskussion beizutragen.
 
