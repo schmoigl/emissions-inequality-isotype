@@ -6,7 +6,7 @@ makeIsotype = function({
   shapeRange = [path1, path2, path3, path4, path5, path6],
   shapeRangeHalf = [path1_half, path2_half, path3_half, path4_half, path5_half, path6_half],
   colorRange = colors_burger,
-  xDomain = [0, 12.5],
+  xDomain = [0, 12],
   height = 250,
   size = 5,
   unit = "€",
@@ -68,7 +68,7 @@ makeIsotype = function({
     ),
     vl.markText({
       align: "right",
-      dy: 16,
+      dy: 18,
       dx: 96,
       fontSize: 14,
       clip: false
@@ -100,7 +100,7 @@ makeIsotype = function({
     vl.flatten(["positions"]),
     vl.calculate(`datum.positions === datum.totalShapes - 1 && datum.decimal >= 0.25 && datum.decimal < 0.75 ? 1 : 0`).as("isHalfShape"),
     vl.calculate(`datum.isHalfShape === 1 ? datum.name + '_half' : datum.name`).as("shapeKey"),
-    vl.calculate(`datum.isHalfShape === 1 ? datum.positions - 0.5 : datum.positions`).as("adjustedPositions")
+    vl.calculate(`datum.isHalfShape === 1 ? datum.positions - 0.3 : datum.positions`).as("adjustedPositions")
   )
   .width(makeWidth(width))
   .height(height)
