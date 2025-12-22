@@ -69,7 +69,7 @@ makeIsotype = function({
     vl.markText({
       align: "right",
       dy: 16,
-      dx: 100,
+      dx: 96,
       fontSize: 14,
       clip: false
     })
