@@ -19,7 +19,7 @@ makeChimneytype = function({
     // Background text for right panel (Reiche)
     // vl.markText({
     //   align: "center",
-    //   dy: 28,
+    //   dy: 32,
     //   dx: 16,
     //   fontSize: 14,
     //   color: "#979797",
@@ -121,10 +121,11 @@ makeChimneytype = function({
     ),
     vl.markText({
       align: "center",
-      dy: 28,
+      dy: 44,
       dx: 16,
       fontSize: 14,
-      clip: false
+      clip: false,
+      color: "gray",
     })
     .transform(
       vl.filter(`datum.positions === 0 && datum.Quantile !== "Reiche"`)
@@ -151,7 +152,7 @@ makeChimneytype = function({
     vl.calculate(`floor(datum.positions / ${iconsPerRow})`).as("row"),
     vl.calculate(`datum.positions % ${iconsPerRow}`).as("xPosition"),
     vl.calculate(`datum.isHalfShape === 1 ? datum.xPosition - 0.5 : datum.xPosition`).as("adjustedXPosition"),
-    vl.calculate(`datum.row * 78`).as("rowOffset"),
+    vl.calculate(`datum.row * 70`).as("rowOffset"),
     vl.calculate(`datum.positions < 2 ? 'light' : 'dark'`).as("colorCategory")
   )
   .width(makeWidth(width))
