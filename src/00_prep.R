@@ -45,6 +45,6 @@ data_agg <- data |>
 
 add_row(data, data_agg) |>
 mutate(
-  value = round(value, 1),
+  value = round(10 * value, 0) * 100,
   ) |>
   write_csv("data/data.csv")
