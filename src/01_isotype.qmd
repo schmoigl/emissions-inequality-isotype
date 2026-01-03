@@ -66,30 +66,30 @@ makeIsotype = function({
         })
         .legend(false)
     ),
-    vl.markText({
-      align: "right",
-      dy: 18,
-      dx: 96,
-      fontSize: 14,
-      clip: false
-    })
-    .transform(
-      vl.filter(`datum.positions === datum.totalShapes - 1`),
-      vl.calculate(`format(datum.value, ',.1f') + ' ${unit}'`).as("valueWithUnit")
-    )
-    .encode(
-      vl.y()
-        .fieldN("name")
-        .sort(shapeDomain)
-        .axis({
-          labels: width >= 860,
-          labelExpr: width >= 860 ? "split(datum.label, ' ')" : null,
-        }),
-      vl.x()
-        .fieldQ("adjustedPositions"),
-      vl.text()
-        .fieldN("valueWithUnit"),
-    )
+    // vl.markText({
+    //   align: "right",
+    //   dy: 18,
+    //   dx: 96,
+    //   fontSize: 14,
+    //   clip: false
+    // })
+    // .transform(
+    //   vl.filter(`datum.positions === datum.totalShapes - 1`),
+    //   vl.calculate(`format(datum.value, ',.1f') + ' ${unit}'`).as("valueWithUnit")
+    // )
+    // .encode(
+    //   vl.y()
+    //     .fieldN("name")
+    //     .sort(shapeDomain)
+    //     .axis({
+    //       labels: width >= 860,
+    //       labelExpr: width >= 860 ? "split(datum.label, ' ')" : null,
+    //     }),
+    //   vl.x()
+    //     .fieldQ("adjustedPositions"),
+    //   vl.text()
+    //     .fieldN("valueWithUnit"),
+    // )
   )
   .transform(
     vl.calculate(`datum.value / ${divisor}`).as("exactValue"),

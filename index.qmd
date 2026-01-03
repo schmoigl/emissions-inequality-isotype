@@ -90,6 +90,29 @@ filteredData = data
   .filter(d => d.Quantile === selectedQuantile || d.Quantile === "Reiche")
 ```
 
+<div class = "grayContainer">
+
+```{ojs}
+//| echo: false
+width >= 860 ?
+  html`<div style="display: flex; justify-content: center; align-items: center; gap: 30px; font-family: Jost; font-size: 15px; padding-top: 16px; padding-bottom: 16px;">
+    <div style="display: flex; align-items: flex-end; gap: 4px;">
+      <svg width="34" height="34" viewBox="0 0 24 24" style="vertical-align: middle; margin: 0;">
+        <path d="${path2}" fill="${colors_new[4]}" stroke="black" stroke-width="0.649" opacity="0.811"/>
+      </svg>
+      <span style="font-weight: 400;">≈ 500 kg CO₂ pro Person und Jahr</span>
+    </div>
+    <div style="display: flex; align-items: flex-end; gap: 4px;">
+      <svg width="20" height="34" viewBox="0 0 16 24" style="vertical-align: middle; margin: 0;">
+        <path d="${path2_half}" fill="${colors_new[4]}" stroke="black" stroke-width="0.649" opacity="0.811"/>
+      </svg>
+      <span style="font-weight: 400;">≈ 250 kg CO₂ pro Person und Jahr</span>
+    </div>
+  </div>`
+  :
+  htl.html`<div></div>`
+```
+
 ```{ojs}
 //| echo: false
 {
@@ -98,7 +121,7 @@ filteredData = data
     spacing: -50,
     height: 200,
     size: 8,
-    divisor: 1,
+    divisor: 500,
     unit: "t CO₂",
     colorRange: colors_new,
     showHeader: width >= 860 ? false : true
@@ -106,7 +129,7 @@ filteredData = data
     .config(config)
     .render({ renderer: "svg" });
 
-  return html`<div style="display: flex; justify-content: center; background-color: #f5f5f5; padding: 10px;">
+  return html`<div style="display: flex; justify-content: center; background-color: "transparent"; padding: 10px;">
     ${viz}
   </div>`;
 }
@@ -167,6 +190,8 @@ filteredEmissionen = data
   .filter(d => d.Quantile === selectedQuantile || d.Quantile === "Reiche")
 ```
 
+---
+
 ```{ojs}
 //| echo: false
 {
@@ -180,14 +205,14 @@ filteredEmissionen = data
       height: 100,
       size: 8,
       unit: "t CO₂",
-      divisor: 1,
+      divisor: 500,
       showHeader: false,
       iconsPerRow: 10
     })
       .config(config)
       .render({ renderer: "svg" });
 
-    return html`<div style="display: flex; justify-content: center; background-color: #f5f5f5; padding: 10px;">
+    return html`<div style="display: flex; justify-content: center; background-color: "transparent"; padding: 10px;">
       ${viz}
     </div>`;
   } else {
@@ -196,40 +221,30 @@ filteredEmissionen = data
 }
 ```
 
-```{ojs}
-//| echo: false
-width >= 860 ?
-  html`<div style="display: flex; justify-content: center; align-items: center; gap: 30px; font-family: Jost; font-size: 15px; padding-top: 12px; padding-bottom: 16px;">
-    <div style="display: flex; align-items: flex-end; gap: 0px;">
-      <svg width="32" height="64" viewBox="0 0 24 48" style="vertical-align: middle; margin: 0;">
-        <path d="${path7}" fill="#474A51" stroke="black" stroke-width="0.8" opacity="0.811"/>
-      </svg>
-      <span style="font-weight: 400;">≈ 1 t CO₂ pro Person und Jahr</span>
-    </div>
-    <div style="display: flex; align-items: flex-end; gap: 0px;">
-      <svg width="32" height="64" viewBox="0 0 24 48" style="vertical-align: middle; margin: 0;">
-        <path d="${path7_half}" fill="#474A51" stroke="black" stroke-width="0.8" opacity="0.811"/>
-      </svg>
-      <span style="font-weight: 400;">≈ 0,5 t CO₂ pro Person und Jahr</span>
-    </div>
-  </div>`
-  :
-  htl.html`<div></div>`
-```
+</div>
 
+<div class="comparison-container">
+  <span class="comparison-left">Vergleich</span>
 ```{ojs}
 //| echo: false
 viewof selectedQuantile = Inputs.select(
   ["Arme", "Untere Mittelschicht", "Mittelschicht", "Obere Mittelschicht"],
-  { label: "Vergleich mit ", value: "Arme" }
+  { label: "Vergleich ", value: "Arme" }
 )
 ```
+<span class="comparison-right">mit Reiche</span>
+</div>
+
 
 ### HINTERGRUND
 
-Wirksamer Klimaschutz muss soziale Gerechtigkeit mitdenken. Eine [**Studie**](https://doi.org/10.1111/jiec.70074){target="_blank"} zeigt: Die nach Pro-Kopf-Haushaltseinkommen **reichsten 10%** der Bevölkerung in Österreich verursachen pro Kopf **mehr als dreimal** so hohe CO₂-Emissionen wie die **ärmsten 10%**. Diese Ungleichheit ist besonders bei <span style="color: #3E6F8E;">**Mobilität**</span>, <span style="color: #D62300;">**Wohnen**</span> und <span style="color: #198737;">**Dienstleistungen**</span> ausgeprägt. Die Folgen des Klimawandels verursachen erhebliche gesellschaftliche Kosten durch extreme Wetterereignisse, verringerte Produktivität und gesundheitliche Beeinträchtigungen infolge höherer Temperaturen. Diese Kosten werden von allen getragen, unabhängig davon, ob eine einzelne Person mehr oder weniger Emissionen verursacht. Um die Auswirkungen zumindest zu begrenzen, dürfte eine Person nur etwa 1-2 Tonnen an CO₂-Äquivalenten pro Jahr emittieren. Ein Wert den alle Einkommensdezile in Österreich überschreiten — allen voran Personen mit höherem Einkommen.
+Wirksamer Klimaschutz muss soziale Gerechtigkeit mitdenken. Neuen [**Daten**](https://doi.org/10.1111/jiec.70074){target="_blank"} zufolge verursachen die nach Pro-Kopf-Haushaltseinkommen **reichsten 10%** der Bevölkerung in Österreich pro Kopf **mehr als dreimal** so hohe CO₂-Emissionen wie die **ärmsten 10%**.[^1] Diese Ungleichheit ist besonders bei [**Mobilität**]{style="color: #3E6F8E;"}, [**Wohnen**]{style="color: #D62300;"} und [**Dienstleistungen**]{style="color: #198737;"} ausgeprägt. Diese Emissionen führen zu hohen gesellschaftlichen Kosten infolge steigender Temperaturen, etwa durch extreme Wetterereignisse, Produktivitätsverluste und zusätzlichen gesundheitlichen Belastungen. Diese Kosten werden von allen getragen, unabhängig davon, ob eine einzelne Person mehr oder weniger Emissionen verursacht. Um die Auswirkungen zumindest zu begrenzen, dürfte 2025 eine Person nur etwa 3 Tonnen an CO₂-Äquivalenten emittieren[^2]. Ein Wert den alle Einkommensdezile in Österreich überschreiten — allen voran Personen mit höherem Einkommen.
 
-Die **Isotype-Methode** macht diese abstrakte Verteilungsfrage unmittelbar erfassbar: Jedes Symbol steht für eine konkrete Menge CO₂. Was **Marie Neurath** in den 1920er-Jahren für wirtschaftliche und soziale Zusammenhänge entwickelte, zeigt auf einen Blick, wie drastisch die Emissionen zwischen Arm und Reich auseinanderklaffen. Diese Visualisierung folgt damit dem Kern der **Wiener Methode der Bildstatistik**: komplexe Verteilungsfragen niederschwellig zugänglich zu machen und zur öffentlichen Diskussion beizutragen.
+[^1]: Diese Schätzungen beziehen sich auf das Jahr 2020 und basieren auf einer Datenkombination aus multiregionalen Input-Output-Tabellen, Umfragedaten der österreichischen Konsumerhebung, und Daten aus der österreichische Luftschadstoff- und Treibhausgas-Inventur (THGI) (Dorninger et al. 2025). Die Daten inkludieren andere Treibhausgase und beziehen sich auf CO₂-Äquivalente. 
+
+[^2]: Schätzwert für 2025 berechnet anhand des österreichischen Anteils am global maximalen Emissionswert zur Erreichung des +1,5°C Ziels und einer konstanten prozentualen Abnahme der Emissionen ab 2022. Siehe: [Climate Change Center Austria (CCCA) 2022](https://ccca.ac.at/fileadmin/00_DokumenteHauptmenue/02_Klimawissen/Papiere/THG-Budget_Hintergrundpapier_CCCA.pdf){target="_blank"}: 1,5° C: Wieviel Treibhausgase dürfen wir noch emittieren? Hintergrundpapier zu globalen und nationalen Treibhausgasbudgets.
+
+Die **Wiener Methode der Bildstatistik** (Isotype) macht diese abstrakte Verteilungsfrage unmittelbar erfassbar: Jedes Symbol steht für eine konkrete Menge CO₂. Was **Marie** und **Otto Neurath** in den 1920er-Jahren für wirtschaftliche und soziale Zusammenhänge entwickelten, zeigt auf einen Blick, wie drastisch die Emissionen zwischen Arm und Reich auseinanderklaffen.
 
 ### AUTOREN
 

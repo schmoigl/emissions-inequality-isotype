@@ -96,39 +96,39 @@ makeChimneytype = function({
         })
         .legend(false)
     ),
-    vl.markText({
-      align: "right",
-      dy: 36,
-      dx: 100,
-      fontSize: 14,
-      clip: false
-    })
-    .transform(
-      vl.filter(`datum.positions === datum.totalShapes - 1`),
-      vl.calculate(`format(datum.value, ',.1f') + ' ${unit}'`).as("valueWithUnit")
-    )
-    .encode(
-      vl.y()
-        .fieldN("name")
-        .sort(shapeDomain),
-      vl.yOffset()
-        .fieldQ("rowOffset")
-        .scale({ domain: [0, 100], range: [0, 100] }),
-      vl.x()
-        .fieldQ("xPosition"),
-      vl.text()
-        .fieldN("valueWithUnit"),
-    ),
+    // vl.markText({
+    //   align: "right",
+    //   dy: 36,
+    //   dx: 100,
+    //   fontSize: 14,
+    //   clip: false
+    // })
+    // .transform(
+    //   vl.filter(`datum.positions === datum.totalShapes - 1`),
+    //   vl.calculate(`format(datum.value, ',.1f') + ' ${unit}'`).as("valueWithUnit")
+    // )
+    // .encode(
+    //   vl.y()
+    //     .fieldN("name")
+    //     .sort(shapeDomain),
+    //   vl.yOffset()
+    //     .fieldQ("rowOffset")
+    //     .scale({ domain: [0, 100], range: [0, 100] }),
+    //   vl.x()
+    //     .fieldQ("xPosition"),
+    //   vl.text()
+    //     .fieldN("valueWithUnit"),
+    // ),
     vl.markText({
       align: "center",
-      dy: 44,
-      dx: 16,
+      dy: 24,
+      dx: 80,
       fontSize: 14,
       clip: false,
       color: "gray",
     })
     .transform(
-      vl.filter(`datum.positions === 0 && datum.Quantile !== "Reiche"`)
+      vl.filter(`datum.positions === 0 && datum.Quantile == "Arme"`)
     )
     .encode(
       vl.y()
@@ -137,7 +137,7 @@ makeChimneytype = function({
       vl.x()
         .datum(0.5),
       vl.text()
-        .datum(["CO₂-Budget", "max. 2 t"])
+        .datum(["CO₂-Budget", "max. 3 t"])
     )
   )
   .transform(
@@ -152,8 +152,8 @@ makeChimneytype = function({
     vl.calculate(`floor(datum.positions / ${iconsPerRow})`).as("row"),
     vl.calculate(`datum.positions % ${iconsPerRow}`).as("xPosition"),
     vl.calculate(`datum.isHalfShape === 1 ? datum.xPosition - 0.5 : datum.xPosition`).as("adjustedXPosition"),
-    vl.calculate(`datum.row * 70`).as("rowOffset"),
-    vl.calculate(`datum.positions < 2 ? 'light' : 'dark'`).as("colorCategory")
+    vl.calculate(`datum.row * 40`).as("rowOffset"),
+    vl.calculate(`datum.positions < 6 ? 'light' : 'dark'`).as("colorCategory")
   )
   .width(makeWidth(width))
   .height(height)
