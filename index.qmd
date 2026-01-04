@@ -97,13 +97,13 @@ filteredData = data
 width >= 860 ?
   html`<div style="display: flex; justify-content: center; align-items: center; gap: 30px; font-family: Jost; font-size: 15px; padding-top: 16px; padding-bottom: 16px;">
     <div style="display: flex; align-items: flex-end; gap: 4px;">
-      <svg width="34" height="34" viewBox="0 0 24 24" style="vertical-align: middle; margin: 0;">
+      <svg width="34" height="34" viewBox="0 0 24 21" style="vertical-align: middle; margin: 0;">
         <path d="${path2}" fill="${colors_new[4]}" stroke="black" stroke-width="0.649" opacity="0.811"/>
       </svg>
       <span style="font-weight: 400;">≈ 500 kg CO₂ pro Person und Jahr</span>
     </div>
     <div style="display: flex; align-items: flex-end; gap: 4px;">
-      <svg width="20" height="34" viewBox="0 0 16 24" style="vertical-align: middle; margin: 0;">
+      <svg width="20" height="34" viewBox="0 0 16 20" style="vertical-align: middle; margin: 0;">
         <path d="${path2_half}" fill="${colors_new[4]}" stroke="black" stroke-width="0.649" opacity="0.811"/>
       </svg>
       <span style="font-weight: 400;">≈ 250 kg CO₂ pro Person und Jahr</span>
@@ -195,29 +195,25 @@ filteredEmissionen = data
 ```{ojs}
 //| echo: false
 {
-  if (width >= 860) {
-    const viz = await makeChimneytype({
-      inputData: filteredEmissionen,
-      shapeDomain: ["Emissionen Gesamt"],
-      shapeRange: [path7],
-      shapeRangeHalf: [path7_half],
-      colorRange: ["#474A51"],
-      height: 100,
-      size: 8,
-      unit: "t CO₂",
-      divisor: 500,
-      showHeader: false,
-      iconsPerRow: 10
-    })
-      .config(config)
-      .render({ renderer: "svg" });
+  const viz = await makeChimneytype({
+    inputData: filteredEmissionen,
+    shapeDomain: ["Emissionen Gesamt"],
+    shapeRange: [path7],
+    shapeRangeHalf: [path7_half],
+    colorRange: ["#474A51"],
+    height: 100,
+    size: 8,
+    unit: "t CO₂",
+    divisor: 500,
+    showHeader: width >= 860 ? false : true,
+    iconsPerRow: 10
+  })
+    .config(config)
+    .render({ renderer: "svg" });
 
-    return html`<div style="display: flex; justify-content: center; background-color: "transparent"; padding: 10px;">
-      ${viz}
-    </div>`;
-  } else {
-    return htl.html`<div></div>`;
-  }
+  return html`<div style="display: flex; justify-content: center; background-color: "transparent"; padding: 10px;">
+    ${viz}
+  </div>`;
 }
 ```
 

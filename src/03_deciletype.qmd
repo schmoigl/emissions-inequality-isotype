@@ -35,7 +35,7 @@ makeDeciletype = function({
         .legend(null)
     ),
     vl.markText({
-      dy: 86,
+      dy: 76,
       dx: 14,
       align: "center",
       anchor: "middle",
