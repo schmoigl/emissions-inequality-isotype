@@ -244,7 +244,7 @@ Die **Wiener Methode der Bildstatistik** (Isotype) macht diese abstrakte Verteil
 
 ### AUTOREN
 
-[**Fabian Kalleitner**](https://www.ls4.soziologie.uni-muenchen.de/personen/wissenschaftlich_mitarbeiter/fabian_kalleitner/index.html){target="_blank"} — [**Lukas Schmoigl**](https://www.wifo.ac.at/person/lukas-schmoigl/){target="_blank"}
+[**Lukas Schmoigl**](https://www.wifo.ac.at/person/lukas-schmoigl/){target="_blank"} — [**Fabian Kalleitner**](https://www.ls4.soziologie.uni-muenchen.de/personen/wissenschaftlich_mitarbeiter/fabian_kalleitner/index.html){target="_blank"}
 
 ### DATEN
 
