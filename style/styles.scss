@@ -18,7 +18,7 @@ body {
 
 /* Headlines */
 h1, h2, h3, h4, h5, h6 {
-    font-family: "Lexend", sans-serif;
+    font-family: "Jost", sans-serif;
     text-align: center;
 }
 
@@ -31,9 +31,14 @@ h1.title, h3 {
     opacity: 1;
 }
 
+p.subtitle {
+    margin-top: .25em;
+    margin-bottom: .25em;
+}
+
 /* Author block */
 .quarto-title-meta {
-    font-family: "Lexend", sans-serif;
+    font-family: "Jost", sans-serif;
 }
 
 .quarto-title-meta-heading {
@@ -57,7 +62,7 @@ hr {
 }
 
 form {
-    margin-top: 24px;
+    // margin-top: 24px;
     margin-left: auto;
     margin-right: auto;
     display: flex;
@@ -77,7 +82,8 @@ form {
     align-items: baseline;
     justify-content: center;
     gap: 8px;
-    margin-top: 12px;
+    margin-top: 0px;
+    margin-bottom: 26px;
 
     .comparison-left,
     .comparison-right {

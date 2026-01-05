@@ -12,7 +12,7 @@ config = ({
   padding: {
     top: width >= 860 ? 0 : 20,
     right: 0,
-    bottom: 0,
+    bottom: 22,
     left: 0,
     },
   title: {
