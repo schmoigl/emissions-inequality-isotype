@@ -1,5 +1,6 @@
 ---
-title: "DIE EMISSIONEN DER WENIGEN <br> DIE LASTEN DER VIELEN"
+title: "CO₂-FUSSABDRUCK ÖSTERREICHISCHER HAUSHALTE"
+subtitle: "DIE EMISSIONEN DER WENIGEN — DIE LASTEN DER VIELEN"
 execute:
   eval: true
   echo: false
@@ -65,7 +66,7 @@ html`<svg width="0" height="0" style="position: absolute;">
 </svg>`
 ```
 
-```{ojs}
+```{ojs .decileContainer}
 //| echo: false
 makeDeciletype({
   decileData: decileData,
@@ -75,7 +76,7 @@ makeDeciletype({
   arrowLeftMedium: arrowLeftMedium,
   arrowRight: arrowRight,
   vizWidth: 600,
-  vizHeight: 30
+  vizHeight: 10
 })
 .render({ renderer: "svg" })
 ```
@@ -95,7 +96,7 @@ filteredData = data
 ```{ojs}
 //| echo: false
 width >= 860 ?
-  html`<div style="display: flex; justify-content: center; align-items: center; gap: 30px; font-family: Jost; font-size: 15px; padding-top: 16px; padding-bottom: 16px;">
+  html`<div style="display: flex; justify-content: center; align-items: center; gap: 30px; font-family: Jost; font-size: 15px; padding-top: 12px; padding-bottom: 0px;">
     <div style="display: flex; align-items: flex-end; gap: 4px;">
       <svg width="34" height="34" viewBox="0 0 24 21" style="vertical-align: middle; margin: 0;">
         <path d="${path2}" fill="${colors_new[4]}" stroke="black" stroke-width="0.649" opacity="0.811"/>
@@ -110,7 +111,20 @@ width >= 860 ?
     </div>
   </div>`
   :
-  htl.html`<div></div>`
+  html`<div style="display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 8px; font-family: Jost; font-size: 15px; padding-top: 12px; padding-bottom: 0px;">
+    <div style="display: flex; align-items: flex-end; gap: 4px;">
+      <svg width="34" height="34" viewBox="0 0 24 21" style="vertical-align: middle; margin: 0;">
+        <path d="${path2}" fill="${colors_new[4]}" stroke="black" stroke-width="0.649" opacity="0.811"/>
+      </svg>
+      <span style="font-weight: 400;">≈ 500 kg CO₂ pro Person und Jahr</span>
+    </div>
+    <div style="display: flex; align-items: flex-end; gap: 4px;">
+      <svg width="20" height="34" viewBox="0 0 16 20" style="vertical-align: middle; margin: 0;">
+        <path d="${path2_half}" fill="${colors_new[4]}" stroke="black" stroke-width="0.649" opacity="0.811"/>
+      </svg>
+      <span style="font-weight: 400;">≈ 250 kg CO₂ pro Person und Jahr</span>
+    </div>
+  </div>`
 ```
 
 ```{ojs}
@@ -220,7 +234,7 @@ filteredEmissionen = data
 </div>
 
 <div class="comparison-container">
-  <span class="comparison-left">Vergleich</span>
+  <span class="comparison-left">Vergleich:</span>
 ```{ojs}
 //| echo: false
 viewof selectedQuantile = Inputs.select(
@@ -244,7 +258,7 @@ Die **Wiener Methode der Bildstatistik** (Isotype) macht diese abstrakte Verteil
 
 ### AUTOREN
 
-[**Lukas Schmoigl**](https://www.wifo.ac.at/person/lukas-schmoigl/){target="_blank"} — [**Fabian Kalleitner**](https://www.ls4.soziologie.uni-muenchen.de/personen/wissenschaftlich_mitarbeiter/fabian_kalleitner/index.html){target="_blank"}
+[**Fabian Kalleitner**](https://www.ls4.soziologie.uni-muenchen.de/personen/wissenschaftlich_mitarbeiter/fabian_kalleitner/index.html){target="_blank"} — [**Lukas Schmoigl**](https://www.wifo.ac.at/person/lukas-schmoigl/){target="_blank"}
 
 ### DATEN
 

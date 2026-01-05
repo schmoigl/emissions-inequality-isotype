@@ -103,7 +103,7 @@ makeDeciletype = function({
   )
   .width(width >= 860 ? vizWidth : (width - 24))
   .height(vizHeight)
-  .config(config);
+  .config({ ...config, padding: { bottom: 13 } });
 
 }
 ```
