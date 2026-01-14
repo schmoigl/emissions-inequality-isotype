@@ -14,7 +14,7 @@ website:
   navbar: false
 format:
   html:
-    theme: [cosmo, style/styles.scss]
+    theme: style/style.scss
     grid:
       # sidebar-width: 300px
       body-width: 900px
