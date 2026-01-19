@@ -1,21 +1,27 @@
 
 ```{ojs}
 makeIsotype = function({
-  inputData,
-  shapeDomain = ["Lebensmittel", "Wohnen", "Energie", "Mobilität", "Güter", "Dienstleistungen"],
-  shapeRange = [path1, path2, path3, path4, path5, path6],
-  shapeRangeHalf = [path1_half, path2_half, path3_half, path4_half, path5_half, path6_half],
-  colorRange = colors_burger,
-  xDomain = [-0.5, 12],
-  height = 250,
-  size = 5,
-  unit = "€",
-  divisor = 1000,
-  showHeader = true
+inputData,
+shapeDomain = ["Lebensmittel", "Wohnen", "Energie", "Mobilität", "Güter", "Dienstleistungen"],
+shapeRange = [path1, path2, path3, path4, path5, path6],
+shapeRangeHalf = [path1_half, path2_half, path3_half, path4_half, path5_half, path6_half],
+colorRange = colors_burger,
+quantileSort = ["Arme", "Untere Mittelschicht", "Mittelschicht", "Obere Mittelschicht", "Reiche"],
+quantileLabels = {}, 
+facetLabelExpr = null,
+categoryLabelExpr = null,
+xDomain = [-0.5, 12],
+height = 250,
+size = 5,
+unit = "€",
+divisor = 1000,
+showHeader = true
 }) {
 
+  const labelExprString = `datum.label === 'Arme' ? '${quantileLabels["Arme"] || "Arme"}' : datum.label === 'Untere Mittelschicht' ? '${quantileLabels["Untere Mittelschicht"] || "Untere Mittelschicht"}' : datum.label === 'Mittelschicht' ? '${quantileLabels["Mittelschicht"] || "Mittelschicht"}' : datum.label === 'Obere Mittelschicht' ? '${quantileLabels["Obere Mittelschicht"] || "Obere Mittelschicht"}' : datum.label === 'Reiche' ? '${quantileLabels["Reiche"] || "Reiche"}' : datum.label`;
+
+
   return vl.layer(
-    // Combined shapes layer with conditional shape selection
     vl.markPoint({
       size: size,
       stroke: "black",
@@ -35,7 +41,15 @@ makeIsotype = function({
           labelOffset: 18,
           minExtent: width >= 860 ? 128 : 16,
           labels: width >= 860,
-          labelExpr: width >= 860 ? "split(datum.label, ' ')" : null,
+          labelExpr: `
+            datum.label === 'Lebensmittel' ? '${t("food")}' :
+            datum.label === 'Wohnen' ? '${t("housing")}' :
+            datum.label === 'Energie' ? '${t("energy")}' :
+            datum.label === 'Mobilität' ? '${t("mobility")}' :
+            datum.label === 'Güter' ? '${t("goods")}' :
+            datum.label === 'Dienstleistungen' ? '${t("services")}' :
+            datum.label
+          `
         }),
       vl.x()
         .fieldQ("positions")
@@ -65,31 +79,7 @@ makeIsotype = function({
           range: shapeRange.concat(shapeRangeHalf)
         })
         .legend(false)
-    ),
-    // vl.markText({
-    //   align: "right",
-    //   dy: 18,
-    //   dx: 96,
-    //   fontSize: 14,
-    //   clip: false
-    // })
-    // .transform(
-    //   vl.filter(`datum.positions === datum.totalShapes - 1`),
-    //   vl.calculate(`format(datum.value, ',.1f') + ' ${unit}'`).as("valueWithUnit")
-    // )
-    // .encode(
-    //   vl.y()
-    //     .fieldN("name")
-    //     .sort(shapeDomain)
-    //     .axis({
-    //       labels: width >= 860,
-    //       labelExpr: width >= 860 ? "split(datum.label, ' ')" : null,
-    //     }),
-    //   vl.x()
-    //     .fieldQ("adjustedPositions"),
-    //   vl.text()
-    //     .fieldN("valueWithUnit"),
-    // )
+    )
   )
   .transform(
     vl.calculate(`datum.value / ${divisor}`).as("exactValue"),
@@ -105,38 +95,41 @@ makeIsotype = function({
   .width(makeWidth(width))
   .height(height)
   .facet(
-    width < 860 ? {
-      row: {
-        field: "Quantile",
-        type: "nominal",
-        title: null,
-        sort: ["Arme", "Untere Mittelschicht", "Mittelschicht", "Obere Mittelschicht", "Reiche"],
-        header: showHeader ? {
-          labelFontSize: 15,
-          labelOrient: "top",
-          labelPadding: -8,
-          labelAlign: "left",
-          labelAnchor: "start"
-        } : {
+    width < 860 ? { 
+      row: { 
+        field: "Quantile", 
+        type: "nominal", 
+        title: null, 
+        sort: quantileSort, 
+        header: showHeader ? { 
+          labelFontSize: 15, 
+          labelOrient: "top", 
+          labelPadding: -8, 
+          labelAlign: "left", 
+          labelAnchor: "start",
+          labelExpr: labelExprString  
+        } : { 
           labels: false
-        },
-      },
-    } : {
-      column: {
-        field: "Quantile",
-        type: "nominal",
-        title: null,
-        sort: ["Arme", "Untere Mittelschicht", "Mittelschicht", "Obere Mittelschicht", "Reiche"],
-        header: showHeader ? {
-          labelFontSize: 15,
-          labelOrient: "top",
-          labelPadding: -8,
-          labelAlign: "left",
-          labelAnchor: "start"
-        } : {
+        } 
+      } 
+    } 
+    : { 
+      column: { 
+        field: "Quantile", 
+        type: "nominal", 
+        title: null, 
+        sort: quantileSort,
+        header: showHeader ? { 
+          labelFontSize: 15, 
+          labelOrient: "top", 
+          labelPadding: -8, 
+          labelAlign: "left", 
+          labelAnchor: "start",
+          labelExpr: labelExprString  
+        } : { 
           labels: false
-        },
-      },
+        }, 
+      }, 
     }
   )
   .resolve({scale: {x: "shared"}})
