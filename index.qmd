@@ -1,5 +1,5 @@
 ---
-title: "DIE EMISSIONEN DER WENIGEN <br> DIE LASTEN DER VIELEN"
+title: ""
 execute:
   eval: true
   echo: false
@@ -19,6 +19,48 @@ execute:
 
 ```{ojs}
 //| echo: false
+viewof language = {
+  const div = html`
+  <div style="
+    position: fixed;
+    top: 16px;
+    right: 20px;
+    z-index: 1000;
+    font-family: Jost;
+  ">
+    <button
+      style="margin-right: 6px;">
+      DE
+    </button>
+    <button>
+      EN
+    </button>
+  </div>`;
+  
+  div.value = "de";
+  
+  const buttons = div.querySelectorAll('button');
+  buttons[0].onclick = () => {
+    div.value = "de";
+    div.dispatchEvent(new Event("input"));
+  };
+  buttons[1].onclick = () => {
+    div.value = "en";
+    div.dispatchEvent(new Event("input"));
+  };
+  
+  return div;
+}
+```
+
+
+```{ojs}
+//| echo: false
+html`<h1 class="page-title">${t("title")}</h1>`
+```
+
+```{ojs}
+//| echo: false
 //| output: false
 arrowRightBase = "M35 138C160.529 259.062 328.006 192.715 361 184.482 M343.69 257C355.23 209.711 361 185.319 361 183.823C361 181.579 327.488 165.87 312 142"
 arrowLeftBase = "M365 138C239.471 259.062 71.994 192.715 39 184.482 M56.31 257C44.77 209.711 39 185.319 39 183.823C39 181.579 72.512 165.87 88 142"
@@ -33,19 +75,19 @@ arrowLeftMedium = rotatePath(arrowLeftBase, -125)  // pointing up-left (symmetri
 //| echo: false
 //| output: false
 baseData = [
-  { decile: 1, group: "Arme", position: 0, label: "Arme", arrow: "right", xArrow: -1, yArrow: -28 },
+  { decile: 1, group: t("poor"), position: 0, label: t("poor"), arrow: "right", xArrow: -1, yArrow: -28 },
   { decile: 2, group: "na", position: 1 },
-  { decile: 3, group: "Untere Mittelschicht", position: 2, label: ["Untere", "Mittelschicht"], arrow: "right", xArrow: 1, yArrow: -28 },
+  { decile: 3, group: t("lower_middle_full"), position: 2, label: t("lower_middle"), arrow: "right", xArrow: 1, yArrow: -28 },
   { decile: 4, group: "na", position: 3 },
-  { decile: 5, group: "Mittelschicht", position: 4, label: "Mittelschicht", arrow: "right", xArrow: 3, yArrow: -28 },
+  { decile: 5, group: t("middle"), position: 4, label: t("middle"), arrow: "right", xArrow: 3, yArrow: -28 },
   { decile: 6, group: "na", position: 5 },
-  { decile: 7, group: "Obere Mittelschicht", position: 6, label: ["Obere", "Mittelschicht"], arrow: "right", xArrow: 5, yArrow: -28 },
+  { decile: 7, group: t("upper_middle_full"), position: 6, label: t("upper_middle"), arrow: "right", xArrow: 5, yArrow: -28 },
   { decile: 8, group: "Andere", position: 7 },
   { decile: 9, group: "Andere", position: 8 },
-  { decile: 10, group: "Reiche", position: 9, label: "Reiche", arrow: "leftHigh", xArrow: 9.7, yArrow: -28 }
+  { decile: 10, group: t("rich"), position: 9, label: t("rich"), arrow: "leftHigh", xArrow: 9.7, yArrow: -28 }
 ]
 
-addHighlight = d => ({ ...d, isHighlighted: d.group === selectedQuantile || d.group === "Reiche" })
+addHighlight = d => ({ ...d, isHighlighted: d.group === selectedQuantile.label || d.group === t("rich") })
 
 labelData = baseData.filter(d => d.label).map(addHighlight)
 decileData = baseData.map(addHighlight)
@@ -87,10 +129,18 @@ data = FileAttachment("data/data.csv").csv({ typed: true })
 
 filteredData = data
   .filter(d => d.name != "Emissionen Gesamt")
-  .filter(d => d.Quantile === selectedQuantile || d.Quantile === "Reiche")
+  .filter(d => d.Quantile === selectedQuantile.value || d.Quantile === "Reiche")
 ```
 
 <div class = "grayContainer">
+
+```{ojs}
+//| echo: false
+//| output: false
+shapeDomainTranslated = [t("food"), t("housing"), t("energy"), t("mobility"), t("goods"), t("services")]
+
+quantileSortTranslated = [t("poor"), t("lower_middle_full"), t("middle"), t("upper_middle_full"), t("rich")]
+```
 
 ```{ojs}
 //| echo: false
@@ -100,13 +150,13 @@ width >= 860 ?
       <svg width="34" height="34" viewBox="0 0 24 24" style="vertical-align: middle; margin: 0;">
         <path d="${path2}" fill="${colors_new[4]}" stroke="black" stroke-width="0.649" opacity="0.811"/>
       </svg>
-      <span style="font-weight: 400;">≈ 500 kg CO₂ pro Person und Jahr</span>
+      <span style="font-weight: 400;">${t("legend_500")}</span>
     </div>
     <div style="display: flex; align-items: flex-end; gap: 4px;">
       <svg width="20" height="34" viewBox="0 0 16 24" style="vertical-align: middle; margin: 0;">
         <path d="${path2_half}" fill="${colors_new[4]}" stroke="black" stroke-width="0.649" opacity="0.811"/>
       </svg>
-      <span style="font-weight: 400;">≈ 250 kg CO₂ pro Person und Jahr</span>
+      <span style="font-weight: 400;">${t("legend_250")}</span>
     </div>
   </div>`
   :
@@ -116,8 +166,19 @@ width >= 860 ?
 ```{ojs}
 //| echo: false
 {
+  language; 
   const viz = await makeIsotype({
     inputData: filteredData,
+    shapeDomain: ["Lebensmittel", "Wohnen", "Energie", "Mobilität", "Güter", "Dienstleistungen"],
+    quantileSort: ["Arme", "Untere Mittelschicht", "Mittelschicht", "Obere Mittelschicht", "Reiche"],
+    // Add these new parameters with current translations
+    quantileLabels: {
+      "Arme": t("poor"),
+      "Untere Mittelschicht": t("lower_middle_full"),
+      "Mittelschicht": t("middle"),
+      "Obere Mittelschicht": t("upper_middle_full"),
+      "Reiche": t("rich")
+    },
     spacing: -50,
     height: 200,
     size: 8,
@@ -129,65 +190,18 @@ width >= 860 ?
     .config(config)
     .render({ renderer: "svg" });
 
-  return html`<div style="display: flex; justify-content: center; background-color: "transparent"; padding: 10px;">
+  return html`<div style="display: flex; justify-content: center; background-color: transparent; padding: 10px;">
     ${viz}
   </div>`;
 }
 ```
-
-<!-- 
-```{ojs}
-//| echo: false
-width >= 860 ?
-  html`<div style="display: flex; justify-content: center; align-items: center; gap: 30px; font-family: Jost; font-size: 15px; padding-top: 20px; padding-bottom: 20px;">
-    <div style="display: flex; align-items: flex-end; gap: 4px;">
-      <svg width="34" height="34" viewBox="0 0 24 24" style="vertical-align: middle; margin: 0;">
-        <path d="${path1}" fill="${colors_new[2]}" stroke="black" stroke-width="0.649" opacity="0.811"/>
-      </svg>
-      <svg width="34" height="34" viewBox="0 0 24 24" style="vertical-align: middle; margin: 0;">
-        <path d="${path2}" fill="${colors_new[4]}" stroke="black" stroke-width="0.649" opacity="0.811"/>
-      </svg>
-      <svg width="34" height="34" viewBox="0 0 24 24" style="vertical-align: middle; margin: 0;">
-        <path d="${path4}" fill="${colors_new[3]}" stroke="black" stroke-width="0.649" opacity="0.811"/>
-      </svg>
-      <svg width="34" height="34" viewBox="0 0 24 24" style="vertical-align: middle; margin: 0;">
-        <path d="${path5}" fill="${colors_new[1]}" stroke="black" stroke-width="0.649" opacity="0.811"/>
-      </svg>
-      <svg width="32" height="32" viewBox="0 0 24 24" style="vertical-align: middle; margin: 0;">
-        <path d="${path6}" fill="${colors_new[0]}" stroke="black" stroke-width="0.722" opacity="0.811"/>
-      </svg>
-      <span style="font-weight: 400;">≈ 0,5 t CO₂ pro Jahr</span>
-    </div>
-    <div style="display: flex; align-items: flex-end; gap: 0px;">
-      <svg width="34" height="34" viewBox="0 0 24 24" style="vertical-align: middle; margin: 0;">
-        <path d="${path1_half}" fill="${colors_new[2]}" stroke="black" stroke-width="0.649" opacity="0.811"/>
-      </svg>
-      <svg width="34" height="34" viewBox="0 0 24 24" style="vertical-align: middle; margin: 0;">
-        <path d="${path2_half}" fill="${colors_new[4]}" stroke="black" stroke-width="0.649" opacity="0.811"/>
-      </svg>
-      <svg width="34" height="34" viewBox="0 0 24 24" style="vertical-align: middle; margin: 0;">
-        <path d="${path4_half}" fill="${colors_new[3]}" stroke="black" stroke-width="0.649" opacity="0.811"/>
-      </svg>
-      <svg width="34" height="34" viewBox="0 0 24 24" style="vertical-align: middle; margin: 0;">
-        <path d="${path5_half}" fill="${colors_new[1]}" stroke="black" stroke-width="0.649" opacity="0.811"/>
-      </svg>
-      <svg width="32" height="32" viewBox="0 0 24 24" style="vertical-align: middle; margin: 0;">
-        <path d="${path6_half}" fill="${colors_new[0]}" stroke="black" stroke-width="0.722" opacity="0.811"/>
-      </svg>
-      <span style="font-weight: 400;">≈ 0,25 t CO₂ pro Jahr</span>
-    </div>
-  </div>`
-  :
-  htl.html`<div></div>`
-```
- -->
 
 ```{ojs}
 //| echo: false
 //| output: false
 filteredEmissionen = data
   .filter(d => d.name == "Emissionen Gesamt")
-  .filter(d => d.Quantile === selectedQuantile || d.Quantile === "Reiche")
+  .filter(d => d.Quantile === selectedQuantile.value || d.Quantile === "Reiche")
 ```
 
 ---
@@ -195,61 +209,119 @@ filteredEmissionen = data
 ```{ojs}
 //| echo: false
 {
-  if (width >= 860) {
-    const viz = await makeChimneytype({
-      inputData: filteredEmissionen,
-      shapeDomain: ["Emissionen Gesamt"],
-      shapeRange: [path7],
-      shapeRangeHalf: [path7_half],
-      colorRange: ["#474A51"],
-      height: 100,
-      size: 8,
-      unit: "t CO₂",
-      divisor: 500,
-      showHeader: false,
-      iconsPerRow: 10
-    })
-      .config(config)
-      .render({ renderer: "svg" });
+  //if (width >= 860) {
+    language;
+  const viz = await makeChimneytype({
+    inputData: filteredEmissionen,
+    shapeDomain: ["Emissionen Gesamt"],
+    quantileSort: [
+      "Arme",
+      "Untere Mittelschicht",
+      "Mittelschicht",
+      "Obere Mittelschicht",
+      "Reiche"
+    ],
+    // Add these new parameters
+    quantileLabels: {
+      "Arme": t("poor"),
+      "Untere Mittelschicht": t("lower_middle_full"),
+      "Mittelschicht": t("middle"),
+      "Obere Mittelschicht": t("upper_middle_full"),
+      "Reiche": t("rich")
+    },
+    budgetText: [t("budget_text_line1"), t("budget_text_line2")],
+    shapeRange: [path7],
+    shapeRangeHalf: [path7_half],
+    colorRange: ["#474A51"],
+    height: 100,
+    size: 8,
+    unit: "t CO₂",
+    divisor: 500,
+    showHeader: width < 860,
+    iconsPerRow: 10
+  })
+    .config(config)
+    .render({ renderer: "svg" });
 
-    return html`<div style="display: flex; justify-content: center; background-color: "transparent"; padding: 10px;">
-      ${viz}
-    </div>`;
-  } else {
-    return htl.html`<div></div>`;
-  }
+  return html`<div style="display: flex; justify-content: center; background-color: transparent; padding: 10px;">
+  ${viz}
+  </div>`;
+  //} else {
+   // return htl.html`<div></div>`;
+ // }
 }
 ```
 
 </div>
-
 <div class="comparison-container">
-  <span class="comparison-left">Vergleich</span>
+  <span class="comparison-left">${t("compare_label")}</span>
+```{ojs}
+//| echo: false
+//| output: false
+quantileOptions = [
+  { value: "Arme", label: t("poor") },
+  { value: "Untere Mittelschicht", label: t("lower_middle_full") },
+  { value: "Mittelschicht", label: t("middle") },
+  { value: "Obere Mittelschicht", label: t("upper_middle_full") }
+]
+```
+
 ```{ojs}
 //| echo: false
 viewof selectedQuantile = Inputs.select(
-  ["Arme", "Untere Mittelschicht", "Mittelschicht", "Obere Mittelschicht"],
-  { label: "Vergleich ", value: "Arme" }
+  quantileOptions,
+  {
+    label: t("compare_label") + " ",
+    value: d => d.value,   // ← what gets returned
+    format: d => d.label   // ← what gets displayed
+  }
 )
 ```
-<span class="comparison-right">mit Reiche</span>
+<span class="comparison-right">${t("compare_with")}</span>
 </div>
 
+```{ojs}
 
-### HINTERGRUND
+//| echo: false
+html`${language === "de" ? html`
+<div>
+<h3>HINTERGRUND</h3>
+<p>Wirksamer Klimaschutz muss soziale Gerechtigkeit mitdenken. Neuen <a href="https://doi.org/10.1111/jiec.70074" target="_blank"><strong>Daten</strong></a> zufolge verursachen die nach Pro-Kopf-Haushaltseinkommen <strong>reichsten 10%</strong> der Bevölkerung in Österreich pro Kopf <strong>mehr als dreimal</strong> so hohe CO₂-Emissionen wie die <strong>ärmsten 10%</strong>.<sup>1</sup> Diese Ungleichheit ist besonders bei <strong style="color: #3E6F8E;">Mobilität</strong>, <strong style="color: #D62300;">Wohnen</strong> und <strong style="color: #198737;">Dienstleistungen</strong> ausgeprägt. Diese Emissionen führen zu hohen gesellschaftlichen Kosten infolge steigender Temperaturen, etwa durch extreme Wetterereignisse, Produktivitätsverluste und zusätzlichen gesundheitlichen Belastungen. Diese Kosten werden von allen getragen, unabhängig davon, ob eine einzelne Person mehr oder weniger Emissionen verursacht. Um die Auswirkungen zumindest zu begrenzen, dürfte 2025 eine Person nur etwa 3 Tonnen an CO₂-Äquivalenten emittieren<sup>2</sup>. Ein Wert den alle Einkommensdezile in Österreich überschreiten — allen voran Personen mit höherem Einkommen.</p>
 
-Wirksamer Klimaschutz muss soziale Gerechtigkeit mitdenken. Neuen [**Daten**](https://doi.org/10.1111/jiec.70074){target="_blank"} zufolge verursachen die nach Pro-Kopf-Haushaltseinkommen **reichsten 10%** der Bevölkerung in Österreich pro Kopf **mehr als dreimal** so hohe CO₂-Emissionen wie die **ärmsten 10%**.[^1] Diese Ungleichheit ist besonders bei [**Mobilität**]{style="color: #3E6F8E;"}, [**Wohnen**]{style="color: #D62300;"} und [**Dienstleistungen**]{style="color: #198737;"} ausgeprägt. Diese Emissionen führen zu hohen gesellschaftlichen Kosten infolge steigender Temperaturen, etwa durch extreme Wetterereignisse, Produktivitätsverluste und zusätzlichen gesundheitlichen Belastungen. Diese Kosten werden von allen getragen, unabhängig davon, ob eine einzelne Person mehr oder weniger Emissionen verursacht. Um die Auswirkungen zumindest zu begrenzen, dürfte 2025 eine Person nur etwa 3 Tonnen an CO₂-Äquivalenten emittieren[^2]. Ein Wert den alle Einkommensdezile in Österreich überschreiten — allen voran Personen mit höherem Einkommen.
+<p>Die <strong>Wiener Methode der Bildstatistik</strong> (Isotype) macht diese abstrakte Verteilungsfrage unmittelbar erfassbar: Jedes Symbol steht für eine konkrete Menge CO₂. Was <strong>Marie</strong> und <strong>Otto Neurath</strong> in den 1920er-Jahren für wirtschaftliche und soziale Zusammenhänge entwickelten, zeigt auf einen Blick, wie drastisch die Emissionen zwischen Arm und Reich auseinanderklaffen.</p>
 
-[^1]: Diese Schätzungen beziehen sich auf das Jahr 2020 und basieren auf einer Datenkombination aus multiregionalen Input-Output-Tabellen, Umfragedaten der österreichischen Konsumerhebung, und Daten aus der österreichische Luftschadstoff- und Treibhausgas-Inventur (THGI) (Dorninger et al. 2025). Die Daten inkludieren andere Treibhausgase und beziehen sich auf CO₂-Äquivalente. 
+<h3>AUTOREN</h3>
+<p><a href="https://www.ls4.soziologie.uni-muenchen.de/personen/wissenschaftlich_mitarbeiter/fabian_kalleitner/index.html" target="_blank"><strong>Fabian Kalleitner</strong></a> — <a href="https://www.wifo.ac.at/person/lukas-schmoigl/" target="_blank"><strong>Lukas Schmoigl</strong></a></p>
 
-[^2]: Schätzwert für 2025 berechnet anhand des österreichischen Anteils am global maximalen Emissionswert zur Erreichung des +1,5°C Ziels und einer konstanten prozentualen Abnahme der Emissionen ab 2022. Siehe: [Climate Change Center Austria (CCCA) 2022](https://ccca.ac.at/fileadmin/00_DokumenteHauptmenue/02_Klimawissen/Papiere/THG-Budget_Hintergrundpapier_CCCA.pdf){target="_blank"}: 1,5° C: Wieviel Treibhausgase dürfen wir noch emittieren? Hintergrundpapier zu globalen und nationalen Treibhausgasbudgets.
+<h3>DATEN</h3>
+<p>Dorninger, Christian, Simone Gingrich, Willi Haas, Alina Brad, Etienne Schneider, and Dominik Wiedenhofer. 2025. "Slow and Unequal Reduction in Austrian Household GHG Footprints Between 2000 and 2020." <em>Journal of Industrial Ecology</em> 29 (5): 1651–65. <a href="https://doi.org/10.1111/jiec.70074" target="_blank"><strong>Link</strong></a>.</p>
 
-Die **Wiener Methode der Bildstatistik** (Isotype) macht diese abstrakte Verteilungsfrage unmittelbar erfassbar: Jedes Symbol steht für eine konkrete Menge CO₂. Was **Marie** und **Otto Neurath** in den 1920er-Jahren für wirtschaftliche und soziale Zusammenhänge entwickelten, zeigt auf einen Blick, wie drastisch die Emissionen zwischen Arm und Reich auseinanderklaffen.
+<hr style="margin-top: 2em; margin-bottom: 1em; border: none; border-top: 1px solid #ddd;">
 
-### AUTOREN
+<p style="font-size: 0.8em;"><sup>1</sup> Diese Schätzungen beziehen sich auf das Jahr 2020 und basieren auf einer Datenkombination aus multiregionalen Input-Output-Tabellen, Umfragedaten der österreichischen Konsumerhebung, und Daten aus der österreichische Luftschadstoff- und Treibhausgas-Inventur (THGI) (Dorninger et al. 2025). Die Daten inkludieren andere Treibhausgase und beziehen sich auf CO₂-Äquivalente.</p>
 
-[**Fabian Kalleitner**](https://www.ls4.soziologie.uni-muenchen.de/personen/wissenschaftlich_mitarbeiter/fabian_kalleitner/index.html){target="_blank"} — [**Lukas Schmoigl**](https://www.wifo.ac.at/person/lukas-schmoigl/){target="_blank"}
+<p style="font-size: 0.8em;"><sup>2</sup> Schätzwert für 2025 berechnet anhand des österreichischen Anteils am global maximalen Emissionswert zur Erreichung des +1,5°C Ziels und einer konstanten prozentualen Abnahme der Emissionen ab 2022. Siehe: <a href="https://ccca.ac.at/fileadmin/00_DokumenteHauptmenue/02_Klimawissen/Papiere/THG-Budget_Hintergrundpapier_CCCA.pdf" target="_blank">Climate Change Center Austria (CCCA) 2022</a>: 1,5° C: Wieviel Treibhausgase dürfen wir noch emittieren? Hintergrundpapier zu globalen und nationalen Treibhausgasbudgets.</p>
 
-### DATEN
+</div>
+` : html`
+<div>
+<h3>BACKGROUND</h3>
+<p>Effective climate protection must consider social justice. According to new <a href="https://doi.org/10.1111/jiec.70074" target="_blank"><strong>data</strong></a>, the <strong>richest 10%</strong> of the population in Austria by per capita household income cause <strong>more than three times</strong> as much CO₂ emissions per capita as the <strong>poorest 10%</strong>.<sup>1</sup> This inequality is particularly pronounced in <strong style="color: #3E6F8E;">mobility</strong>, <strong style="color: #D62300;">housing</strong>, and <strong style="color: #198737;">services</strong>. These emissions lead to high societal costs due to rising temperatures, such as extreme weather events, productivity losses, and additional health burdens. These costs are borne by everyone, regardless of whether an individual emits more or fewer emissions. To at least limit the impacts, a person should emit only about 3 tons of CO₂ equivalents in 2025<sup>2</sup>. A value that all income deciles in Austria exceed — especially those with higher incomes.</p>
 
-Dorninger, Christian, Simone Gingrich, Willi Haas, Alina Brad, Etienne Schneider, and Dominik Wiedenhofer. 2025. "Slow and Unequal Reduction in Austrian Household GHG Footprints Between 2000 and 2020." *Journal of Industrial Ecology* 29 (5): 1651–65. [**Link**](https://doi.org/10.1111/jiec.70074){target="_blank"}.
+<p>The <strong>Vienna Method of Pictorial Statistics</strong> (Isotype) makes this abstract distribution question immediately comprehensible: Each symbol represents a concrete amount of CO₂. What <strong>Marie</strong> and <strong>Otto Neurath</strong> developed in the 1920s for economic and social relationships shows at a glance how drastically emissions diverge between rich and poor.</p>
+
+<h3>AUTHORS</h3>
+<p><a href="https://www.ls4.soziologie.uni-muenchen.de/personen/wissenschaftlich_mitarbeiter/fabian_kalleitner/index.html" target="_blank"><strong>Fabian Kalleitner</strong></a> — <a href="https://www.wifo.ac.at/person/lukas-schmoigl/" target="_blank"><strong>Lukas Schmoigl</strong></a></p>
+
+<h3>DATA</h3>
+<p>Dorninger, Christian, Simone Gingrich, Willi Haas, Alina Brad, Etienne Schneider, and Dominik Wiedenhofer. 2025. "Slow and Unequal Reduction in Austrian Household GHG Footprints Between 2000 and 2020." <em>Journal of Industrial Ecology</em> 29 (5): 1651–65. <a href="https://doi.org/10.1111/jiec.70074" target="_blank"><strong>Link</strong></a>.</p>
+
+<hr style="margin-top: 2em; margin-bottom: 1em; border: none; border-top: 1px solid #ddd;">
+
+<p style="font-size: 0.8em;"><sup>1</sup> These estimates refer to the year 2020 and are based on a data combination of multi-regional input-output tables, survey data from the Austrian household budget survey, and data from the Austrian air pollutant and greenhouse gas inventory (THGI) (Dorninger et al. 2025). The data includes other greenhouse gases and refers to CO₂ equivalents.</p>
+
+<p style="font-size: 0.8em;"><sup>2</sup> Estimate for 2025 calculated based on Austria's share of the global maximum emission value to achieve the +1.5°C target and a constant percentage decrease in emissions from 2022. See: <a href="https://ccca.ac.at/fileadmin/00_DokumenteHauptmenue/02_Klimawissen/Papiere/THG-Budget_Hintergrundpapier_CCCA.pdf" target="_blank">Climate Change Center Austria (CCCA) 2022</a>: 1,5° C: Wieviel Treibhausgase dürfen wir noch emittieren? Hintergrundpapier zu globalen und nationalen Treibhausgasbudgets.</p>
+</div>
+`}`
+```
+
