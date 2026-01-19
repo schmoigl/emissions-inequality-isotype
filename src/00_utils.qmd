@@ -20,8 +20,8 @@ makeWidth = function(inputWidth) {
 germanLocale = d3.formatLocale({
   decimal: ",",
   thousands: "",
-  grouping: [3], 
-  currency: ["€", " "],
+  grouping: [3],
+  currency: ["€", " "],
 })
 
 hexToRgb = function(hex) {
@@ -56,7 +56,7 @@ colors = [
   "#72bb6f",
   "#559bd5",
   "#f3d039",
-  "#c3423f", 
+  "#c3423f",
   "#12a7e7",
   "#96b428",
   "#559e8f",
@@ -65,15 +65,15 @@ colors = [
   "#2d5b5e",
 ]
 colors_diverging = [
-  "#2d76b3", 
-  "#559bd5", 
+  "#2d76b3",
+  "#559bd5",
   "#99c4e6",
-  "#bbd7ee", 
-  "#ddebf7", 
-  "#e3f1e2", 
-  "#c7e3c6", 
-  "#abd6a9", 
-  "#72bb6f", 
+  "#bbd7ee",
+  "#ddebf7",
+  "#e3f1e2",
+  "#c7e3c6",
+  "#abd6a9",
+  "#72bb6f",
   "#4b9847",
 ]
 colors_npr = [
@@ -170,4 +170,68 @@ path7_half = "M7 27ZM7 21a1.26.945 0 01-1-1v-1a1.26.945 0 011-1H14a1.25.9375 0 0
 
 // Person (Human figure - Neurath style)
 path_neurath = "M89 1.2l-12 6-4.8 6-3.6 12 1.2 18 4.8 30h-42l-6 4.8L23 85.2l-2.4 18v120L21.8 240 29 254.4l9.6 8.4 6 2.4L36.2 396 35 438l-9.6 1.2-4.8 7.2v4.8h6 54l1.2-1.2 3.6-43.2 8.4-96 2.4-9.6 2.4 9.6L101 336l7.2 75.6 2.4 38.4 1.2 1.2h58.8v-4.8l-6-6-8.4-1.2-1.2-36-4.8-106.8V267.6l4.8-2.4 7.2-6 6-10.8 3.6-13.2V88.8l-3.6-8.4-9.6-6-18-1.2H119l1.2-4.8L125 39.6l-1.2-19.2-2.4-6L114.2 6l-8.4-4.8L95 0Z"
+```
+
+```{ojs}
+//| echo: false
+//| warning: false
+//| output: false
+i18n = ({
+  de: {
+    title: "DIE EMISSIONEN DER WENIGEN <br> DIE LASTEN DER VIELEN",
+    poor: "Arme",
+    lower_middle: ["Untere", "Mittelschicht"],
+    middle: "Mittelschicht",
+    upper_middle: ["Obere", "Mittelschicht"],
+    rich: "Reiche",
+    legend_500: "≈ 500 kg CO₂ pro Person und Jahr",
+    legend_250: "≈ 250 kg CO₂ pro Person und Jahr",
+    unit_person_year: "pro Person und Jahr",
+    compare_label: "Vergleich",
+    compare_with: "mit Reiche",
+    lower_middle_full: "Untere Mittelschicht",
+    upper_middle_full: "Obere Mittelschicht",
+    background_title: "HINTERGRUND",
+    authors_title: "AUTOREN",
+    data_title: "DATEN",
+    food: "Lebensmittel",
+    housing: "Wohnen",
+    energy: "Energie",
+    mobility: "Mobilität",
+    goods: "Güter",
+    services: "Dienstleistungen",
+    total_emissions: "Emissionen Gesamt",
+    budget_text_line1: "CO₂-Budget",
+    budget_text_line2: "max. 3 t"
+  },
+  en: {
+    title: "EMISSIONS OF THE FEW <br> BURDENS OF THE MANY",
+    poor: "Poor",
+    lower_middle: ["Lower", "middle class"],
+    middle: "Middle class",
+    upper_middle: ["Upper", "middle class"],
+    rich: "Rich",
+    legend_500: "≈ 500 kg CO₂ per person per year",
+    legend_250: "≈ 250 kg CO₂ per person per year",
+    unit_person_year: "per person per year",
+    compare_label: "Compare",
+    compare_with: "with Rich",
+    lower_middle_full: "Lower middle class",
+    upper_middle_full: "Upper middle class",
+    background_title: "BACKGROUND",
+    authors_title: "AUTHORS",
+    data_title: "DATA",
+    food: "Food",
+    housing: "Housing",
+    energy: "Energy",
+    mobility: "Mobility",
+    goods: "Goods",
+    services: "Services",
+    total_emissions: "Total Emissions",
+    budget_text_line1: "CO₂ Budget",
+    budget_text_line2: "max. 3 t"
+  }
+})
+
+t = key => i18n[language][key]
 ```
