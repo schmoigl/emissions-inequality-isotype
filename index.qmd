@@ -1,6 +1,5 @@
 ---
-title: "CO₂-FUSSABDRUCK ÖSTERREICHISCHER HAUSHALTE"
-subtitle: "DIE EMISSIONEN DER WENIGEN — DIE LASTEN DER VIELEN"
+title: ""
 execute:
   eval: true
   echo: false
@@ -54,11 +53,19 @@ viewof language = {
 }
 ```
 
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
 
 ```{ojs}
 //| echo: false
-html`<h1 class="page-title">${t("title")}</h1>`
+html`<h1 class="title">${language === "de" ? "CO₂-FUSSABDRUCK ÖSTERREICHISCHER HAUSHALTE" : "CO₂ FOOTPRINT OF AUSTRIAN HOUSEHOLDS"}</h1>
+<p class="subtitle lead">${language === "de" ? "DIE EMISSIONEN DER WENIGEN — DIE LASTEN DER VIELEN" : "EMISSIONS OF THE FEW — BURDENS OF THE MANY"}</p>`
 ```
+
+</div>
+<div class="quarto-title-meta">
+</div>
+</header>
 
 ```{ojs}
 //| echo: false
@@ -204,7 +211,7 @@ width >= 860 ?
     .config(config)
     .render({ renderer: "svg" });
 
-  return html`<div style="display: flex; justify-content: center; background-color: transparent; padding: 10px;">
+  return html`<div style="display: flex; justify-content: center; background-color: transparent; padding: 0px;">
     ${viz}
   </div>`;
 }
@@ -255,7 +262,7 @@ filteredEmissionen = data
     .config(config)
     .render({ renderer: "svg" });
 
-  return html`<div style="display: flex; justify-content: center; background-color: transparent; padding: 10px;">
+  return html`<div style="display: flex; justify-content: center; background-color: transparent; padding: 0px;">
   ${viz}
   </div>`;
 }
@@ -264,6 +271,7 @@ filteredEmissionen = data
 </div>
 <div class="comparison-container">
   <span class="comparison-left">${t("compare_label")}</span>
+  
 ```{ojs}
 //| echo: false
 //| output: false
@@ -286,11 +294,11 @@ viewof selectedQuantile = Inputs.select(
   }
 )
 ```
+
 <span class="comparison-right">${t("compare_with")}</span>
 </div>
 
 ```{ojs}
-
 //| echo: false
 html`${language === "de" ? html`
 <div>
