@@ -329,6 +329,120 @@ pre, code, .callout, .sourceCode { // comment out until final deployment
 }
 
 // --- Spin Logo ---
+/* Language switch buttons */
+.lang-switch {
+    position: fixed;
+    top: 16px;
+    right: 20px;
+    z-index: 1000;
+    font-family: Jost;
+    display: flex;
+    gap: 8px;
+}
+
+.lang-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+
+    svg {
+        width: 28px;
+        height: auto;
+        fill: #d3d3d3;
+        stroke: black;
+        stroke-width: 5;
+        transition: fill 0.2s ease;
+    }
+
+    span {
+        font-size: 10px;
+        color: #666;
+        margin-top: 2px;
+        transition: color 0.2s ease;
+    }
+
+    &:hover {
+        svg {
+            fill: #333;
+        }
+        span {
+            color: #333;
+        }
+    }
+}
+
+/* Hidden SVG for pattern definitions */
+.svg-defs {
+    position: absolute;
+}
+
+/* Legend container */
+.legend-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    font-family: Jost;
+    font-size: 15px;
+    padding-top: 12px;
+    padding-bottom: 0;
+
+    &.legend-container--vertical {
+        flex-direction: column;
+        gap: 8px;
+    }
+}
+
+.legend-item {
+    display: flex;
+    align-items: flex-end;
+    gap: 4px;
+
+    svg {
+        vertical-align: middle;
+        margin: 0;
+    }
+
+    span {
+        font-weight: 400;
+    }
+}
+
+/* Viz wrapper */
+.viz-container {
+    display: flex;
+    justify-content: center;
+    background-color: transparent;
+    padding: 0;
+}
+
+/* Footnote separator */
+.footnote-separator {
+    margin-top: 2em;
+    margin-bottom: 1em;
+    border: none;
+    border-top: 1px solid #ddd;
+}
+
+/* Footnotes */
+.footnote {
+    font-size: 0.8em;
+}
+
+/* Category color highlights */
+.highlight-mobility {
+    color: #3E6F8E;
+}
+
+.highlight-housing {
+    color: #D62300;
+}
+
+.highlight-services {
+    color: #198737;
+}
+
 .navbar-brand {
     position: relative;
     display: inline-block;
