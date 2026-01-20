@@ -24,7 +24,7 @@ makeChimneytype = function({
   const upperMiddleLabel = quantileLabels["Obere Mittelschicht"] || "Obere Mittelschicht";
   const richLabel = quantileLabels["Reiche"] || "Reiche";
 
-  const labelExprString = `datum.label === 'Arme' ? '${poorLabel}' : datum.label === 'Untere Mittelschicht' ? '${lowerMiddleLabel}' : datum.label === 'Mittelschicht' ? '${middleLabel}' : datum.label === 'Obere Mittelschicht' ? '${upperMiddleLabel}' : datum.label === 'Reiche' ? '${richLabel}' : datum.label`;
+  const labelExprString = `datum.value === 'Arme' ? '${poorLabel}' : datum.value === 'Untere Mittelschicht' ? '${lowerMiddleLabel}' : datum.value === 'Mittelschicht' ? '${middleLabel}' : datum.value === 'Obere Mittelschicht' ? '${upperMiddleLabel}' : datum.value === 'Reiche' ? '${richLabel}' : datum.value`;
 
 
   return vl.layer(
