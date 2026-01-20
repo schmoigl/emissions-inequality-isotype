@@ -21,25 +21,24 @@ execute:
 //| echo: false
 viewof language = {
   const div = html`
-  <div style="
-    position: fixed;
-    top: 16px;
-    right: 20px;
-    z-index: 1000;
-    font-family: Jost;
-  ">
-    <button
-      style="margin-right: 6px;">
-      DE
-    </button>
-    <button>
-      EN
-    </button>
+  <div class="lang-switch">
+    <div class="lang-btn" data-lang="de">
+      <svg viewBox="-5 -5 180 460">
+        <path d="${path_neurath}"/>
+      </svg>
+      <span>DE</span>
+    </div>
+    <div class="lang-btn" data-lang="en">
+      <svg viewBox="-5 -5 180 460">
+        <path d="${path_neurath}"/>
+      </svg>
+      <span>EN</span>
+    </div>
   </div>`;
 
   div.value = "de";
 
-  const buttons = div.querySelectorAll('button');
+  const buttons = div.querySelectorAll('.lang-btn');
   buttons[0].onclick = () => {
     div.value = "de";
     div.dispatchEvent(new Event("input"));
@@ -102,7 +101,7 @@ decileData = baseData.map(addHighlight)
 
 ```{ojs}
 //| echo: false
-html`<svg width="0" height="0" style="position: absolute;">
+html`<svg width="0" height="0" class="svg-defs">
   <defs>
     <pattern id="hatch_right" patternUnits="userSpaceOnUse" width="3" height="3">
       <path d="M0,3 L3,0" stroke="#333333" stroke-width="0.6" fill="none" />
@@ -152,33 +151,33 @@ quantileSortTranslated = [t("poor"), t("lower_middle_full"), t("middle"), t("upp
 ```{ojs}
 //| echo: false
 width >= 860 ?
-  html`<div style="display: flex; justify-content: center; align-items: center; gap: 30px; font-family: Jost; font-size: 15px; padding-top: 12px; padding-bottom: 0px;">
-    <div style="display: flex; align-items: flex-end; gap: 4px;">
-      <svg width="34" height="34" viewBox="0 0 24 21" style="vertical-align: middle; margin: 0;">
+  html`<div class="legend-container">
+    <div class="legend-item">
+      <svg width="34" height="34" viewBox="0 0 24 21">
         <path d="${path2}" fill="${colors_new[4]}" stroke="black" stroke-width="0.649" opacity="0.811"/>
       </svg>
-      <span style="font-weight: 400;">${t("legend_500")}</span>
+      <span>${t("legend_500")}</span>
     </div>
-    <div style="display: flex; align-items: flex-end; gap: 4px;">
-      <svg width="20" height="34" viewBox="0 0 16 20" style="vertical-align: middle; margin: 0;">
+    <div class="legend-item">
+      <svg width="20" height="34" viewBox="0 0 16 20">
         <path d="${path2_half}" fill="${colors_new[4]}" stroke="black" stroke-width="0.649" opacity="0.811"/>
       </svg>
-      <span style="font-weight: 400;">${t("legend_250")}</span>
+      <span>${t("legend_250")}</span>
     </div>
   </div>`
   :
-  html`<div style="display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 8px; font-family: Jost; font-size: 15px; padding-top: 12px; padding-bottom: 0px;">
-    <div style="display: flex; align-items: flex-end; gap: 4px;">
-      <svg width="34" height="34" viewBox="0 0 24 21" style="vertical-align: middle; margin: 0;">
+  html`<div class="legend-container legend-container--vertical">
+    <div class="legend-item">
+      <svg width="34" height="34" viewBox="0 0 24 21">
         <path d="${path2}" fill="${colors_new[4]}" stroke="black" stroke-width="0.649" opacity="0.811"/>
       </svg>
-      <span style="font-weight: 400;">${t("legend_500")}</span>
+      <span>${t("legend_500")}</span>
     </div>
-    <div style="display: flex; align-items: flex-end; gap: 4px;">
-      <svg width="20" height="34" viewBox="0 0 16 20" style="vertical-align: middle; margin: 0;">
+    <div class="legend-item">
+      <svg width="20" height="34" viewBox="0 0 16 20">
         <path d="${path2_half}" fill="${colors_new[4]}" stroke="black" stroke-width="0.649" opacity="0.811"/>
       </svg>
-      <span style="font-weight: 400;">${t("legend_250")}</span>
+      <span>${t("legend_250")}</span>
     </div>
   </div>`
 ```
@@ -210,9 +209,7 @@ width >= 860 ?
     .config(config)
     .render({ renderer: "svg" });
 
-  return html`<div style="display: flex; justify-content: center; background-color: transparent; padding: 0px;">
-    ${viz}
-  </div>`;
+  return html`<div class="viz-container">${viz}</div>`;
 }
 ```
 
@@ -261,9 +258,7 @@ filteredEmissionen = data
     .config(config)
     .render({ renderer: "svg" });
 
-  return html`<div style="display: flex; justify-content: center; background-color: transparent; padding: 0px;">
-  ${viz}
-  </div>`;
+  return html`<div class="viz-container">${viz}</div>`;
 }
 ```
 
@@ -301,7 +296,7 @@ viewof selectedQuantile = Inputs.select(
 html`${language === "de" ? html`
 <div>
 <h3>HINTERGRUND</h3>
-<p>Wirksamer Klimaschutz muss soziale Gerechtigkeit mitdenken. Neuen <a href="https://doi.org/10.1111/jiec.70074" target="_blank"><strong>Daten</strong></a> zufolge verursachen die nach Pro-Kopf-Haushaltseinkommen <strong>reichsten 10%</strong> der Bevölkerung in Österreich pro Kopf <strong>mehr als dreimal</strong> so hohe CO₂-Emissionen wie die <strong>ärmsten 10%</strong>.<sup>1</sup> Diese Ungleichheit ist besonders bei <strong style="color: #3E6F8E;">Mobilität</strong>, <strong style="color: #D62300;">Wohnen</strong> und <strong style="color: #198737;">Dienstleistungen</strong> ausgeprägt. Diese Emissionen führen zu hohen gesellschaftlichen Kosten infolge steigender Temperaturen, etwa durch extreme Wetterereignisse, Produktivitätsverluste und zusätzlichen gesundheitlichen Belastungen. Diese Kosten werden von allen getragen, unabhängig davon, ob eine einzelne Person mehr oder weniger Emissionen verursacht. Um die Auswirkungen zumindest zu begrenzen, dürfte 2025 eine Person nur etwa 3 Tonnen an CO₂-Äquivalenten emittieren<sup>2</sup>. Ein Wert den alle Einkommensdezile in Österreich überschreiten — allen voran Personen mit höherem Einkommen.</p>
+<p>Wirksamer Klimaschutz muss soziale Gerechtigkeit mitdenken. Neuen <a href="https://doi.org/10.1111/jiec.70074" target="_blank"><strong>Daten</strong></a> zufolge verursachen die nach Pro-Kopf-Haushaltseinkommen <strong>reichsten 10%</strong> der Bevölkerung in Österreich pro Kopf <strong>mehr als dreimal</strong> so hohe CO₂-Emissionen wie die <strong>ärmsten 10%</strong>.<sup>1</sup> Diese Ungleichheit ist besonders bei <strong class="highlight-mobility">Mobilität</strong>, <strong class="highlight-housing">Wohnen</strong> und <strong class="highlight-services">Dienstleistungen</strong> ausgeprägt. Diese Emissionen führen zu hohen gesellschaftlichen Kosten infolge steigender Temperaturen, etwa durch extreme Wetterereignisse, Produktivitätsverluste und zusätzlichen gesundheitlichen Belastungen. Diese Kosten werden von allen getragen, unabhängig davon, ob eine einzelne Person mehr oder weniger Emissionen verursacht. Um die Auswirkungen zumindest zu begrenzen, dürfte 2025 eine Person nur etwa 3 Tonnen an CO₂-Äquivalenten emittieren<sup>2</sup>. Ein Wert den alle Einkommensdezile in Österreich überschreiten — allen voran Personen mit höherem Einkommen.</p>
 
 <p>Die <strong>Wiener Methode der Bildstatistik</strong> (Isotype) macht diese abstrakte Verteilungsfrage unmittelbar erfassbar: Jedes Symbol steht für eine konkrete Menge CO₂. Was <strong>Marie</strong> und <strong>Otto Neurath</strong> in den 1920er-Jahren für wirtschaftliche und soziale Zusammenhänge entwickelten, zeigt auf einen Blick, wie drastisch die Emissionen zwischen Arm und Reich auseinanderklaffen.</p>
 
@@ -311,17 +306,17 @@ html`${language === "de" ? html`
 <h3>DATEN</h3>
 <p>Dorninger, Christian, Simone Gingrich, Willi Haas, Alina Brad, Etienne Schneider, and Dominik Wiedenhofer. 2025. "Slow and Unequal Reduction in Austrian Household GHG Footprints Between 2000 and 2020." <em>Journal of Industrial Ecology</em> 29 (5): 1651–65. <a href="https://doi.org/10.1111/jiec.70074" target="_blank"><strong>Link</strong></a>.</p>
 
-<hr style="margin-top: 2em; margin-bottom: 1em; border: none; border-top: 1px solid #ddd;">
+<hr class="footnote-separator">
 
-<p style="font-size: 0.8em;"><sup>1</sup> Diese Schätzungen beziehen sich auf das Jahr 2020 und basieren auf einer Datenkombination aus multiregionalen Input-Output-Tabellen, Umfragedaten der österreichischen Konsumerhebung, und Daten aus der österreichische Luftschadstoff- und Treibhausgas-Inventur (THGI) (Dorninger et al. 2025). Die Daten inkludieren andere Treibhausgase und beziehen sich auf CO₂-Äquivalente.</p>
+<p class="footnote"><sup>1</sup> Diese Schätzungen beziehen sich auf das Jahr 2020 und basieren auf einer Datenkombination aus multiregionalen Input-Output-Tabellen, Umfragedaten der österreichischen Konsumerhebung, und Daten aus der österreichische Luftschadstoff- und Treibhausgas-Inventur (THGI) (Dorninger et al. 2025). Die Daten inkludieren andere Treibhausgase und beziehen sich auf CO₂-Äquivalente.</p>
 
-<p style="font-size: 0.8em;"><sup>2</sup> Schätzwert für 2025 berechnet anhand des österreichischen Anteils am global maximalen Emissionswert zur Erreichung des +1,5°C Ziels und einer konstanten prozentualen Abnahme der Emissionen ab 2022. Siehe: <a href="https://ccca.ac.at/fileadmin/00_DokumenteHauptmenue/02_Klimawissen/Papiere/THG-Budget_Hintergrundpapier_CCCA.pdf" target="_blank">Climate Change Center Austria (CCCA) 2022</a>: 1,5° C: Wieviel Treibhausgase dürfen wir noch emittieren? Hintergrundpapier zu globalen und nationalen Treibhausgasbudgets.</p>
+<p class="footnote"><sup>2</sup> Schätzwert für 2025 berechnet anhand des österreichischen Anteils am global maximalen Emissionswert zur Erreichung des +1,5°C Ziels und einer konstanten prozentualen Abnahme der Emissionen ab 2022. Siehe: <a href="https://ccca.ac.at/fileadmin/00_DokumenteHauptmenue/02_Klimawissen/Papiere/THG-Budget_Hintergrundpapier_CCCA.pdf" target="_blank">Climate Change Center Austria (CCCA) 2022</a>: 1,5° C: Wieviel Treibhausgase dürfen wir noch emittieren? Hintergrundpapier zu globalen und nationalen Treibhausgasbudgets.</p>
 
 </div>
 ` : html`
 <div>
 <h3>BACKGROUND</h3>
-<p>Effective climate protection must consider social justice. According to new <a href="https://doi.org/10.1111/jiec.70074" target="_blank"><strong>data</strong></a>, the <strong>richest 10%</strong> of the population in Austria by per capita household income cause <strong>more than three times</strong> as much CO₂ emissions per capita as the <strong>poorest 10%</strong>.<sup>1</sup> This inequality is particularly pronounced in <strong style="color: #3E6F8E;">mobility</strong>, <strong style="color: #D62300;">housing</strong>, and <strong style="color: #198737;">services</strong>. These emissions lead to high societal costs due to rising temperatures, such as extreme weather events, productivity losses, and additional health burdens. These costs are borne by everyone, regardless of whether an individual emits more or fewer emissions. To at least limit the impacts, a person should emit only about 3 tons of CO₂ equivalents in 2025<sup>2</sup>. A value that all income deciles in Austria exceed — especially those with higher incomes.</p>
+<p>Effective climate protection must consider social justice. According to new <a href="https://doi.org/10.1111/jiec.70074" target="_blank"><strong>data</strong></a>, the <strong>richest 10%</strong> of the population in Austria by per capita household income cause <strong>more than three times</strong> as much CO₂ emissions per capita as the <strong>poorest 10%</strong>.<sup>1</sup> This inequality is particularly pronounced in <strong class="highlight-mobility">mobility</strong>, <strong class="highlight-housing">housing</strong>, and <strong class="highlight-services">services</strong>. These emissions lead to high societal costs due to rising temperatures, such as extreme weather events, productivity losses, and additional health burdens. These costs are borne by everyone, regardless of whether an individual emits more or fewer emissions. To at least limit the impacts, a person should emit only about 3 tons of CO₂ equivalents in 2025<sup>2</sup>. A value that all income deciles in Austria exceed — especially those with higher incomes.</p>
 
 <p>The <strong>Vienna Method of Pictorial Statistics</strong> (Isotype) makes this abstract distribution question immediately comprehensible: Each symbol represents a concrete amount of CO₂. What <strong>Marie</strong> and <strong>Otto Neurath</strong> developed in the 1920s for economic and social relationships shows at a glance how drastically emissions diverge between rich and poor.</p>
 
@@ -331,11 +326,11 @@ html`${language === "de" ? html`
 <h3>DATA</h3>
 <p>Dorninger, Christian, Simone Gingrich, Willi Haas, Alina Brad, Etienne Schneider, and Dominik Wiedenhofer. 2025. "Slow and Unequal Reduction in Austrian Household GHG Footprints Between 2000 and 2020." <em>Journal of Industrial Ecology</em> 29 (5): 1651–65. <a href="https://doi.org/10.1111/jiec.70074" target="_blank"><strong>Link</strong></a>.</p>
 
-<hr style="margin-top: 2em; margin-bottom: 1em; border: none; border-top: 1px solid #ddd;">
+<hr class="footnote-separator">
 
-<p style="font-size: 0.8em;"><sup>1</sup> These estimates refer to the year 2020 and are based on a data combination of multi-regional input-output tables, survey data from the Austrian household budget survey, and data from the Austrian air pollutant and greenhouse gas inventory (THGI) (Dorninger et al. 2025). The data includes other greenhouse gases and refers to CO₂ equivalents.</p>
+<p class="footnote"><sup>1</sup> These estimates refer to the year 2020 and are based on a data combination of multi-regional input-output tables, survey data from the Austrian household budget survey, and data from the Austrian air pollutant and greenhouse gas inventory (THGI) (Dorninger et al. 2025). The data includes other greenhouse gases and refers to CO₂ equivalents.</p>
 
-<p style="font-size: 0.8em;"><sup>2</sup> Estimate for 2025 calculated based on Austria's share of the global maximum emission value to achieve the +1.5°C target and a constant percentage decrease in emissions from 2022. See: <a href="https://ccca.ac.at/fileadmin/00_DokumenteHauptmenue/02_Klimawissen/Papiere/THG-Budget_Hintergrundpapier_CCCA.pdf" target="_blank">Climate Change Center Austria (CCCA) 2022</a>: 1,5° C: Wieviel Treibhausgase dürfen wir noch emittieren? Hintergrundpapier zu globalen und nationalen Treibhausgasbudgets.</p>
+<p class="footnote"><sup>2</sup> Estimate for 2025 calculated based on Austria's share of the global maximum emission value to achieve the +1.5°C target and a constant percentage decrease in emissions from 2022. See: <a href="https://ccca.ac.at/fileadmin/00_DokumenteHauptmenue/02_Klimawissen/Papiere/THG-Budget_Hintergrundpapier_CCCA.pdf" target="_blank">Climate Change Center Austria (CCCA) 2022</a>: 1,5° C: Wieviel Treibhausgase dürfen wir noch emittieren? Hintergrundpapier zu globalen und nationalen Treibhausgasbudgets.</p>
 </div>
 `}`
 ```
