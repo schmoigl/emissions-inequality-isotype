@@ -6,6 +6,9 @@ makeChimneytype = function({
   shapeRange = [path7],
   shapeRangeHalf = [path7_half],
   colorRange = ["#474A51"],
+  quantileSort = ["Arme", "Untere Mittelschicht", "Mittelschicht", "Obere Mittelschicht", "Reiche"],
+  quantileLabels = {}, 
+  budgetText = ["CO₂-Budget", "max. 3 t"],
   xDomain = [-0.5, 12],
   height = 60,
   size = 5,
@@ -14,6 +17,15 @@ makeChimneytype = function({
   showHeader = false,
   iconsPerRow = 10
 }) {
+
+  const poorLabel = quantileLabels["Arme"] || "Arme";
+  const lowerMiddleLabel = quantileLabels["Untere Mittelschicht"] || "Untere Mittelschicht";
+  const middleLabel = quantileLabels["Mittelschicht"] || "Mittelschicht";
+  const upperMiddleLabel = quantileLabels["Obere Mittelschicht"] || "Obere Mittelschicht";
+  const richLabel = quantileLabels["Reiche"] || "Reiche";
+
+  const labelExprString = `datum.label === 'Arme' ? '${poorLabel}' : datum.label === 'Untere Mittelschicht' ? '${lowerMiddleLabel}' : datum.label === 'Mittelschicht' ? '${middleLabel}' : datum.label === 'Obere Mittelschicht' ? '${upperMiddleLabel}' : datum.label === 'Reiche' ? '${richLabel}' : datum.label`;
+
 
   return vl.layer(
     // Background text for right panel (Reiche)
@@ -60,7 +72,10 @@ makeChimneytype = function({
           labelOffset: 18,
           minExtent: width >= 860 ? 128 : 16,
           labels: width >= 860,
-          labelExpr: width >= 860 ? "split(datum.label, ' ')" : null,
+          // Combined translation and splitting logic
+          labelExpr: width >= 860 
+            ? `datum.label === 'Emissionen Gesamt' ? split('${t("total_emissions")}', ' ') : split(datum.label, ' ')` 
+            : `datum.label === 'Emissionen Gesamt' ? '${t("total_emissions")}' : datum.label`,
           grid: false,
         }),
       vl.yOffset()
@@ -96,29 +111,6 @@ makeChimneytype = function({
         })
         .legend(false)
     ),
-    // vl.markText({
-    //   align: "right",
-    //   dy: 36,
-    //   dx: 100,
-    //   fontSize: 14,
-    //   clip: false
-    // })
-    // .transform(
-    //   vl.filter(`datum.positions === datum.totalShapes - 1`),
-    //   vl.calculate(`format(datum.value, ',.1f') + ' ${unit}'`).as("valueWithUnit")
-    // )
-    // .encode(
-    //   vl.y()
-    //     .fieldN("name")
-    //     .sort(shapeDomain),
-    //   vl.yOffset()
-    //     .fieldQ("rowOffset")
-    //     .scale({ domain: [0, 100], range: [0, 100] }),
-    //   vl.x()
-    //     .fieldQ("xPosition"),
-    //   vl.text()
-    //     .fieldN("valueWithUnit"),
-    // ),
     vl.markText({
       align: "center",
       dy: 24,
@@ -128,7 +120,7 @@ makeChimneytype = function({
       color: "gray",
     })
     .transform(
-      vl.filter(`datum.positions === 0 && datum.Quantile == "Arme"`)
+      vl.filter(`datum.positions === 0 && datum.Quantile == "${quantileSort[0]}"`)
     )
     .encode(
       vl.y()
@@ -137,7 +129,7 @@ makeChimneytype = function({
       vl.x()
         .datum(0.5),
       vl.text()
-        .datum(["CO₂-Budget", "max. 3 t"])
+        .datum(budgetText)
     )
   )
   .transform(
@@ -158,41 +150,43 @@ makeChimneytype = function({
   .width(makeWidth(width))
   .height(height)
   .facet(
-    width < 860 ? {
-      row: {
-        field: "Quantile",
-        type: "nominal",
-        title: null,
-        sort: ["Arme", "Untere Mittelschicht", "Mittelschicht", "Obere Mittelschicht", "Reiche"],
-        header: showHeader ? {
-          labelFontSize: 15,
-          labelOrient: "top",
-          labelPadding: -8,
-          labelAlign: "left",
-          labelAnchor: "start"
-        } : {
+    width < 860 ? { 
+      row: { 
+        field: "Quantile", 
+        type: "nominal", 
+        title: null, 
+        sort: quantileSort, 
+        header: showHeader ? { 
+          labelFontSize: 15, 
+          labelOrient: "top", 
+          labelPadding: -8, 
+          labelAlign: "left", 
+          labelAnchor: "start",
+          labelExpr: labelExprString  // USE THE VARIABLE
+        } : { 
           labels: false
-        },
-      },
-    } : {
-      column: {
-        field: "Quantile",
-        type: "nominal",
-        title: null,
-        sort: ["Arme", "Untere Mittelschicht", "Mittelschicht", "Obere Mittelschicht", "Reiche"],
-        header: showHeader ? {
-          labelFontSize: 15,
-          labelOrient: "top",
-          labelPadding: -8,
-          labelAlign: "left",
-          labelAnchor: "start"
-        } : {
+        } 
+      }, 
+    } : { 
+      column: { 
+        field: "Quantile", 
+        type: "nominal", 
+        title: null, 
+        sort: quantileSort,
+        header: showHeader ? { 
+          labelFontSize: 15, 
+          labelOrient: "top", 
+          labelPadding: -8, 
+          labelAlign: "left", 
+          labelAnchor: "start",
+          labelExpr: labelExprString  // USE THE VARIABLE
+        } : { 
           labels: false
-        },
-      },
+        }, 
+      }, 
     }
   )
-  .resolve({scale: {x: "shared"}})
+    .resolve({scale: {x: "shared"}})
   .data(inputData)
   .config(config);
 
