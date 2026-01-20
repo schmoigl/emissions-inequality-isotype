@@ -1,5 +1,5 @@
 ---
-title: ""
+title: <h1 class="invisibleTitle">ISOTYPE</h1>
 execute:
   eval: true
   echo: false
@@ -21,32 +21,49 @@ execute:
 //| echo: false
 viewof language = {
   const div = html`
-  <div class="lang-switch">
-    <div class="lang-btn" data-lang="de">
-      <svg viewBox="-5 -5 180 460">
-        <path d="${path_neurath}"/>
-      </svg>
-      <span>DE</span>
+    <div class="lang-switch">
+      <div class="lang-btn" data-lang="de">
+        <svg viewBox="-5 -5 210 470">
+          <path d="${path_de2}" transform="translate(10, 0)"/>
+        </svg>
+        <span>DE</span>
+      </div>
+      <div class="lang-btn" data-lang="en">
+        <svg viewBox="-5 -5 210 470">
+          <path d="${path_en2}" transform="translate(7, 0)"/>
+        </svg>
+        <span>EN</span>
+      </div>
     </div>
-    <div class="lang-btn" data-lang="en">
-      <svg viewBox="-5 -5 180 460">
-        <path d="${path_neurath}"/>
-      </svg>
-      <span>EN</span>
-    </div>
-  </div>`;
+  `;
 
-  div.value = "de";
+  const buttons = div.querySelectorAll(".lang-btn");
 
-  const buttons = div.querySelectorAll('.lang-btn');
-  buttons[0].onclick = () => {
-    div.value = "de";
-    div.dispatchEvent(new Event("input"));
+  // 1. Detect browser language
+  const browserLang = navigator.language?.slice(0, 2);
+  const supported = ["de", "en"];
+
+  // 2. Set default language
+  div.value = supported.includes(browserLang) ? browserLang : "en";
+
+  // 3. Update active state
+  const updateActive = () => {
+    buttons.forEach(b => {
+      b.classList.toggle("active", b.dataset.lang === div.value);
+    });
   };
-  buttons[1].onclick = () => {
-    div.value = "en";
-    div.dispatchEvent(new Event("input"));
-  };
+
+  updateActive();
+
+  // 4. Click handling
+  buttons.forEach(btn => {
+    btn.onclick = () => {
+      div.value = btn.dataset.lang;
+      updateActive();
+      div.dispatchEvent(new Event("input"));
+    };
+  });
+
   return div;
 }
 ```
@@ -112,6 +129,7 @@ html`<svg width="0" height="0" class="svg-defs">
   </defs>
 </svg>`
 ```
+
 
 ```{ojs .decileContainer}
 //| echo: false
