@@ -342,6 +342,10 @@ pre, code, .callout, .sourceCode { // comment out until final deployment
     font-family: Jost;
     display: flex;
     gap: 8px;
+
+    @media (max-width: 859px) {
+        display: none;
+    }
 }
 
 .lang-btn {
