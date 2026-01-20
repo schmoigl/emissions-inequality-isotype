@@ -18,7 +18,13 @@ divisor = 1000,
 showHeader = true
 }) {
 
-  const labelExprString = `datum.label === 'Arme' ? '${quantileLabels["Arme"] || "Arme"}' : datum.label === 'Untere Mittelschicht' ? '${quantileLabels["Untere Mittelschicht"] || "Untere Mittelschicht"}' : datum.label === 'Mittelschicht' ? '${quantileLabels["Mittelschicht"] || "Mittelschicht"}' : datum.label === 'Obere Mittelschicht' ? '${quantileLabels["Obere Mittelschicht"] || "Obere Mittelschicht"}' : datum.label === 'Reiche' ? '${quantileLabels["Reiche"] || "Reiche"}' : datum.label`;
+  const poorLabel = quantileLabels["Arme"] || "Arme";
+  const lowerMiddleLabel = quantileLabels["Untere Mittelschicht"] || "Untere Mittelschicht";
+  const middleLabel = quantileLabels["Mittelschicht"] || "Mittelschicht";
+  const upperMiddleLabel = quantileLabels["Obere Mittelschicht"] || "Obere Mittelschicht";
+  const richLabel = quantileLabels["Reiche"] || "Reiche";
+
+  const labelExprString = `datum.label === 'Arme' ? '${poorLabel}' : datum.label === 'Untere Mittelschicht' ? '${lowerMiddleLabel}' : datum.label === 'Mittelschicht' ? '${middleLabel}' : datum.label === 'Obere Mittelschicht' ? '${upperMiddleLabel}' : datum.label === 'Reiche' ? '${richLabel}' : datum.label`;
 
 
   return vl.layer(
