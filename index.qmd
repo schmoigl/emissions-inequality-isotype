@@ -48,7 +48,6 @@ viewof language = {
     div.value = "en";
     div.dispatchEvent(new Event("input"));
   };
-
   return div;
 }
 ```
@@ -173,13 +172,13 @@ width >= 860 ?
       <svg width="34" height="34" viewBox="0 0 24 21" style="vertical-align: middle; margin: 0;">
         <path d="${path2}" fill="${colors_new[4]}" stroke="black" stroke-width="0.649" opacity="0.811"/>
       </svg>
-      <span style="font-weight: 400;">≈ 500 kg CO₂ pro Person und Jahr</span>
+      <span style="font-weight: 400;">${t("legend_500")}</span>
     </div>
     <div style="display: flex; align-items: flex-end; gap: 4px;">
       <svg width="20" height="34" viewBox="0 0 16 20" style="vertical-align: middle; margin: 0;">
         <path d="${path2_half}" fill="${colors_new[4]}" stroke="black" stroke-width="0.649" opacity="0.811"/>
       </svg>
-      <span style="font-weight: 400;">≈ 250 kg CO₂ pro Person und Jahr</span>
+      <span style="font-weight: 400;">${t("legend_250")}</span>
     </div>
   </div>`
 ```
@@ -294,7 +293,6 @@ viewof selectedQuantile = Inputs.select(
   }
 )
 ```
-
 <span class="comparison-right">${t("compare_with")}</span>
 </div>
 
