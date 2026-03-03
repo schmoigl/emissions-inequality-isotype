@@ -8,6 +8,7 @@ keys/
 /node_modules/
 *_files
 data/*
+.claude/
 
 # R
 .Rhistory
@@ -40,3 +41,5 @@ data/*
 **/*.quarto_ipynb
 
 /.luarc.json
+
+deploy.sh
