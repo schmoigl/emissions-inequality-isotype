@@ -4,6 +4,8 @@
 
 This visualization makes the distributional injustice of CO₂ emissions visible: in Austria, the richest income decile causes four times as many emissions as the poorest. The isotype representation shows at a glance how drastically the differences between rich and poor diverge across consumption categories – from food and mobility to goods.
 
+[![View live](img/screenshot.png)](https://data-science.wifo.ac.at/emissionen-ungleichheit/)
+
 **View live:** [https://data-science.wifo.ac.at/emissionen-ungleichheit/](https://data-science.wifo.ac.at/emissionen-ungleichheit/)
 
 ## About the Project
