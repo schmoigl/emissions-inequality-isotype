@@ -36,8 +36,12 @@ The Marie Neurath Prize for Data Visualization is awarded in 2025 by the Vienna 
 
 **More information:** <https://wien.arbeiterkammer.at/neurath>
 
-**Created by:** Lukas Schmoigl[^1]  & Fabian Kalleitner[^2]
+**Created by:**  
 
-[^1]  **Organisation:** [WIFO – Austrian Institute of Economic Research](https://www.wifo.ac.at/) **Contact:** [lukas.schmoigl\@wifo.ac.at](mailto:lukas.schmoigl@wifo.ac.at)
+- **Fabian Kalleitner**  
+  Organisation: LMU Munich – Department of Sociology  
+  Contact: fabian.kalleitner@lmu.de
 
-[^2] **Organisation:** [LMU Munich – Department of Sociology](https://www.soziologie.lmu.de/en/) **Contact:** [fabian.kalleitner\@lmu.de](mailto:fabian.kalleitner@lmu.de)
+- **Lukas Schmoigl**  
+  Organisation: WIFO – Austrian Institute of Economic Research  
+  Contact: lukas.schmoigl@wifo.ac.at  
