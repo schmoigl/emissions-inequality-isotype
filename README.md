@@ -1,6 +1,6 @@
-# Unequal Consumption – Unequal Emissions
+# CO₂ FOOTPRINT OF AUSTRIAN HOUSEHOLDS
 
-## Submission for the Marie Neurath Prize for Data Visualization 2025
+## Submission for the Marie Neurath Prize for Data Visualization
 
 This visualization makes the distributional injustice of CO₂ emissions visible: in Austria, the richest income decile causes four times as many emissions as the poorest. The isotype representation shows at a glance how drastically the differences between rich and poor diverge across consumption categories – from food and mobility to goods.
 
@@ -36,8 +36,8 @@ The Marie Neurath Prize for Data Visualization is awarded in 2025 by the Vienna 
 
 **More information:** <https://wien.arbeiterkammer.at/neurath>
 
-**Created by:** Lukas Schmoigl^1^ & Fabian Kalleitner^2^
+**Created by:** Lukas Schmoigl[^1]  & Fabian Kalleitner[^2]
 
-^1^ **Organisation:** [WIFO – Austrian Institute of Economic Research](https://www.wifo.ac.at/) **Contact:** [lukas.schmoigl\@wifo.ac.at](mailto:lukas.schmoigl@wifo.ac.at)
+[^1]  **Organisation:** [WIFO – Austrian Institute of Economic Research](https://www.wifo.ac.at/) **Contact:** [lukas.schmoigl\@wifo.ac.at](mailto:lukas.schmoigl@wifo.ac.at)
 
-^2^ **Organisation:** [LMU Munich – Department of Sociology](https://www.soziologie.lmu.de/en/) **Contact:** [fabian.kalleitner\@lmu.de](mailto:fabian.kalleitner@lmu.de)
+[^2] **Organisation:** [LMU Munich – Department of Sociology](https://www.soziologie.lmu.de/en/) **Contact:** [fabian.kalleitner\@lmu.de](mailto:fabian.kalleitner@lmu.de)
