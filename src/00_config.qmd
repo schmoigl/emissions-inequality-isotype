@@ -5,10 +5,9 @@
 //| output: false
 config = ({
   view: { stroke: null },
-  background: "transparent", // "#f1f1f1"
-  font: "Jost", // "Century Gothic" "FFDaxPro"
+  background: "transparent",
+  font: "Jost",
   fontSize: 15,
-  // concat: { spacing: 10 },
   padding: {
     top: width >= 860 ? 0 : 20,
     right: 0,

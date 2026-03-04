@@ -73,7 +73,6 @@ hr {
 }
 
 form {
-    // margin-top: 24px;
     margin-left: auto;
     margin-right: auto;
     display: flex;
@@ -216,12 +215,12 @@ option {
 }
 
 /* quarto */
-pre, code, .callout, .sourceCode { // comment out until final deployment
+pre, code, .callout, .sourceCode {
     display: none;
 }
 
 :root {
-    --r-selection-background-color: #EAD7B0; // #94672d #E20613
+    --r-selection-background-color: #EAD7B0;
     --bs-link-color: #474A51;
     --bs-link-color-rgb: 71, 74, 81;
     --bs-link-hover-color: #474A51;
@@ -251,7 +250,7 @@ pre, code, .callout, .sourceCode { // comment out until final deployment
     border-radius: 0px;
     border: 1.5px solid;
     font-family: "Century Gothic";
-    font-Size: 12px;
+    font-size: 12px;
 }
 #vg-tooltip-element > table {
     margin: 0px;
@@ -336,7 +335,7 @@ pre, code, .callout, .sourceCode { // comment out until final deployment
     display: flex;
     gap: 8px;
 
-    @media (max-width: 859px) {
+    @media (max-width: 860px) {
         display: none;
     }
 }

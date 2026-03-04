@@ -28,28 +28,6 @@ makeChimneytype = function({
 
 
   return vl.layer(
-    // Background text for right panel (Reiche)
-    // vl.markText({
-    //   align: "center",
-    //   dy: 32,
-    //   dx: 16,
-    //   fontSize: 14,
-    //   color: "#979797",
-    //   clip: false
-    // })
-    // .transform(
-    //   vl.filter(`datum.positions === 0 && datum.Quantile === "Reiche"`)
-    // )
-    // .encode(
-    //   vl.y()
-    //     .fieldN("name")
-    //     .sort(shapeDomain),
-    //   vl.x()
-    //     .datum(0.5),
-    //   vl.text()
-    //     .datum(["CO₂-Budget", "max. 2 t"])
-    // ),
-    // Combined shapes layer with conditional shape selection
     vl.markPoint({
       size: size,
       stroke: "black",
@@ -162,7 +140,7 @@ makeChimneytype = function({
           labelPadding: -8, 
           labelAlign: "left", 
           labelAnchor: "start",
-          labelExpr: labelExprString  // USE THE VARIABLE
+          labelExpr: labelExprString
         } : { 
           labels: false
         } 
@@ -179,7 +157,7 @@ makeChimneytype = function({
           labelPadding: -8, 
           labelAlign: "left", 
           labelAnchor: "start",
-          labelExpr: labelExprString  // USE THE VARIABLE
+          labelExpr: labelExprString
         } : { 
           labels: false
         }, 
