@@ -1,0 +1,31 @@
+name,Quantile,value
+Dienstleistungen,Arme,400
+Dienstleistungen,Mittelschicht,900
+Dienstleistungen,Obere Mittelschicht,1100
+Dienstleistungen,Reiche,2000
+Dienstleistungen,Untere Mittelschicht,700
+Güter,Arme,400
+Güter,Mittelschicht,800
+Güter,Obere Mittelschicht,900
+Güter,Reiche,1400
+Güter,Untere Mittelschicht,600
+Lebensmittel,Arme,800
+Lebensmittel,Mittelschicht,1300
+Lebensmittel,Obere Mittelschicht,1400
+Lebensmittel,Reiche,1700
+Lebensmittel,Untere Mittelschicht,1100
+Mobilität,Arme,1000
+Mobilität,Mittelschicht,2300
+Mobilität,Obere Mittelschicht,2700
+Mobilität,Reiche,4800
+Mobilität,Untere Mittelschicht,1800
+Wohnen,Arme,1100
+Wohnen,Mittelschicht,1900
+Wohnen,Obere Mittelschicht,2300
+Wohnen,Reiche,3100
+Wohnen,Untere Mittelschicht,1600
+Emissionen Gesamt,Arme,3800
+Emissionen Gesamt,Mittelschicht,7300
+Emissionen Gesamt,Obere Mittelschicht,8300
+Emissionen Gesamt,Reiche,13000
+Emissionen Gesamt,Untere Mittelschicht,5700
