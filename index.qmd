@@ -339,7 +339,7 @@ html`${language === "de" ? html`
 <p>The <strong>Vienna Method of Pictorial Statistics</strong> (Isotype) makes this abstract distribution question immediately comprehensible: Each symbol represents a concrete amount of CO₂. What <strong>Marie</strong> and <strong>Otto Neurath</strong> developed in the 1920s for economic and social relationships shows at a glance how drastically emissions diverge between rich and poor.</p>
 
 <h3>AUTHORS</h3>
-<p><a href="https://www.ls4.soziologie.uni-muenchen.de/personen/wissenschaftlich_mitarbeiter/fabian_kalleitner/index.html" target="_blank"><strong>Fabian Kalleitner</strong></a> — <a href="https://www.wifo.ac.at/person/lukas-schmoigl/" target="_blank"><strong>Lukas Schmoigl</strong></a></p>
+<p><a href="https://www.soziologie.lmu.de/de/das-institut/personen/kontaktseite/fabian-kalleitner-e069e205.html" target="_blank"><strong>Fabian Kalleitner</strong></a> — <a href="https://www.wifo.ac.at/person/lukas-schmoigl/" target="_blank"><strong>Lukas Schmoigl</strong></a></p>
 
 <h3>DATA</h3>
 <p>Dorninger, Christian, Simone Gingrich, Willi Haas, Alina Brad, Etienne Schneider, and Dominik Wiedenhofer. 2025. "Slow and Unequal Reduction in Austrian Household GHG Footprints Between 2000 and 2020." <em>Journal of Industrial Ecology</em> 29 (5): 1651–65. <a href="https://doi.org/10.1111/jiec.70074" target="_blank"><strong>Link</strong></a>.</p>
